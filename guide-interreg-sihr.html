@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interreg VI-A SI-HR 4. poziv — Vodič za prijavo | Bela Krajina 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --si-green: #1b5e20;
+  --hr-red: #a50015;
+  --river: #1565c0;
+  --river-mid: #1976d2;
+  --navy: #0d2137;
+  --gold: #f9a825;
+  --cream: #faf8f4;
+  --text: #1a1a1a;
+  --muted: #666;
+  --border: #e0e0e0;
+  --radius: 10px;
+}
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); line-height: 1.65; }
+a { color: var(--river); }
+
+.nav { background: var(--navy); padding: 10px 24px; display: flex; align-items: center; gap: 12px; }
+.nav a { color: rgba(255,255,255,.7); font-size: .85rem; text-decoration: none; }
+.nav a:hover { color: #fff; }
+.nav span { color: rgba(255,255,255,.3); }
+
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #0d2f5a 50%, #0d3d1f 100%);
+  color: #fff;
+  padding: 50px 24px 60px;
+  text-align: center;
+  position: relative;
+}
+.hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:50px; background:linear-gradient(to bottom right, transparent 49%, var(--cream) 50%); }
+.flag-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; font-size: 2rem; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,4vw,2.6rem); margin-bottom: 10px; }
+.hero .sub { font-size: 1rem; opacity: .85; max-width: 580px; margin: 0 auto 24px; }
+.hero-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+.hero-badge { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); border-radius: 6px; padding: 10px 18px; text-align: center; }
+.hero-badge strong { display: block; font-size: 1.2rem; font-family: 'Playfair Display', serif; }
+.hero-badge span { font-size: .75rem; opacity: .75; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+section { padding: 40px 0; border-bottom: 1px solid var(--border); }
+h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 18px; padding-left: 12px; border-left: 4px solid var(--river); }
+p { margin-bottom: 12px; }
+
+.priority-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.priority-table th { background: var(--navy); color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+.priority-table td { border: 1px solid var(--border); padding: 10px 12px; vertical-align: top; }
+.priority-table tr:nth-child(even) td { background: #f5f8ff; }
+.priority-table .p-num { background: var(--river); color: #fff; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: .75rem; white-space: nowrap; }
+
+.project-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
+.project-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; border-top: 4px solid var(--river); }
+.project-card .p-axis { font-size: .72rem; color: var(--river); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+.project-card h4 { font-weight: 600; font-size: .95rem; margin-bottom: 6px; color: var(--navy); }
+.project-card p { font-size: .82rem; color: var(--muted); margin: 0; }
+
+.steps { list-style: none; padding: 0; }
+.steps li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
+.steps li:last-child { border-bottom: none; }
+.step-num { width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: var(--river); color: #fff; font-weight: 700; font-size: .95rem; display: flex; align-items: center; justify-content: center; }
+.step-body h4 { font-weight: 600; margin-bottom: 4px; font-size: .95rem; }
+.step-body p { font-size: .84rem; color: var(--muted); margin: 0; }
+
+.checklist { list-style: none; padding: 0; }
+.checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; font-size: .88rem; }
+.checklist li::before { content: '☐'; font-size: 1.1rem; color: var(--river); min-width: 20px; }
+
+.partner-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.partner-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+.partner-card .country { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.partner-card .country.si { color: var(--si-green); }
+.partner-card .country.hr { color: var(--hr-red); }
+.partner-card h4 { font-weight: 600; font-size: .9rem; margin-bottom: 4px; }
+.partner-card p { font-size: .8rem; color: var(--muted); margin: 0; }
+
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content:''; position:absolute; left:6px; top:0; bottom:0; width:2px; background:var(--river); }
+.tl-item { position: relative; padding: 0 0 20px 20px; }
+.tl-item::before { content:''; position:absolute; left:-6px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--river); border:2px solid #fff; box-shadow:0 0 0 2px var(--river); }
+.tl-item .tl-date { font-weight: 700; font-size: .85rem; color: var(--river); }
+.tl-item .tl-task { font-size: .9rem; }
+
+.tips { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.tip { background: #e8f5e9; border-left: 4px solid var(--si-green); border-radius: 6px; padding: 14px; }
+.tip h4 { font-weight: 600; font-size: .9rem; margin-bottom: 4px; }
+.tip p { font-size: .82rem; color: var(--muted); margin: 0; }
+
+.highlight { background: #e3f2fd; border: 1px solid #90caf9; border-left: 4px solid var(--river); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 16px; font-size: .9rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+th, td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; }
+th { background: var(--navy); color: #fff; font-size: .78rem; }
+tr:nth-child(even) { background: #f5f8ff; }
+
+footer { background: var(--navy); color: rgba(255,255,255,.6); text-align: center; padding: 20px; font-size: .78rem; margin-top: 40px; }
+@media(max-width:600px){ .hero-badges{flex-direction:column;align-items:center} }
+@media print { .nav,footer{display:none} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html">← Nazaj na pregled</a>
+  <span>|</span>
+  <a href="https://www.si-hr.eu" target="_blank">si-hr.eu ↗</a>
+</nav>
+
+<div class="hero">
+  <div class="flag-bar">🇸🇮 🌊 🇭🇷</div>
+  <h1>Interreg VI-A Slovenija–Hrvaška<br>4. javni poziv za projekte</h1>
+  <p class="sub">Največja priložnost za čezmejne projekte ob Kolpi. €200k–1.5M na projekt. Kolpa/Kupa je eksplicitna programska prioriteta.</p>
+  <div class="hero-badges">
+    <div class="hero-badge"><strong>15.6.2026</strong><span>Rok za oddajo</span></div>
+    <div class="hero-badge"><strong>€200k–1.5M</strong><span>Budget na projekt</span></div>
+    <div class="hero-badge"><strong>80–85%</strong><span>ESRR sofinanciranje</span></div>
+    <div class="hero-badge"><strong>Odprt od 1.2.2026</strong><span>4. poziv aktiven</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <section>
+    <div class="highlight">
+      <strong>🏆 Zakaj je to najboljša priložnost?</strong> Interreg SI-HR ima največje budgete (do €1.5M), najdaljši rok (15.6.), in Kolpa/Kupa je programska prioriteta. Precedens: Misterion projekt (Semič + Metlika + Kamanje, HR) = <strong>€1.24M ESRR</strong>. Te partnerske mreže so že vzpostavljene.
+    </div>
+
+    <h2>Programske prioritetne osi</h2>
+    <table class="priority-table">
+      <thead><tr><th>Os</th><th>Tema</th><th>Primerni projekti Kolpa</th></tr></thead>
+      <tbody>
+        <tr><td><span class="p-num">P1</span></td><td>Razvoj, inovacije, IKT</td><td>Citizen science app (Projekt 1)</td></tr>
+        <tr><td><span class="p-num">P2</span></td><td>Okolje in biodiverziteta</td><td>Biodiverzitetna mreža (Projekt 1), Perma vrtovi (Projekt 3)</td></tr>
+        <tr><td><span class="p-num">P4</span></td><td>Trajnostni turizem in kultura</td><td>Eko-pot (2), Platforme (4), Dostopnost (6), Zvezdna pot (7)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>5 Kolpa projektov, ki ustrezajo Interreg SI-HR</h2>
+    <div class="project-cards">
+      <div class="project-card">
+        <div class="p-axis">Prioritetna os 2 — Okolje</div>
+        <h4>1. Kolpa Biodiverzitetna mreža</h4>
+        <p>Monitoring 39 endemičnih vrst, čezmejni podatkovni portal, skupna SI-HR Natura 2000 upravljanje.</p>
+      </div>
+      <div class="project-card">
+        <div class="p-axis">Prioritetna os 4 — Turizem</div>
+        <h4>2. Eko-kmetijska pot & tržnice</h4>
+        <p>Skupna SI-HR gastro pot, čezmejni pop-up trgi, QR kultura in hrana ob Kolpi/Kupi.</p>
+      </div>
+      <div class="project-card">
+        <div class="p-axis">Prioritetna os 4 — Turizem</div>
+        <h4>4. Plavajoče eko-platforme</h4>
+        <p>Modularni solarni platformi za delavnice in eko-tabore. Čezmejne umetniške rezidence SI-HR.</p>
+      </div>
+      <div class="project-card">
+        <div class="p-axis">Prioritetna os 4 — Turizem</div>
+        <h4>6. Dostopnost za vse ob Kolpi</h4>
+        <p>5 dostopnih točk SI + HR stran, skupna čezmejna dostopna pot za invalide.</p>
+      </div>
+      <div class="project-card">
+        <div class="p-axis">Prioritetna os 4 — Turizem</div>
+        <h4>7. Zvezdna pot & gastro festival</h4>
+        <p>Temno-nebeška pot SI-HR, rotirajoči festival (Metlika-Ozalj), Belokranjska pogača EU TSG.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Kdo lahko kandidira?</h2>
+    <ul class="checklist">
+      <li>Vsaj 1 partner iz SI + vsaj 1 partner iz HR — obvezno</li>
+      <li>Vodilni partner (Lead Partner) je odgovoren za celoten projekt in finance</li>
+      <li>Primerni tipi: občine, javni zavodi, nevladne organizacije, razvojne agencije, LAS</li>
+      <li>Podjetja so primerna le v posebnih primerih (ne za splošne projekte)</li>
+      <li>Vsi partnerji morajo podpisati Partnership Agreement</li>
+      <li>Vodilni partner je praviloma z SI strani (ker je JS v Ljubljani)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Iskanje hrvaškega partnerja — praktični vodič</h2>
+    <div class="partner-grid">
+      <div class="partner-card">
+        <div class="country hr">🇭🇷 Hrvaška — Karlovačka županija</div>
+        <h4>LAG "Vallis Colapis"</h4>
+        <p>LAG za območje Karlovca in Kupe. Izkušen z LEADER projekti. Kontakt: vallis-colapis.hr</p>
+      </div>
+      <div class="partner-card">
+        <div class="country hr">🇭🇷 Hrvaška — Ozalj/Kamanje</div>
+        <h4>Grad Ozalj / Općina Kamanje</h4>
+        <p>Kamanje je partner iz Misterion projekta — vzpostavljena mreža z Metliko in Semičem.</p>
+      </div>
+      <div class="partner-card">
+        <div class="country hr">🇭🇷 Hrvaška — Karlovac</div>
+        <h4>Turistička zajednica Karlovačke županije</h4>
+        <p>Za turistične projekte (P4). Aktivna na področju Kupe in naravne dediščine.</p>
+      </div>
+      <div class="partner-card">
+        <div class="country si">🇸🇮 Slovenija — Bela Krajina</div>
+        <h4>Možni vodilni partnerji</h4>
+        <p>Občina Metlika, Občina Semič, Občina Črnomelj, Zavod za razvoj BK (RIC BK), LAS DBK</p>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:.85rem;color:var(--muted)"><strong>Tip:</strong> Kontaktiraj Skupni sekretariat (info@si-hr.eu) — oni imajo bazo hrvaških organizacij, ki iščejo partnerje.</p>
+  </section>
+
+  <section>
+    <h2>Korak za korakom — aplikacijski proces</h2>
+    <ol class="steps">
+      <li><div class="step-num">1</div><div class="step-body"><h4>Kontaktiraj Joint Secretariat</h4><p>info@si-hr.eu ali +386 1 400 34 30 (Ljubljana). Pojasni projekt, dobi povratno info o ustreznosti. Organizirajo tudi info-dni za 4. poziv.</p></div></li>
+      <li><div class="step-num">2</div><div class="step-body"><h4>Poišči in potrdi hrvaške partnerje</h4><p>Podpiši Letter of Intent. Skupaj se dogovorite o vlogi vsakega partnerja, aktivnostih in budget deležu.</p></div></li>
+      <li><div class="step-num">3</div><div class="step-body"><h4>Pripravi projektno idejo (Application Form)</h4><p>Sistem: Jems portal na <a href="https://jems.si-hr.eu">jems.si-hr.eu</a>. Registracija → novi projekt → izpolnjevanje po korakih.</p></div></li>
+      <li><div class="step-num">4</div><div class="step-body"><h4>Pripravi partnerski sporazum</h4><p>Partnership Agreement je obvezen pred oddajo. Določa vloge, odgovornosti in finančne tokove med partnerji.</p></div></li>
+      <li><div class="step-num">5</div><div class="step-body"><h4>Finančni načrt in budget</h4><p>Razdelite budget med partnerje. Vsak partner upravlja s svojim delom. Min. €200k skupaj, max €1.5M. ESRR 80–85%, lastni delež 15–20%.</p></div></li>
+      <li><div class="step-num">6</div><div class="step-body"><h4>Oddaj prek Jems portala do 15.6.2026</h4><p>Rok 15.6.2026 ob 17:00 CET. Priporoča se oddaja vsaj teden pred rokom.</p></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Dokumenti — popoln seznam</h2>
+    <ul class="checklist">
+      <li>Izpolnjen Application Form v Jems portalu (SI + HR skupaj)</li>
+      <li>Partnership Agreement — podpisan s strani vseh partnerjev</li>
+      <li>Letter of Intent — za vsakega partnerja posebej</li>
+      <li>Dokazila o pravni obliki vseh partnerjev (izpisek iz registra)</li>
+      <li>Izjava o nekonfliktnosti interesov (za vsakega partnerja)</li>
+      <li>Budget breakdown — po partnerjih in kategorijah stroškov</li>
+      <li>Časovni načrt aktivnosti (Gantt chart priporočeno)</li>
+      <li>Za investicije: gradbeno dovoljenje ali dokazilo o lastništvu/najemu</li>
+      <li>Natura 2000 ocena ustreznosti (za projekte ob reki)</li>
+      <li>Finančna konsolidacija (finančni izkazi za zadnji 2 leti)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Budget pravila</h2>
+    <table>
+      <thead><tr><th>Kategorija</th><th>Detajl</th></tr></thead>
+      <tbody>
+        <tr><td>Skupni budget projekta</td><td>€200,000 – €1,500,000</td></tr>
+        <tr><td>ESRR sofinanciranje</td><td>80–85% (odvisno od tipa organizacije)</td></tr>
+        <tr><td>Lastni delež</td><td>15–20% (can be in-kind za javne org.)</td></tr>
+        <tr><td>Upravičeni stroški</td><td>Osebje, potni stroški, oprema, storitve zunanjih izvajalcev, gradnja/investicije, promocija</td></tr>
+        <tr><td>Začetek upravičenih stroškov</td><td>Po podpisu pogodbe o sofinanciranju — ne retroaktivno</td></tr>
+        <tr><td>Trajanje projekta</td><td>Tipično 24–36 mesecev</td></tr>
+        <tr><td>Poročanje</td><td>Vmesna poročila vsakih 6 mesecev, zaključno poročilo</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Časovnica do oddaje</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">Marec 2026</div><div class="tl-task">Kontakt JS · iskanje HR partnerjev · Letter of Intent · registracija na Jems portalu</div></div>
+      <div class="tl-item"><div class="tl-date">April 2026</div><div class="tl-task">Partnerski sestanki · opis projekta · budget plan · pridobivanje ponudb za investicije</div></div>
+      <div class="tl-item"><div class="tl-date">Maj 2026</div><div class="tl-task">Izpolnjevanje Application Form v Jems · Partnership Agreement v podpis · pregled s JS</div></div>
+      <div class="tl-item"><div class="tl-date">1.–14.6.2026</div><div class="tl-task">Dokončanje prijave · zadnja preverjanja · predoddaja (dummy submission) za pregled napak</div></div>
+      <div class="tl-item"><div class="tl-date">15.6.2026 do 17:00</div><div class="tl-task">⚡ ODDAJA prek Jems portala. Potrditveni e-mail avtomatično.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Nasveti za visoke točke</h2>
+    <div class="tips">
+      <div class="tip"><h4>🌊 Kolpa/Kupa kot skupni vir</h4><p>Poudarite, da je reka SKUPNI naravni vir — projekt ne more obstajati brez obeh strani. To je esenca Interreg.</p></div>
+      <div class="tip"><h4>📋 Precedens Misterion</h4><p>Misterion projekt (€1.24M, Semič+Metlika+Kamanje) = dokaz, da ta partnerska mreža deluje. Sklicujte se na rezultate.</p></div>
+      <div class="tip"><h4>🏛️ Vključi Krajinski park Kolpa</h4><p>Krajinski park Kolpa kot partner doda institucionalno kredibilnost in Natura 2000 upravičenost.</p></div>
+      <div class="tip"><h4>📊 Merljivi kazalci</h4><p>Definirajte jasne output indikatorje: km turistične poti, število obiskovalcev, delovnih mest, vrst v monitoringu. Interreg je strikten glede kazalcev.</p></div>
+      <div class="tip"><h4>🔗 Sinergija z Misterionom</h4><p>Pokažite, kako vaš projekt gradi na Misterion rezultatih (Bela Krajina Nature Centre) — nadgrajuje, ne podvaja.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ključni kontakti</h2>
+    <div class="partner-grid">
+      <div class="partner-card">
+        <h4>Joint Secretariat — Ljubljana</h4>
+        <p>info@si-hr.eu<br>+386 1 400 34 30<br><a href="https://www.si-hr.eu">si-hr.eu</a></p>
+      </div>
+      <div class="partner-card">
+        <h4>Jems — Aplikacijski portal</h4>
+        <p><a href="https://jems.si-hr.eu">jems.si-hr.eu</a><br>Registracija + oddaja prijav</p>
+      </div>
+      <div class="partner-card">
+        <h4>RIC Bela Krajina</h4>
+        <p>Razvojna agencija<br>ric-belakrajina.si<br>Lokalna podpora za prijave</p>
+      </div>
+      <div class="partner-card">
+        <h4>LAS DBK (partner)</h4>
+        <p>info@las-dbk.si<br>las-dbk.si<br>Izkušnje z Interreg projektov</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Bela Krajina LAS Vodič za prijave · Interreg VI-A SI-HR · Pripravljeno 15.3.2026</p>
+  <p style="margin-top:4px">Preverite vse na <strong>si-hr.eu</strong> in pri Joint Secretariat pred oddajo. Informacije se lahko spremenijo.</p>
+</footer>
+</body>
+</html>

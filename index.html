@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bela Krajina EU Funding Explorer — Kolpa 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0d1f2d;
+  --river: #1a6b8a;
+  --river-light: #2e9bbf;
+  --green: #2e7d32;
+  --green-light: #4caf50;
+  --eksrp: #2e7d32;
+  --esrr: #1565c0;
+  --urgent: #c62828;
+  --warn: #e65100;
+  --ok: #2e7d32;
+  --cream: #faf8f4;
+  --text: #1a1a1a;
+  --muted: #666;
+  --border: #e0e0e0;
+  --radius: 10px;
+}
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; }
+a { color: inherit; text-decoration: none; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #0d3347 50%, #0a4a2e 100%);
+  color: #fff;
+  padding: 60px 24px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 60px;
+  background: linear-gradient(to bottom right, transparent 49%, var(--cream) 50%);
+}
+.hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; margin-bottom: 12px; }
+.hero .sub { font-size: 1.1rem; color: rgba(255,255,255,.75); max-width: 600px; margin: 0 auto 24px; }
+.hero-stats { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.hero-stats .stat { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 8px; padding: 12px 20px; }
+.hero-stats .stat strong { display: block; font-size: 1.4rem; font-family: 'Space Grotesk', sans-serif; }
+.hero-stats .stat span { font-size: .8rem; color: rgba(255,255,255,.7); }
+
+/* MAIN */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+section { padding: 48px 0; }
+section + section { border-top: 1px solid var(--border); }
+h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; color: var(--navy); }
+h2 span { font-size: .85rem; font-weight: 400; color: var(--muted); margin-left: 8px; }
+
+/* DEADLINE CALENDAR */
+.deadline-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.dl-item {
+  border-radius: var(--radius);
+  padding: 14px 12px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+.dl-item.urgent { background: var(--urgent); }
+.dl-item.warn { background: var(--warn); }
+.dl-item.ok { background: #1976d2; }
+.dl-item.upcoming { background: #37474f; }
+.dl-item .dl-date { font-family: 'Space Grotesk', sans-serif; font-size: .85rem; font-weight: 700; }
+.dl-item .dl-name { font-size: .75rem; margin-top: 4px; opacity: .9; }
+.dl-item .dl-budget { font-size: .7rem; margin-top: 2px; opacity: .7; }
+.dl-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+.dl-legend span { display: flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+/* CARDS GRID */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: transform .15s, box-shadow .15s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+.card a.card { display: block; }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--navy); line-height: 1.3; }
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.badge.eksrp { background: #e8f5e9; color: #2e7d32; }
+.badge.esrr { background: #e3f2fd; color: #1565c0; }
+.badge.urgent { background: #ffebee; color: #c62828; }
+.badge.warn { background: #fff3e0; color: #e65100; }
+.badge.ok { background: #e3f2fd; color: #1565c0; }
+.badge.upcoming { background: #eceff1; color: #37474f; }
+.card-meta { font-size: .8rem; color: var(--muted); }
+.card-meta strong { color: var(--text); }
+.card p { font-size: .85rem; color: var(--muted); flex: 1; }
+.card-link {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: .85rem;
+  font-weight: 600;
+  background: var(--navy);
+  color: #fff;
+  text-align: center;
+  transition: background .15s;
+}
+.card-link:hover { background: var(--river); }
+.card-link.urgent-btn { background: var(--urgent); }
+.card-link.urgent-btn:hover { background: #b71c1c; }
+
+/* MATRIX TABLE */
+.matrix-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: center; }
+th { background: var(--navy); color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: .75rem; font-weight: 600; }
+th:first-child, td:first-child { text-align: left; min-width: 180px; background: #f5f5f5; }
+td.y { color: var(--green); font-weight: 700; font-size: 1rem; }
+td.n { color: #ccc; }
+
+/* START HERE */
+.start-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.start-card { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--river); border-radius: var(--radius); padding: 16px; }
+.start-card h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; margin-bottom: 8px; font-size: .95rem; }
+.start-card ul { list-style: none; padding: 0; }
+.start-card ul li { font-size: .82rem; color: var(--muted); padding: 3px 0; }
+.start-card ul li::before { content: '→ '; color: var(--river); font-weight: 700; }
+
+/* CONTACTS */
+.contacts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.contact-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+.contact-card h4 { font-size: .85rem; font-weight: 700; margin-bottom: 6px; color: var(--navy); }
+.contact-card p { font-size: .78rem; color: var(--muted); }
+.contact-card a { color: var(--river); }
+
+/* FOOTER */
+footer { background: var(--navy); color: rgba(255,255,255,.6); text-align: center; padding: 24px; font-size: .8rem; }
+footer strong { color: rgba(255,255,255,.9); }
+
+@media (max-width: 600px) {
+  .hero-stats { flex-direction: column; align-items: center; }
+  .deadline-track { grid-template-columns: repeat(2, 1fr); }
+}
+@media print { footer, .card-link { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🌊 Bela Krajina EU Funding Explorer</h1>
+  <p class="sub">7 projektnih idej · 7 vodičev za prijavo · Kolpa 2026<br>Pripravljeno za iskanje EU sredstev v Beli Krajini</p>
+  <div class="hero-stats">
+    <div class="stat"><strong>7</strong><span>Projektnih idej</span></div>
+    <div class="stat"><strong>7</strong><span>Odprtih razpisov</span></div>
+    <div class="stat"><strong>€4M+</strong><span>Skupaj dostopno</span></div>
+    <div class="stat"><strong>15.3.2026</strong><span>Datum priprave</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- DEADLINE CALENDAR -->
+  <section>
+    <h2>📅 Roki razpisov 2026 <span>— od najnujnejšega naprej</span></h2>
+    <div class="deadline-track">
+      <div class="dl-item urgent">
+        <div class="dl-date">26.3.2026 ⚡</div>
+        <div class="dl-name">Erasmus+ KA220</div>
+        <div class="dl-budget">€60k–200k</div>
+      </div>
+      <div class="dl-item warn">
+        <div class="dl-date">23.4.2026</div>
+        <div class="dl-name">LIFE 2026-SSC</div>
+        <div class="dl-budget">€2M–10M</div>
+      </div>
+      <div class="dl-item warn">
+        <div class="dl-date">30.4.2026</div>
+        <div class="dl-name">ARSKTRP P4.1</div>
+        <div class="dl-budget">€20k–150k</div>
+      </div>
+      <div class="dl-item warn">
+        <div class="dl-date">30.4.2026</div>
+        <div class="dl-name">EIT Food RIS</div>
+        <div class="dl-budget">€50k–200k</div>
+      </div>
+      <div class="dl-item upcoming">
+        <div class="dl-date">April 2026</div>
+        <div class="dl-name">LAS DBK 3. EKSRP</div>
+        <div class="dl-budget">do €200k</div>
+      </div>
+      <div class="dl-item ok">
+        <div class="dl-date">15.5.2026</div>
+        <div class="dl-name">SPIRIT Rural</div>
+        <div class="dl-budget">€30k–300k</div>
+      </div>
+      <div class="dl-item upcoming">
+        <div class="dl-date">Junij 2026</div>
+        <div class="dl-name">LAS DBK 3. ESRR</div>
+        <div class="dl-budget">do €200k</div>
+      </div>
+      <div class="dl-item ok">
+        <div class="dl-date">15.6.2026</div>
+        <div class="dl-name">Interreg SI-HR</div>
+        <div class="dl-budget">€200k–1.5M</div>
+      </div>
+    </div>
+    <div class="dl-legend">
+      <span><span class="dot" style="background:#c62828"></span> NUJNO — manj kot 2 tedna</span>
+      <span><span class="dot" style="background:#e65100"></span> Kmalu — april 2026</span>
+      <span><span class="dot" style="background:#1976d2"></span> Odprt — maj/junij 2026</span>
+      <span><span class="dot" style="background:#37474f"></span> Pričakovan — ni še odprt</span>
+    </div>
+  </section>
+
+  <!-- APPLICATION GUIDES -->
+  <section>
+    <h2>📋 Vodiči za prijavo <span>— korak za korakom</span></h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-header">
+          <h3>Erasmus+ KA220 — Small-Scale Partnerships</h3>
+          <span class="badge urgent">⚡ NUJNO</span>
+        </div>
+        <div class="card-meta">Rok: <strong>26.3.2026</strong> · Budget: <strong>€60k–200k</strong> (lump sum)</div>
+        <p>Partnerstvo med šolami/nevladnimi organizacijami iz vsaj 2 EU držav. Idealno za Zeleni podjetniški inkubator za mlade ob Kolpi. SI+HR partnerstvo.</p>
+        <a href="guide-erasmus-ka220.html" class="card-link urgent-btn">Odpri vodič →</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>LIFE 2026-SSC — Strateški projekti narave</h3>
+          <span class="badge warn">23.4.2026</span>
+        </div>
+        <div class="card-meta">Rok Stage 1: <strong>23.4.2026</strong> · Budget: <strong>€2M–10M</strong></div>
+        <p>Največji razpis za biodiverziteto. Kolpa je Natura 2000 z 39 vrstami rib. Potreben konzorcij. Stage 1 = kratka skica projekta.</p>
+        <a href="guide-life-nature.html" class="card-link">Odpri vodič →</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>ARSKTRP Podukrep 4.1 — Kmetijske investicije</h3>
+          <span class="badge warn">30.4.2026</span>
+        </div>
+        <div class="card-meta">Rok: <strong>30.4.2026</strong> · Budget: <strong>€20k–150k</strong> · 60% sofinanciranje</div>
+        <p>Za kmete in zadruge. Idealno za Perma-Kolpa vrtove — oprema, nasadi, namakanje. Prijava prek eVloga portala.</p>
+        <a href="guide-arsktrp-p41.html" class="card-link">Odpri vodič →</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>EIT Food RIS 2026 — Inovacije v živilstvu</h3>
+          <span class="badge warn">30.4.2026</span>
+        </div>
+        <div class="card-meta">Rok: <strong>30.4.2026</strong> · Budget: <strong>€50k–200k</strong> · 50% sofinanciranje</div>
+        <p>Za agri-food inovacijske projekte z mlado generacijo. Slovenija je RIS+ država. Zahteva inovacijski/raziskovalni element.</p>
+        <a href="guide-eit-food.html" class="card-link">Odpri vodič →</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>SPIRIT Slovenia — Trajnostni ruralni turizem</h3>
+          <span class="badge ok">15.5.2026</span>
+        </div>
+        <div class="card-meta">Rok: <strong>15.5.2026</strong> · Budget: <strong>€30k–300k</strong> · 50% sofinanciranje</div>
+        <p>Za turistična društva, nevladne organizacije, občine. Primerno za 4 od 7 projektnih idej: steze, festivali, dostopnost, mladi.</p>
+        <a href="guide-spirit-rural.html" class="card-link">Odpri vodič →</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>Interreg VI-A SI-HR — 4. javni poziv</h3>
+          <span class="badge ok">15.6.2026</span>
+        </div>
+        <div class="card-meta">Rok: <strong>15.6.2026</strong> · Budget: <strong>€200k–1.5M</strong> · ESRR 80–85%</div>
+        <p>Največja priložnost. Kolpa/Kupa je eksplicitna prioriteta. 5 od 7 projektov ustreza. Potreben hrvaški partner. Precedens: Misterion (€1.24M).</p>
+        <a href="guide-interreg-sihr.html" class="card-link">Odpri vodič →</a>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3>LAS DBK — Priprava na 3. EKSRP + ESRR</h3>
+          <span class="badge upcoming">April/Junij 2026</span>
+        </div>
+        <div class="card-meta">Naslednji razpis: <strong>April 2026</strong> · Budget: <strong>do €200k</strong> · 80% sofinanciranje</div>
+        <p>LAS DBK nima odprtega razpisa. Pripravi prijavo zdaj — ko razpis odpre, moraš biti pripravljen. Kontaktiraj jih takoj.</p>
+        <a href="guide-las-dbk-prep.html" class="card-link">Odpri vodič →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT IDEAS -->
+  <section>
+    <h2>💡 Projektne ideje <span>— brainstorm z raziskavami</span></h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-header"><h3>Mreža opazovalcev narave ob Kolpi</h3><span class="badge eksrp">EKSRP</span></div>
+        <div class="card-meta">Budget: <strong>€80k</strong> · Razpis: EKSRP-3 + LIFE + Interreg SI-HR P2</div>
+        <p>App za monitoring vrst (39 endemičnih rib, vidre, sklednica), šolska zbiranja podatkov, kmetijsko usposabljanje.</p>
+        <a href="01-kolpa-biodiversity-citizen-science.html" class="card-link">Projektna stran →</a>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Eko-kmetijska pot ob Kolpi</h3><span class="badge esrr">ESRR</span></div>
+        <div class="card-meta">Budget: <strong>€120k</strong> · Razpis: ESRR-3 + SPIRIT + Interreg SI-HR P4</div>
+        <p>10 farm-to-fork postaj vzdolž e-kolesarske poti, skupne SI-HR tržnice v Vinici in Metliki, QR gastro ture.</p>
+        <a href="02-kolpa-farm-trail-markets.html" class="card-link">Projektna stran →</a>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Mreža permakultivnih vrtov ob Kolpi</h3><span class="badge eksrp">EKSRP</span></div>
+        <div class="card-meta">Budget: <strong>€200k</strong> · Razpis: EKSRP-3 + ARSKTRP P4.1</div>
+        <p>5 ha permakulturnih pasov z avtohtono vegetacijo. Nadgradnja Verige EKO semen (Belokranjka čebula, ajda, zeliščni čaj).</p>
+        <a href="03-perma-kolpa-gardens.html" class="card-link">Projektna stran →</a>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Plavajoče eko-platforme ob Kolpi</h3><span class="badge esrr">ESRR</span></div>
+        <div class="card-meta">Budget: <strong>€250k</strong> · Razpis: Interreg SI-HR P4 + ESRR-3</div>
+        <p>3 solarno napajane plavajoče platforme za delavnice, eko-tabore, čezmejne umetniške rezidence. Najpomembnejši: vodno soglasje ARSO.</p>
+        <a href="04-kolpa-floating-hubs.html" class="card-link">Projektna stran →</a>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Zeleni podjetniški inkubator za mlade</h3><span class="badge esrr">ESRR</span></div>
+        <div class="card-meta">Budget: <strong>€40k</strong> · Razpis: Erasmus+ KA220 + EIT Food + SPIRIT</div>
+        <p>6-mesečna akademija za 50 mladih iz BK. Bio-kozmetika iz kolpskih rastlin, kajakaštvo, eko-hrana. Najboljše razmerje cena/učinek.</p>
+        <a href="05-kolpa-youth-venture-lab.html" class="card-link">Projektna stran →</a>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Dostopnost za vse ob Kolpi</h3><span class="badge eksrp">EKSRP</span></div>
+        <div class="card-meta">Budget: <strong>€100k</strong> · Razpis: EKSRP-3 + Interreg SI-HR P4 + SPIRIT</div>
+        <p>5 dostopnih vstopnih točk na reko, prilagojen kajak, EV polnjenje, AR dediščinski tur (EN 17210:2021). Bonus točke za vključevanje.</p>
+        <a href="06-kolpa-inclusive-access.html" class="card-link">Projektna stran →</a>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Zvezdna pot ob Kolpi — noč, okus in ogenj</h3><span class="badge esrr">ESRR</span></div>
+        <div class="card-meta">Budget: <strong>€90k</strong> · Razpis: ESRR-3 + SPIRIT + Interreg SI-HR P4</div>
+        <p>Bela Krajina bi bila PRVA IDA certificirana temno-nebeška lokacija v Sloveniji. Festivalski krog SI-HR, Kolpa postrv, belokranjska pogača (EU TSG).</p>
+        <a href="07-kolpa-night-sky-gastro.html" class="card-link">Projektna stran →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATRIX -->
+  <section>
+    <h2>🔗 Matrika ujemanja projektov in razpisov</h2>
+    <div class="matrix-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Projekt</th>
+            <th>Erasmus+<br>26.3</th>
+            <th>LIFE<br>23.4</th>
+            <th>ARSKTRP<br>30.4</th>
+            <th>EIT Food<br>30.4</th>
+            <th>LAS EKSRP<br>Apr</th>
+            <th>SPIRIT<br>15.5</th>
+            <th>LAS ESRR<br>Jun</th>
+            <th>Interreg<br>15.6</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1. Biodiverziteta</td><td class="n">—</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><td>2. Eko-kmetijska pot</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td>3. Perma-Kolpa vrtovi</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="n">—</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td><td class="n">—</td></tr>
+          <tr><td>4. Plavajoče platforme</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td>5. Inkubator za mlade</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr>
+          <tr><td>6. Dostopnost za vse</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><td>7. Zvezdna pot</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- START HERE -->
+  <section>
+    <h2>🧭 Kje začeti?</h2>
+    <div class="start-grid">
+      <div class="start-card">
+        <h4>👩‍🌾 Si kmet/kmetica?</h4>
+        <ul>
+          <li>ARSKTRP P4.1 (rok 30.4)</li>
+          <li>LAS DBK EKSRP (april)</li>
+          <li>Projekt 3: Perma-Kolpa</li>
+        </ul>
+      </div>
+      <div class="start-card">
+        <h4>🏛️ Si občina?</h4>
+        <ul>
+          <li>Interreg SI-HR (rok 15.6)</li>
+          <li>SPIRIT Slovenia (rok 15.5)</li>
+          <li>LAS DBK oba razpisa</li>
+        </ul>
+      </div>
+      <div class="start-card">
+        <h4>🤝 Si nevladna org.?</h4>
+        <ul>
+          <li>Erasmus+ KA220 (ROK 26.3!)</li>
+          <li>EIT Food RIS (rok 30.4)</li>
+          <li>Interreg SI-HR (rok 15.6)</li>
+        </ul>
+      </div>
+      <div class="start-card">
+        <h4>🏫 Si šola?</h4>
+        <ul>
+          <li>Erasmus+ KA220 (ROK 26.3!)</li>
+          <li>LAS DBK ESRR (junij)</li>
+          <li>Projekt 5: Inkubator za mlade</li>
+        </ul>
+      </div>
+      <div class="start-card">
+        <h4>🏨 Si turistični ponudnik?</h4>
+        <ul>
+          <li>SPIRIT Slovenia (rok 15.5)</li>
+          <li>Interreg SI-HR (rok 15.6)</li>
+          <li>LAS DBK ESRR (junij)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY CONTACTS -->
+  <section>
+    <h2>📞 Ključni kontakti</h2>
+    <div class="contacts-grid">
+      <div class="contact-card">
+        <h4>LAS DBK</h4>
+        <p>info@las-dbk.si<br><a href="https://las-dbk.si">las-dbk.si</a><br>RC Novo Mesto d.o.o.</p>
+      </div>
+      <div class="contact-card">
+        <h4>CMEPIUS (Erasmus+)</h4>
+        <p>+386 1 430 47 47<br><a href="https://www.cmepius.si">cmepius.si</a><br>info@cmepius.si</p>
+      </div>
+      <div class="contact-card">
+        <h4>Interreg SI-HR JS</h4>
+        <p>info@si-hr.eu<br><a href="https://www.si-hr.eu">si-hr.eu</a><br>Ljubljana + Zagreb</p>
+      </div>
+      <div class="contact-card">
+        <h4>SPIRIT Slovenia</h4>
+        <p>+386 1 5898 000<br><a href="https://www.spirit.si">spirit.si</a><br>Dimičeva 13, Ljubljana</p>
+      </div>
+      <div class="contact-card">
+        <h4>ARSKTRP</h4>
+        <p>+386 1 580 77 92<br><a href="https://www.arsktrp.gov.si">arsktrp.gov.si</a></p>
+      </div>
+      <div class="contact-card">
+        <h4>KGZS BK (kmetijci)</h4>
+        <p>KGZS Metlika<br>Partizanska 2, Metlika<br>+386 7 30 58 800</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p><strong>Bela Krajina EU Funding Explorer</strong> — Pripravljeno marca 2026 za brainstorming namene.</p>
+  <p style="margin-top:6px">Vse informacije preverite pri uradnih virih pred prijavo. Roki in zneski se lahko spremenijo.</p>
+</footer>
+
+</body>
+</html>

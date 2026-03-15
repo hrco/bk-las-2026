@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARSKTRP Podukrep 4.1 — Navodila za prijavo | BK LAS 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --orange: #f0883e;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --arsktrp: #2563eb;
+    --arsktrp-light: #60a5fa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+  .header {
+    background: linear-gradient(135deg, #0d1a3a 0%, #1a2d6e 50%, #0d2040 100%);
+    border-bottom: 3px solid var(--arsktrp-light);
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(96,165,250,0.12) 0%, transparent 60%);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(37,99,235,0.4);
+    border: 1px solid var(--arsktrp-light);
+    color: #93c5fd;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 16px;
+    position: relative;
+  }
+  .header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(22px, 4vw, 40px);
+    font-weight: 700; color: #fff;
+    position: relative; margin-bottom: 8px;
+  }
+  .header .subtitle { font-size: 16px; color: #93c5fd; position: relative; margin-bottom: 24px; }
+  .header-meta {
+    display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative;
+  }
+  .meta-chip {
+    background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .meta-chip .label { color: var(--muted); }
+  .meta-chip .value { color: #fff; font-weight: 600; }
+
+  .urgent-banner {
+    background: linear-gradient(90deg, #1a1200, #2d2000, #1a1200);
+    border: 1px solid var(--yellow); border-radius: 10px;
+    padding: 16px 20px; margin: 24px auto; max-width: 900px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .urgent-text strong { color: var(--yellow); font-size: 15px; }
+  .urgent-text p { color: var(--text); font-size: 13px; margin-top: 4px; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 14px; margin-bottom: 30px; transition: all 0.2s;
+  }
+  .nav-back:hover { color: var(--text); border-color: var(--accent); }
+
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--arsktrp-light);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px; margin-bottom: 16px;
+  }
+  .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .kv { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid rgba(48,54,61,0.5); padding-bottom: 8px; }
+  .kv:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .kv .k { color: var(--muted); font-size: 13px; }
+  .kv .v { color: var(--text); font-size: 13px; font-weight: 500; text-align: right; max-width: 55%; }
+
+  .step-list { counter-reset: steps; }
+  .step {
+    counter-increment: steps; display: flex; gap: 16px; margin-bottom: 20px;
+    padding: 16px; background: var(--surface2); border-radius: 10px;
+    border-left: 3px solid var(--arsktrp-light);
+  }
+  .step-num {
+    width: 32px; height: 32px; min-width: 32px;
+    background: var(--arsktrp); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: #fff;
+  }
+  .step-num::before { content: counter(steps); }
+  .step-content h4 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .step-content p, .step-content ul { font-size: 13px; color: var(--muted); }
+  .step-content ul { padding-left: 16px; margin-top: 6px; }
+  .step-content li { margin-bottom: 4px; }
+  .step-content a { color: var(--accent); }
+  .step-content strong { color: var(--text); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .tag-orange { background: rgba(240,136,62,0.15); color: var(--orange); border: 1px solid rgba(240,136,62,0.3); }
+  .tag-blue { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+  .tag-yellow { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); }
+
+  .info-box {
+    background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.25);
+    border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px;
+  }
+  .info-box strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 14px; }
+
+  .warn-box {
+    background: rgba(210,153,34,0.08); border: 1px solid rgba(210,153,34,0.3);
+    border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; color: #deba7a;
+  }
+  .warn-box strong { color: var(--yellow); display: block; margin-bottom: 6px; }
+
+  .contact-card {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 12px;
+  }
+  .contact-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .contact-card p { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .contact-card a { color: var(--accent); }
+
+  .deadline-banner {
+    background: linear-gradient(135deg, #0d1a3a, #1a2d6e);
+    border: 2px solid var(--arsktrp-light); border-radius: 12px;
+    padding: 20px 24px; text-align: center; margin: 24px 0;
+  }
+  .deadline-banner .deadline-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+  .deadline-banner .deadline-date { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: var(--arsktrp-light); }
+  .deadline-banner .deadline-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .eligible-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0;
+  }
+  .eligible-item {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px; text-align: center; font-size: 13px; color: var(--text);
+  }
+  .eligible-item .icon { font-size: 24px; margin-bottom: 6px; }
+  .eligible-item.yes { border-color: rgba(63,185,80,0.4); }
+  .eligible-item.no { border-color: rgba(248,81,73,0.3); color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(48,54,61,0.5); color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+
+  .footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .header { background: #1a3a8f; }
+    .nav-back { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">🌾 ARSKTRP — Kmetijsko okoljska plačila</div>
+  <h1>Podukrep 4.1 — Podpora za naložbe v kmetijska gospodarstva</h1>
+  <p class="subtitle">PRP 2014–2022 (podaljšan) · Naložbe v kmetijsko predelavo in trženje · eVloga portal</p>
+  <div class="header-meta">
+    <div class="meta-chip"><span class="label">Program</span><span class="value">PRP 2014-2022 (ext.)</span></div>
+    <div class="meta-chip"><span class="label">Predvideni rok</span><span class="value">30. april 2026</span></div>
+    <div class="meta-chip"><span class="label">Razpon</span><span class="value">€20k – €150k</span></div>
+    <div class="meta-chip"><span class="label">EU delež</span><span class="value">60%</span></div>
+    <div class="meta-chip"><span class="label">Portal</span><span class="value">eVloga (ARSKTRP)</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <a href="index.html" class="nav-back">← Nazaj na pregled</a>
+
+  <div class="urgent-banner">
+    <div style="font-size:28px">🌾</div>
+    <div class="urgent-text">
+      <strong>Predvideni rok: 30. april 2026 — Preveri uradni razpis!</strong>
+      <p>ARSKTRP razpisa za 4.1 niso vedno točno napovedani. Preveri portal <a href="https://www.gov.si/drzavni-organi/agencije/arsktrp/" target="_blank" style="color:var(--accent)">arsktrp.gov.si</a> za aktualni razpis. Rok je informativen na podlagi preteklih ciklov.</p>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <h2 class="section-title">📋 Pregled Podukреpa 4.1</h2>
+    <div class="card">
+      <div class="kv"><span class="k">Program</span><span class="v">PRP 2014–2022 (podaljšan do 2025/2026)</span></div>
+      <div class="kv"><span class="k">Ukrep</span><span class="v">Ukrep 4: Naložbe v osnovna sredstva</span></div>
+      <div class="kv"><span class="k">Podukrep</span><span class="v">4.1: Podpora za naložbe v kmetijska gospodarstva</span></div>
+      <div class="kv"><span class="k">Upravljavec</span><span class="v">ARSKTRP (Agencija RS za kmetijske trge)</span></div>
+      <div class="kv"><span class="k">Min. vrednost naložbe</span><span class="v">€20.000</span></div>
+      <div class="kv"><span class="k">Max. vrednost naložbe</span><span class="v">€150.000 (splošni); do €500k za kmetijska društva</span></div>
+      <div class="kv"><span class="k">EU + SLO sofinanciranje</span><span class="v">do 60% upravičenih stroškov</span></div>
+      <div class="kv"><span class="k">Dodatnih 20%</span><span class="v">za mlade kmete (&lt;40 let), OMD območja, ekološke kmete</span></div>
+    </div>
+
+    <div class="info-box">
+      <strong>Zakaj 4.1 za Belo krajino?</strong>
+      Bela krajina je OMD (območje z omejenimi možnostmi za kmetijstvo) — to pomeni <strong>+20% sofinanciranja</strong> na že tako ugodnih 60%. Skupaj do 80% za mlade kmete v OMD. Projekt Perma-Kolpa (03) in Farm Trail (02) direktno koristita od naložb v predelavo in trženje lokalnih pridelkov.
+    </div>
+  </div>
+
+  <!-- UPRAVIČENOST -->
+  <div class="section">
+    <h2 class="section-title">✅ Kdo se lahko prijavi?</h2>
+    <div class="eligible-grid">
+      <div class="eligible-item yes">
+        <div class="icon">👨‍🌾</div>
+        <strong>Kmetje (fizične osebe)</strong><br>Min. 1 ha SKP površin
+      </div>
+      <div class="eligible-item yes">
+        <div class="icon">🏢</div>
+        <strong>Kmetijska podjetja</strong><br>s.p., d.o.o. — pretežno kmetijska dejavnost
+      </div>
+      <div class="eligible-item yes">
+        <div class="icon">🤝</div>
+        <strong>Kmetijska zadruge</strong><br>Zadruge z večinsko kmetijsko dejavnostjo
+      </div>
+      <div class="eligible-item yes">
+        <div class="icon">🌱</div>
+        <strong>Mladi kmetje</strong><br>&lt;40 let = +20% sofinanciranja
+      </div>
+      <div class="eligible-item no">
+        <div class="icon">🏪</div>
+        <strong>Gostinci / turistični subjekti</strong><br>Ne, razen kot dodatna dejavnost na kmetiji
+      </div>
+      <div class="eligible-item no">
+        <div class="icon">🏙️</div>
+        <strong>Občine / NVO</strong><br>Ne za 4.1 (za 7.1 / 7.4)
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Pogoji za prijavitelja</h3>
+      <div class="kv"><span class="k">Registracija</span><span class="v">Vpisan v register kmetijskih gospodarstev (KMG-MID)</span></div>
+      <div class="kv"><span class="k">Min. površina</span><span class="v">1 ha kmetijskih površin (prijaviteljev KMG)</span></div>
+      <div class="kv"><span class="k">Ekonomska velikost</span><span class="v">Min. €4.000 standardni prihodek (SO)</span></div>
+      <div class="kv"><span class="k">Poklicna usposobljenost</span><span class="v">Min. osnovna kmetijska izobrazba ali praktične izkušnje</span></div>
+      <div class="kv"><span class="k">Brez dolgov</span><span class="v">Brez neporavnanih obveznosti do ARSKTRP</span></div>
+    </div>
+  </div>
+
+  <!-- UPRAVIČENI STROŠKI -->
+  <div class="section">
+    <h2 class="section-title">💰 Kaj se financira?</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>✅ Upravičeni stroški</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Nakup, gradnja, adaptacija kmetijskih objektov</li>
+          <li>Nakup strojev in opreme za pridelavo</li>
+          <li>Naložbe v predelavo in trženje kmetijskih pridelkov</li>
+          <li>Oprema za direktno prodajo (hladilnice, pakirnice)</li>
+          <li>Namakalne sisteme, zaščitne mreže</li>
+          <li>Ureditev poti na kmetiji</li>
+          <li>Zunanja izvajanja za pripravo vloge (do 10%)</li>
+          <li>DDV <em>samo</em> če ni povračljiv</li>
+        </ul>
+        <div class="tags"><span class="tag tag-green">Do 60% (80% v OMD)</span></div>
+      </div>
+      <div class="card">
+        <h3>❌ Neupravičeni stroški</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Nakup rabljene opreme (praviloma)</li>
+          <li>Stroški plač in lastnega dela</li>
+          <li>Nakup živine</li>
+          <li>Vzdrževanje obstoječe opreme</li>
+          <li>Stroški financiranja (obresti)</li>
+          <li>Promocija in marketing (ločeni ukrepi)</li>
+          <li>Stroški pred oddajo vloge (razen izjem)</li>
+        </ul>
+        <div class="tags"><span class="tag tag-orange">Pozor!</span></div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Posebnost za Belo krajino — ekološka kmetija + OMD = max bonus</strong>
+      Kmetija registrirana kot ekološka (certifikat) + mladi kmet (&lt;40 let) + OMD področje (večina BK) = potencialno do 80% sofinanciranja. Npr. naložba €100k → EU/SLO plačata €80k, lastna udeležba samo €20k.
+    </div>
+  </div>
+
+  <!-- KORAKI -->
+  <div class="section">
+    <h2 class="section-title">📝 Koraki za prijavo</h2>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Preveri aktualni razpis na ARSKTRP</h4>
+          <p>Portal: <a href="https://www.gov.si/drzavni-organi/agencije/arsktrp/razpisi/" target="_blank">gov.si/arsktrp/razpisi</a><br>
+          Razpis vsebuje: razpisno dokumentacijo, točkovalni kriteriji, razpisni obrazci.<br>
+          <strong>Natančno preberi razpisno dokumentacijo</strong> — pogoji se spremenijo pri vsakem razpisu.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pridobi KMG-MID (če ga nimaš)</h4>
+          <p>KMG-MID = identifikator kmetijskega gospodarstva.<br>
+          Pristojno: KGZS (Kmetijsko gozdarska zbornica) — območna enota Novo Mesto za BK.<br>
+          <a href="https://www.kgzs.si" target="_blank">kgzs.si</a> ali <a href="https://www.gov.si/teme/kmetijstvo/" target="_blank">gov.si/kmetijstvo</a></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pridobi 3 ponudbe za naložbo</h4>
+          <p>Za vsako postavko nad določenim pragom (praviloma €500-1000) potrebuješ <strong>3 neodvisne ponudbe</strong>.<br>
+          ARSKTRP bo preveril cene glede na tržne cene — previsoke bodo zavrnjene.<br>
+          <strong>Dokumentiraj vse ponudbe</strong> — bodo priložene vlogi.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pripravi poslovni načrt</h4>
+          <p>Obvezni del vloge — prikazuje ekonomsko upravičenost naložbe.<br>
+          Vsebuje: opis kmetije, opis naložbe, finančni prikaz (pred/po), plan prodaje, analiza trga.<br>
+          Pomoč: KGZS svetovalci (brezplačno za člane), ali komercialni svetovalci.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Oddaj vlogo prek eVloga portala</h4>
+          <p>Portal: <a href="https://evloga.arsktrp.gov.si" target="_blank">evloga.arsktrp.gov.si</a><br>
+          Potrebuješ: kvalificirano digitalno potrdilo (SIGEN-CA, Pošta SI) ali SI-PASS.<br>
+          <strong>Rok: 30. april 2026, 23:59</strong> (preveri uradni razpis!)<br>
+          Vloga se odda elektronsko — papirnate vloge se ne sprejemajo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Odgovarjaj na dopolnitve</h4>
+          <p>ARSKTRP bo verjetno zahteval dopolnitve (rok praviloma 8 delovnih dni).<br>
+          Dopolnitve prek eVloga — prejmeš obvestilo na e-mail.<br>
+          <strong>Zamuda = zavrnitev</strong> — redno preverjaj portal in e-pošto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOČKOVALNI KRITERIJI -->
+  <div class="section">
+    <h2 class="section-title">🏆 Točkovalni kriteriji (pretekli razpis — informativno)</h2>
+    <div class="card">
+      <table>
+        <tr><th>Kriterij</th><th>Opis</th><th>Max točk</th></tr>
+        <tr><td>OMD področje</td><td>Kmetija leži na OMD (hribovit, odročen teren)</td><td style="color:var(--green)">15</td></tr>
+        <tr><td>Ekološka pridelava</td><td>Certificirana EKO kmetija ali v preusmeritvi</td><td style="color:var(--green)">15</td></tr>
+        <tr><td>Mladi kmet</td><td>Prijavitelj mlajši od 40 let</td><td style="color:var(--green)">10</td></tr>
+        <tr><td>Ekonomska velikost</td><td>SO kmetije (višji SO = več točk)</td><td style="color:var(--yellow)">10</td></tr>
+        <tr><td>Trajnostnost naložbe</td><td>Vpliv na okolje, emisije, varčevanje z vodo</td><td style="color:var(--yellow)">10</td></tr>
+        <tr><td>Predelava / trženje</td><td>Naložba v predelavo ali direktno prodajo pridelkov</td><td style="color:var(--accent)">10</td></tr>
+        <tr><td>Kooperative / skupni projekti</td><td>Skupna naložba več kmetov</td><td style="color:var(--accent)">5</td></tr>
+      </table>
+    </div>
+    <div class="warn-box">
+      <strong>⚠️ Točkovalni kriteriji se spremenijo pri vsakem razpisu</strong>
+      Zgornja tabela je informativna na podlagi preteklih razpisov. Vedno preveri aktualno razpisno dokumentacijo za točne kriterije in uteži.
+    </div>
+  </div>
+
+  <!-- BK PRIMERI -->
+  <div class="section">
+    <h2 class="section-title">💡 Primeri naložb primerni za Belo krajino</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>🌿 Zeliščna kmetija pod Hrelenom</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Obstoječa zeliščna kmetija v Stari vasi ob Kolpi — idealen kandidat za 4.1 naložbo v predelavo zelišč (destilator eteričnih olj, sušilnica, pakirnica).</p>
+        <div class="kv" style="margin-top:10px"><span class="k">Potencialna naložba</span><span class="v">€40-60k</span></div>
+        <div class="kv"><span class="k">EU delež (OMD+EKO)</span><span class="v">do €48k (80%)</span></div>
+        <div class="tags"><span class="tag tag-green">Idealen kandidat</span><span class="tag tag-blue">Zelišča BK</span></div>
+      </div>
+      <div class="card">
+        <h3>🍷 Pridelovalci Metliške črnine</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Naložba v kletarsko opremo za manjše pridelovalce Metliške črnine (PTP vino). Skupna naložba zadruge = +5 točk, možni skupaj do 80% sofinanciranja.</p>
+        <div class="kv" style="margin-top:10px"><span class="k">Potencialna naložba</span><span class="v">€80-120k</span></div>
+        <div class="kv"><span class="k">Priporočena oblika</span><span class="v">Kmetijska zadruga</span></div>
+        <div class="tags"><span class="tag tag-green">Zadruga bonus</span><span class="tag tag-blue">PTP vino</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONTAKTI -->
+  <div class="section">
+    <h2 class="section-title">📞 Ključni kontakti</h2>
+    <div class="contact-card">
+      <h4>ARSKTRP — Agencija RS za kmetijske trge in razvoj podeželja</h4>
+      <p>📞 Klicni center: <strong>01 580 77 92</strong></p>
+      <p>📧 <a href="mailto:aktrp@gov.si">aktrp@gov.si</a></p>
+      <p>🌐 <a href="https://www.gov.si/drzavni-organi/agencije/arsktrp/" target="_blank">gov.si/arsktrp</a></p>
+      <p>eVloga portal: <a href="https://evloga.arsktrp.gov.si" target="_blank">evloga.arsktrp.gov.si</a></p>
+    </div>
+    <div class="contact-card">
+      <h4>KGZS — Kmetijsko gozdarska zbornica, OE Novo Mesto (za BK)</h4>
+      <p>Brezplačno svetovanje za prijavo in poslovni načrt</p>
+      <p>📞 07 393 04 00</p>
+      <p>🌐 <a href="https://www.kgzs.si/gzs/sodbizovstvo/oe-novo-mesto" target="_blank">kgzs.si/oe-novo-mesto</a></p>
+    </div>
+    <div class="contact-card">
+      <h4>LAS DBK — Lokalna akcijska skupina DBK</h4>
+      <p>Pomoč pri razumevanju, kateri ukrep je pravi za vaš projekt</p>
+      <p>📧 <a href="mailto:las@ra-dc.si">las@ra-dc.si</a></p>
+      <p>🌐 <a href="https://www.las-dbk.si" target="_blank">las-dbk.si</a></p>
+    </div>
+  </div>
+
+  <!-- POVEZAVE Z BK PROJEKTI -->
+  <div class="section">
+    <h2 class="section-title">🔗 Relevantni BK LAS projekti</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3><a href="03-perma-kolpa-gardens.html" style="color:var(--accent); text-decoration:none;">03 — Perma-Kolpa Gardens</a></h3>
+        <p style="font-size:13px; color:var(--muted);">LEADER projekt za semensko banko + permakulturne vrtove. 4.1 naložba v predelavo zelišč (destilator, sušilnica) je komplementarna in stackable.</p>
+        <div class="tags"><span class="tag tag-blue">Komplementarno s LEADER</span></div>
+      </div>
+      <div class="card">
+        <h3><a href="02-kolpa-farm-trail-markets.html" style="color:var(--accent); text-decoration:none;">02 — Eko-Farm Trail</a></h3>
+        <p style="font-size:13px; color:var(--muted);">Kmetije na Farm Trail poti potrebujejo naložbe v trženje — hladilnice, pakirnice, prodajne stojnice. 4.1 pokriva te naložbe.</p>
+        <div class="tags"><span class="tag tag-blue">Direktna prodaja</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deadline-banner">
+    <div class="deadline-label">Predvideni rok za oddajo vloge</div>
+    <div class="deadline-date">30. april 2026</div>
+    <div class="deadline-note">⚠️ Rok informativen — preveri uradni razpis na arsktrp.gov.si</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>BK LAS 2026 Research Hub · <a href="index.html">← Nazaj na pregled</a></p>
+  <p style="margin-top:6px;">Informacije na podlagi javnih podatkov ARSKTRP · Vedno preveri uradne razpisne pogoje</p>
+</div>
+
+</body>
+</html>

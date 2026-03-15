@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kolpa Floating Wellness & Learning Hubs — LAS DBK 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Water / Wellness Palette
+    ============================================================ */
+    :root {
+      --navy:        #0D2B45;
+      --deep-blue:   #1A4A6B;
+      --mid-blue:    #2E7DA6;
+      --turquoise:   #3BBFBF;
+      --sky:         #7DD8E0;
+      --mist:        #C7EAF0;
+      --silver:      #E8F4F8;
+      --warm-white:  #FAFCFD;
+      --stone:       #8B9BA8;
+      --charcoal:    #2C3E50;
+      --text:        #1E3040;
+      --text-light:  #5A7080;
+      --gold:        #C8943A;
+      --gold-light:  #F0C864;
+      --green:       #3A7D5E;
+      --green-light: #68B89A;
+      --warning:     #B85C38;
+      --warning-bg:  #FEF3EC;
+
+      --font-head:   'Playfair Display', Georgia, serif;
+      --font-body:   'Inter', system-ui, sans-serif;
+
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+
+      --shadow-sm:   0 2px 8px rgba(13,43,69,0.08);
+      --shadow-md:   0 6px 24px rgba(13,43,69,0.12);
+      --shadow-lg:   0 16px 48px rgba(13,43,69,0.18);
+
+      --max-width:   1080px;
+      --gap:         2rem;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--warm-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================================
+       LAYOUT UTILITIES
+    ============================================================ */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid rgba(59,191,191,0.15);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
+    h1, h2, h3, h4 {
+      font-family: var(--font-head);
+      line-height: 1.2;
+      color: var(--navy);
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 600; margin-bottom: 1.5rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
+    h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+
+    p { margin-bottom: 1rem; color: var(--text); }
+    p:last-child { margin-bottom: 0; }
+
+    strong { font-weight: 600; color: var(--navy); }
+
+    .lead {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-light);
+      font-weight: 300;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--turquoise);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      background:
+        linear-gradient(160deg, rgba(13,43,69,0.92) 0%, rgba(26,74,107,0.88) 40%, rgba(46,125,166,0.80) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Cdefs%3E%3CradialGradient id='a' cx='50%25' cy='50%25'%3E%3Cstop offset='0' stop-color='%233BBFBF' stop-opacity='.18'/%3E%3Cstop offset='100%25' stop-color='%230D2B45' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='800' height='500' fill='url(%23a)'/%3E%3Cellipse cx='400' cy='320' rx='380' ry='60' fill='%233BBFBF' fill-opacity='.08'/%3E%3Cellipse cx='400' cy='360' rx='340' ry='45' fill='%237DD8E0' fill-opacity='.06'/%3E%3C/svg%3E") center/cover no-repeat;
+      color: white;
+      padding: 5rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--warm-white));
+    }
+
+    .hero-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge-eu {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+    }
+
+    .badge-esrr {
+      background: rgba(59,191,191,0.25);
+      border: 1px solid rgba(59,191,191,0.5);
+      color: #7DD8E0;
+    }
+
+    .badge-las {
+      background: rgba(200,148,58,0.2);
+      border: 1px solid rgba(200,148,58,0.4);
+      color: var(--gold-light);
+    }
+
+    .hero-title {
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-head);
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      color: rgba(125,216,224,0.9);
+      margin-bottom: 1.75rem;
+      font-weight: 400;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-meta-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(125,216,224,0.7);
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-meta-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    .hero-aside {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 0.5rem;
+    }
+
+    .ambition-badge {
+      background: linear-gradient(135deg, var(--gold), #E8A830);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      width: 160px;
+      box-shadow: 0 8px 32px rgba(200,148,58,0.4);
+    }
+
+    .ambition-badge .star {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .ambition-badge .label {
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .budget-pill {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      text-align: center;
+      width: 160px;
+    }
+
+    .budget-pill .amount {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      display: block;
+    }
+
+    .budget-pill .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ============================================================
+       WAVE DIVIDER
+    ============================================================ */
+    .wave-divider {
+      width: 100%;
+      height: 40px;
+      overflow: hidden;
+      line-height: 0;
+      margin-bottom: -1px;
+    }
+
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+      height: 40px;
+    }
+
+    /* ============================================================
+       CARDS
+    ============================================================ */
+    .card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(59,191,191,0.12);
+    }
+
+    .card-accent {
+      border-top: 3px solid var(--turquoise);
+    }
+
+    .card-gold {
+      border-top: 3px solid var(--gold);
+    }
+
+    .card-green {
+      border-top: 3px solid var(--green);
+    }
+
+    .card-warning {
+      border-top: 3px solid var(--warning);
+      background: var(--warning-bg);
+      border-color: rgba(184,92,56,0.15);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* ============================================================
+       WINS LIST
+    ============================================================ */
+    .wins-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .wins-list li {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .wins-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--turquoise), var(--mid-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .wins-text strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .wins-text span {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* ============================================================
+       ALIGNMENT TABLE
+    ============================================================ */
+    .align-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .align-table thead {
+      background: var(--navy);
+      color: white;
+    }
+
+    .align-table thead th {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .align-table tbody tr {
+      border-bottom: 1px solid rgba(59,191,191,0.12);
+      transition: background 0.15s;
+    }
+
+    .align-table tbody tr:hover {
+      background: rgba(59,191,191,0.04);
+    }
+
+    .align-table tbody td {
+      padding: 1rem 1rem;
+      vertical-align: top;
+    }
+
+    .align-table tbody td:first-child {
+      font-weight: 600;
+      color: var(--deep-blue);
+    }
+
+    .match-pill {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(59,191,191,0.12);
+      color: var(--mid-blue);
+      border: 1px solid rgba(59,191,191,0.3);
+    }
+
+    .match-high {
+      background: rgba(58,125,94,0.1);
+      color: var(--green);
+      border-color: rgba(58,125,94,0.25);
+    }
+
+    /* ============================================================
+       REGULATORY SECTION
+    ============================================================ */
+    .reg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .reg-item {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(184,92,56,0.15);
+      border-left: 4px solid var(--warning);
+    }
+
+    .reg-item h4 {
+      color: var(--warning);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+
+    .reg-item p {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, var(--navy), var(--deep-blue));
+      border-radius: var(--radius-md);
+      padding: 1.5rem 2rem;
+      margin-top: 1.5rem;
+      color: white;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .contact-box .icon {
+      font-size: 2.5rem;
+    }
+
+    .contact-box h4 {
+      color: var(--sky);
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+    }
+
+    .contact-box p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.88rem;
+      margin: 0;
+    }
+
+    .contact-box a {
+      color: var(--turquoise);
+      text-decoration: none;
+    }
+
+    /* ============================================================
+       CHECKLIST
+    ============================================================ */
+    .checklist {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.9rem;
+      padding: 0.65rem 0.85rem;
+      background: white;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(59,191,191,0.12);
+    }
+
+    .check-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--turquoise), var(--green-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: white;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* ============================================================
+       TIMELINE
+    ============================================================ */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+      margin-top: 1rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.6rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--turquoise), var(--mid-blue), var(--navy));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.15rem;
+      top: 0.15rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: var(--turquoise);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--turquoise);
+    }
+
+    .timeline-phase {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--turquoise);
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-title {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-period {
+      display: inline-block;
+      background: rgba(59,191,191,0.08);
+      color: var(--mid-blue);
+      border-radius: 100px;
+      padding: 0.15rem 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .timeline-tasks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .timeline-tasks li {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .timeline-tasks li::before {
+      content: '-';
+      position: absolute;
+      left: 0;
+      color: var(--turquoise);
+    }
+
+    /* ============================================================
+       BUDGET
+    ============================================================ */
+    .budget-bar-wrap {
+      margin-bottom: 1rem;
+    }
+
+    .budget-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.88rem;
+    }
+
+    .budget-label {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .budget-amount {
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .budget-bar-bg {
+      height: 10px;
+      background: rgba(59,191,191,0.1);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+
+    .budget-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--turquoise), var(--mid-blue));
+    }
+
+    .budget-total {
+      padding: 1.25rem 1.5rem;
+      background: var(--navy);
+      border-radius: var(--radius-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      margin-top: 1.5rem;
+    }
+
+    .budget-total .label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--sky);
+    }
+
+    .budget-total .value {
+      font-family: var(--font-head);
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    .cofinancing-note {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       PARTNERS
+    ============================================================ */
+    .partner-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .partner-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.85rem 1.25rem;
+      background: white;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(59,191,191,0.12);
+    }
+
+    .partner-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--turquoise);
+      background: rgba(59,191,191,0.08);
+      padding: 0.2rem 0.5rem;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .partner-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .partner-role {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    /* ============================================================
+       CROSS-BORDER
+    ============================================================ */
+    .crossborder-box {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--deep-blue) 50%, rgba(46,125,166,0.9) 100%);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .crossborder-box::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(59,191,191,0.08);
+    }
+
+    .crossborder-box::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -30px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: rgba(125,216,224,0.05);
+    }
+
+    .crossborder-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .crossborder-box h3 {
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .crossborder-box p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+    }
+
+    .crossborder-flags {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 2.5rem;
+    }
+
+    .flag-divider {
+      font-size: 1rem;
+      color: var(--turquoise);
+      font-weight: 300;
+    }
+
+    .crossborder-points {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .crossborder-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .crossborder-points li::before {
+      content: '→';
+      color: var(--turquoise);
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       RISK
+    ============================================================ */
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .risk-card {
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      border: 1px solid transparent;
+    }
+
+    .risk-high {
+      background: rgba(184,92,56,0.06);
+      border-color: rgba(184,92,56,0.2);
+    }
+
+    .risk-med {
+      background: rgba(200,148,58,0.06);
+      border-color: rgba(200,148,58,0.2);
+    }
+
+    .risk-low {
+      background: rgba(58,125,94,0.06);
+      border-color: rgba(58,125,94,0.2);
+    }
+
+    .risk-level {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 100px;
+      margin-bottom: 0.65rem;
+    }
+
+    .level-high { background: rgba(184,92,56,0.15); color: var(--warning); }
+    .level-med  { background: rgba(200,148,58,0.15); color: var(--gold); }
+    .level-low  { background: rgba(58,125,94,0.15); color: var(--green); }
+
+    .risk-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .risk-card p {
+      font-size: 0.83rem;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+
+    .risk-mitigation {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--deep-blue);
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(59,191,191,0.15);
+    }
+
+    /* ============================================================
+       NEXT STEPS
+    ============================================================ */
+    .steps-list {
+      list-style: none;
+      counter-reset: steps;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 1rem 1.25rem;
+      background: white;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(59,191,191,0.12);
+      transition: box-shadow 0.15s;
+    }
+
+    .steps-list li::before {
+      content: counter(steps, decimal-leading-zero);
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--turquoise);
+      line-height: 1;
+    }
+
+    .step-content strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .step-content p {
+      font-size: 0.83rem;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    .step-urgent {
+      border-left: 3px solid var(--turquoise);
+      background: rgba(59,191,191,0.04);
+    }
+
+    /* ============================================================
+       SECTION BG VARIANTS
+    ============================================================ */
+    .section-mist {
+      background: var(--silver);
+    }
+
+    .section-deep {
+      background: var(--navy);
+    }
+
+    .section-deep h2,
+    .section-deep h3,
+    .section-deep h4 {
+      color: white;
+    }
+
+    .section-deep p {
+      color: rgba(255,255,255,0.75);
+    }
+
+    .section-deep .section-label {
+      color: var(--sky);
+    }
+
+    /* ============================================================
+       INFO STRIP
+    ============================================================ */
+    .info-strip {
+      background: linear-gradient(90deg, var(--turquoise), var(--mid-blue));
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .info-strip p {
+      color: white;
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .info-strip strong {
+      color: white;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--navy);
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+
+    footer p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.82rem;
+      margin-bottom: 0.35rem;
+    }
+
+    footer p:first-child {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--turquoise);
+      text-decoration: none;
+    }
+
+    .footer-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--turquoise);
+      border-radius: 2px;
+      margin: 1rem auto;
+      opacity: 0.4;
+    }
+
+    /* ============================================================
+       PLATFORM CONCEPT VISUAL
+    ============================================================ */
+    .platform-visual {
+      background: linear-gradient(180deg, var(--mist) 0%, rgba(59,191,191,0.08) 100%);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin: 2rem 0;
+      border: 1px solid rgba(59,191,191,0.2);
+    }
+
+    .platforms-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .platform-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border-bottom: 3px solid var(--turquoise);
+    }
+
+    .platform-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--turquoise), var(--mid-blue));
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .platform-card h4 {
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .platform-card p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .platform-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--turquoise);
+      background: rgba(59,191,191,0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 100px;
+      margin-top: 0.5rem;
+    }
+
+    .water-note {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       PRINT STYLES
+    ============================================================ */
+    @media print {
+      body { font-size: 11pt; }
+      .hero { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section { padding: 2rem 0; }
+      .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+      .crossborder-box { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .card { break-inside: avoid; }
+      .timeline-item { break-inside: avoid; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-aside { flex-direction: row; justify-content: flex-start; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .checklist { grid-template-columns: 1fr; }
+      .crossborder-points { grid-template-columns: 1fr; }
+      .risk-grid { grid-template-columns: 1fr; }
+      .platforms-row { grid-template-columns: 1fr; }
+      .reg-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 1rem; }
+      .hero { padding: 3rem 0 3rem; }
+      .ambition-badge, .budget-pill { width: auto; flex: 1; }
+    }
+  </style>
+</head>
+<body>
+<!-- LAS-STATUS-BANNER -->
+
+<style id="las-status-css">
+.las-status-bar {
+    background: #0f1f0f;
+    color: #e8f5e8;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 13px;
+    border-bottom: 3px solid #4caf50;
+}
+.las-status-bar .status-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+}
+.las-status-bar .s-label {
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #81c784;
+    font-weight: 700;
+    margin-right: 2px;
+}
+.las-status-bar .s-none {
+    background: #c62828;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+.las-status-bar .s-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1b3a1b;
+    border: 1px solid #4caf50;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+.las-status-bar .s-call.hot {
+    border-color: #ff9800;
+    background: #2a1f00;
+    animation: pulse-hot 1.4s ease-in-out infinite;
+}
+@keyframes pulse-hot {
+    0%,100%{box-shadow:0 0 0 0 rgba(255,152,0,.4)}
+    50%{box-shadow:0 0 0 4px rgba(255,152,0,0)}
+}
+.las-status-bar .s-deadline { color: #a5d6a7; font-size: 11px; }
+.las-status-bar .s-deadline.hot-d { color: #ffb74d; font-weight:700; }
+.las-status-bar .s-budget { color: #81c784; font-size: 11px; }
+.las-status-bar .s-upcoming {
+    background: #1a2940;
+    border: 1px solid #4a90a4;
+    color: #90caf9;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+.las-status-bar .s-link { color: #4caf50; font-size: 11px; text-decoration:none; }
+.las-status-bar .s-link:hover { text-decoration:underline; }
+.las-status-bar .s-divider { color: #33691e; }
+@media(max-width:700px){.las-status-bar .status-inner{flex-direction:column;gap:6px}}
+@media print{.las-status-bar{display:none}}
+</style>
+
+<div class="las-status-bar">
+  <div class="status-inner">
+    <span><span class="s-label">LAS DBK</span><span class="s-none">Ni odprtega razpisa</span></span>
+    <span class="s-upcoming">⏳ Kmalu: 3. javni poziv ESRR — junij 2026</span>
+    <span class="s-divider">|</span>
+    <span class="s-label">Odprti zdaj →</span>
+    
+        <span class="s-call">
+            <a class="s-link" href="https://www.si-hr.eu" target="_blank">Interreg VI-A SI-HR – 4. poziv (P4 Tourism)</a>
+            <span class="s-deadline">rok: 15.6.2026</span>
+            <span class="s-budget">€200k–1.5M</span>
+        </span>
+        <span class="s-call">
+            <a class="s-link" href="https://spirit.si" target="_blank">SPIRIT Slovenia SIDT-2026-RURAL</a>
+            <span class="s-deadline">rok: 15.5.2026</span>
+            <span class="s-budget">€30k–300k</span>
+        </span>
+    <a class="s-link" style="margin-left:auto" href="https://las-dbk.si/javni-pozivi" target="_blank">las-dbk.si →</a>
+  </div>
+</div>
+<!-- /LAS-STATUS-BANNER -->
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badges">
+        <span class="badge badge-eu">EU LEADER/CLLD 2021–2027</span>
+        <span class="badge badge-esrr">ESRR</span>
+        <span class="badge badge-las">LAS DBK</span>
+        <span class="badge badge-eu">Bela Krajina</span>
+      </div>
+
+      <h1 class="hero-title">Kolpa Floating Wellness<br>&amp; Learning Hubs</h1>
+      <p class="hero-subtitle">Plavajoče eko-platforme za učenje in wellbeing ob Kolpi</p>
+
+      <p class="lead" style="color:rgba(255,255,255,0.75); max-width: 600px;">
+        Three solar-powered modular platforms on the Kolpa river — Slovenia's warmest,
+        cleanest borderland — where wellness meets ecology, where folklore becomes
+        living curriculum, and where a forgotten river edge becomes Europe's most
+        inventive rural hub.
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Fund</span>
+          <span class="hero-meta-value">ESRR via LAS DBK</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Region</span>
+          <span class="hero-meta-value">Bela Krajina, SI</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Cross-Border</span>
+          <span class="hero-meta-value">SI + HR</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Project Type</span>
+          <span class="hero-meta-value">Green Infrastructure</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Status</span>
+          <span class="hero-meta-value">Concept / Brainstorm</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-aside">
+      <div class="ambition-badge">
+        <span class="star">&#9733;</span>
+        <div class="label">Most<br>Ambitious<br>Concept</div>
+      </div>
+      <div class="budget-pill">
+        <span class="amount">&#8364;250K</span>
+        <span class="label">Est. Project Budget</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     PROJECT OVERVIEW
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Project Overview</span>
+    <h2>A River That Has Never Been Used Like This</h2>
+
+    <div class="grid-2" style="gap: 3rem; align-items: start;">
+      <div>
+        <p class="lead">
+          The Kolpa is the longest Slovenian river coast — 113 kilometres of borderland
+          shared with Croatia, protected under Natura 2000 and recognised as one of
+          Europe's most intact river ecosystems. It is already Slovenia's warmest river,
+          a canoe corridor, a fishing haven. What it has never been is a platform for
+          learning, wellness, and cultural exchange that floats directly upon it.
+        </p>
+        <p>
+          This project proposes three <strong>modular, solar-powered floating platforms</strong>
+          — anchored seasonally on different stretches of the Kolpa river between
+          Metlika, Semič and Črnomelj — each dedicated to a distinct programme stream:
+          wellness and yoga, youth eco-learning and science camps, and cultural
+          storytelling rooted in Bela Krajina border folklore. The platforms are
+          reached by e-bike trail connections, making the whole system car-free
+          by design.
+        </p>
+        <p>
+          Each platform is modular: manufactured off-site in sections, transported
+          by road, assembled on water with minimal disruption to the riverbed.
+          Solar panels provide the energy for lighting, audio equipment and
+          climate-resilient sheltering. In summer the platforms host outdoor
+          programming; a winter wellness configuration uses insulated modular
+          shelters for retreat and contemplation. The river becomes the setting,
+          not the obstacle.
+        </p>
+        <p>
+          Cross-border in its DNA, the project builds on the precedent set by the
+          EU-funded <strong>Misterion project</strong> (Semič, Metlika, Kamanje, HR —
+          ERDF, 2014-2020, EUR 1.24M) and extends its cultural logic into the water
+          itself. Croatian artists, cultural associations and wellness practitioners
+          become resident contributors. Bela Krajina's unique position as a
+          Slovenian-Croatian borderland becomes its competitive advantage.
+        </p>
+      </div>
+
+      <div>
+        <div class="platform-visual">
+          <div style="text-align:center; margin-bottom: 1.5rem;">
+            <span style="font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--mid-blue);">The Three Platforms</span>
+          </div>
+          <div class="platforms-row">
+            <div class="platform-card">
+              <div class="platform-number">01</div>
+              <h4>Wellness Hub</h4>
+              <p>Yoga, breathwork, guided meditation. Sunrise sessions on the water. Winter sauna retreat configuration.</p>
+              <span class="platform-tag">Metlika reach</span>
+            </div>
+            <div class="platform-card">
+              <h4 style="margin-top:0.25rem;">&#127807;</h4>
+              <div class="platform-number">02</div>
+              <h4>Eco-Learning Camp</h4>
+              <p>Youth ecology workshops, river biology, solar tech demos. School partnerships from Crnomelj.</p>
+              <span class="platform-tag">Semič reach</span>
+            </div>
+            <div class="platform-card">
+              <div class="platform-number">03</div>
+              <h4>Story &amp; Culture Stage</h4>
+              <p>Bela Krajina oral history, cross-border folk performances, artist residencies with Croatian partners.</p>
+              <span class="platform-tag">Crnomelj reach</span>
+            </div>
+          </div>
+          <p class="water-note">All platforms solar-powered · Reached by e-bike trail · Modular &amp; seasonal</p>
+        </div>
+
+        <div class="card" style="margin-top: 1.5rem; background: rgba(59,191,191,0.04); border-color: rgba(59,191,191,0.2);">
+          <h4>Why Floating?</h4>
+          <p style="font-size:0.88rem; color:var(--text-light); margin:0;">
+            A floating structure leaves zero permanent footprint on the riverbank.
+            No excavation, no piling, no land-use change. The platform moves with
+            seasonal water levels and can be removed entirely in winter. For a
+            Natura 2000-protected river, this distinction is critical — and it is
+            the strongest argument in the permit conversation with regulators.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY THIS PROJECT WINS
+============================================================ -->
+<section class="section section-mist">
+  <div class="container">
+    <span class="section-label">Strategic Rationale</span>
+    <h2>Why This Project Wins</h2>
+
+    <ul class="wins-list">
+      <li>
+        <div class="wins-icon">&#9728;</div>
+        <div class="wins-text">
+          <strong>Zero Permanent Footprint — Maximum Regulatory Elegance</strong>
+          <span>Modular floating infrastructure avoids land-use reclassification, minimises Natura 2000 impact, and can be framed as temporary/reversible installation — the strongest category for environmental permitting on protected rivers.</span>
+        </div>
+      </li>
+      <li>
+        <div class="wins-icon">&#127807;</div>
+        <div class="wins-text">
+          <strong>100% Renewable Energy on the Water</strong>
+          <span>Solar panels on floating platforms are a proven, cost-falling technology (module costs dropped to ~€0.13/Wp in 2025). The project demonstrates green infrastructure in the most visible possible way — powering culture and learning by sun on a clean river.</span>
+        </div>
+      </li>
+      <li>
+        <div class="wins-icon">&#127760;</div>
+        <div class="wins-text">
+          <strong>Genuine Cross-Border DNA</strong>
+          <span>The Kolpa is literally the SI-HR border. Artist residencies with Croatian cultural organisations, joint programming, and shared visitor flows qualify the project for cross-border attention and potentially Interreg SI-HR co-funding in future phases.</span>
+        </div>
+      </li>
+      <li>
+        <div class="wins-icon">&#128218;</div>
+        <div class="wins-text">
+          <strong>Youth + Wellness + Culture — Three LAS Boxes Ticked at Once</strong>
+          <span>The project addresses green economy, local entrepreneurship (wellness operators, guides, craftspeople), cultural heritage preservation, and social inclusion in one coherent concept — rare for a single project.</span>
+        </div>
+      </li>
+      <li>
+        <div class="wins-icon">&#128640;</div>
+        <div class="wins-text">
+          <strong>Year-Round Programming Viability</strong>
+          <span>Unlike most outdoor tourism infrastructure that dies in November, the platform's winter wellness configuration (insulated modular shelter, sauna, fire) makes it a year-round economic driver — extending the tourism season by 4–5 months in a region that currently goes dormant after September.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     LAS DBK ALIGNMENT
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Strategic Fit</span>
+    <h2>LAS DBK 2021–2027 Alignment</h2>
+    <p style="max-width:680px; margin-bottom:2rem; color:var(--text-light);">
+      LAS DBK received €4.073M total — €2.256M EKSRP + €1.817M ESRR — for five
+      measures. The table below shows how this project aligns with three of them,
+      with ESRR as the primary funding stream for infrastructure investment.
+    </p>
+
+    <div style="overflow-x:auto; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+      <table class="align-table">
+        <thead>
+          <tr>
+            <th>LAS DBK Priority Measure</th>
+            <th>ESRR / EKSRP</th>
+            <th>How This Project Qualifies</th>
+            <th>Match</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Green Economy &amp; Sustainable Tourism Infrastructure</td>
+            <td>ESRR</td>
+            <td>Solar-powered river platforms are novel green infrastructure. Extends Kolpa tourism season. Builds on existing EDEN designation and Misterion precedent.</td>
+            <td><span class="match-pill match-high">Strong</span></td>
+          </tr>
+          <tr>
+            <td>Local Entrepreneurship Development</td>
+            <td>ESRR</td>
+            <td>Platform programming creates demand for local wellness operators, boat transfers, e-bike rental, craft vendors, and accommodation providers in Metlika/Semič/Črnomelj.</td>
+            <td><span class="match-pill match-high">Strong</span></td>
+          </tr>
+          <tr>
+            <td>Cultural &amp; Natural Heritage Preservation</td>
+            <td>EKSRP / ESRR</td>
+            <td>Bela Krajina oral folklore, cross-border music and storytelling, and SI-HR cultural exchange are the core programming of Platform 03. Builds on Misterion's cultural heritage work.</td>
+            <td><span class="match-pill match-high">Strong</span></td>
+          </tr>
+          <tr>
+            <td>Social Inclusion &amp; Solidarity</td>
+            <td>EKSRP</td>
+            <td>Youth eco-camps on Platform 02 serve Črnomelj schools, with priority access for disadvantaged youth. Cross-border youth exchange component possible with Croatian schools.</td>
+            <td><span class="match-pill">Good</span></td>
+          </tr>
+          <tr>
+            <td>Quality of Rural Life Infrastructure</td>
+            <td>ESRR</td>
+            <td>E-bike trail connection integrates the floating hubs into existing cycling tourism corridors, serving local residents as well as visitors.</td>
+            <td><span class="match-pill">Partial</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REGULATORY CONSIDERATIONS
+============================================================ -->
+<section class="section section-mist">
+  <div class="container">
+    <span class="section-label">Important — Read First</span>
+    <h2>Regulatory Considerations</h2>
+
+    <div class="card card-warning" style="margin-bottom: 1.5rem;">
+      <p style="margin:0; font-size:0.95rem;">
+        <strong>This is the most complex section of the project — and the reason it must start with a regulatory consultation, not a funding application.</strong>
+        Floating structures on Slovenian rivers require permits under the
+        <em>Zakon o vodah (ZV-1)</em> (Water Act), coordinated through ARSO
+        (Slovenian Environment Agency) and implemented by the relevant
+        VGP (Vodnogospodarski zavod — Water Management Institute) regional office.
+        None of this is an insurmountable obstacle, but it cannot be
+        bypassed or left for later.
+      </p>
+    </div>
+
+    <div class="reg-grid">
+      <div class="reg-item">
+        <h4>Vodno Soglasje (Water Consent)</h4>
+        <p>
+          Any structure placed in or on a Slovenian river requires a
+          <em>vodno soglasje</em> (water permit / consent) under Article 153 ZV-1.
+          This is issued by ARSO after assessment of hydrological impact.
+          For floating, anchored structures, the assessment focuses on
+          water flow interference, flood risk, and ecological impact.
+          Modular, seasonally removable platforms are viewed more favourably
+          than permanent structures.
+        </p>
+      </div>
+      <div class="reg-item">
+        <h4>Natura 2000 Compliance</h4>
+        <p>
+          The Kolpa is Natura 2000 protected (EU Habitats Directive).
+          An appropriate assessment (presoja ustreznosti) is required
+          if the project could affect the conservation status of protected
+          habitats or species. Key concern: disturbance to nesting birds
+          and fish habitat during construction. Seasonal deployment
+          (April–October) and removable anchoring significantly reduce
+          this risk. Environmental consultant needed for this assessment.
+        </p>
+      </div>
+      <div class="reg-item">
+        <h4>Spatial Planning (OPN)</h4>
+        <p>
+          Each municipality has an OPN (Občinski prostorski načrt) governing
+          land and water use. River activities may fall under special-use
+          zone provisions. Coordination with Metlika, Semič and Črnomelj
+          municipal planning offices is needed to confirm that floating
+          seasonal structures do not require a formal spatial planning
+          amendment (OPPN). In most cases temporary installations do not.
+        </p>
+      </div>
+      <div class="reg-item">
+        <h4>Navigation &amp; Safety</h4>
+        <p>
+          The Kolpa is used by canoeists and small pleasure craft.
+          Platforms must be marked with navigation buoys and must not
+          obstruct the navigable channel. Coordination with the
+          Inland Waterways Authority (Uprava RS za pomorstvo) may be
+          needed depending on the specific moorings. Platform design
+          must include safety railings and emergency egress per
+          Slovenian occupational safety standards.
+        </p>
+      </div>
+      <div class="reg-item">
+        <h4>Border Zone Sensitivity</h4>
+        <p>
+          Parts of the Kolpa lie directly on the SI-HR state border.
+          Structures near or on the border require coordination with
+          the Police Directorate Novo Mesto (border affairs) and
+          potentially MZZ (Foreign Ministry) for cross-border activities
+          hosted on the platform. In practice this is procedural, not
+          prohibitive — the Misterion project navigated similar issues.
+        </p>
+      </div>
+      <div class="reg-item">
+        <h4>Construction &amp; Transport</h4>
+        <p>
+          Platform sections are built off-site (in a workshop/boatyard)
+          and transported to the river by road, then assembled on water.
+          This avoids riverbank construction disturbance. Access roads
+          to launching points must be confirmed. Weight limits on rural
+          bridges in the area need checking — some cross-Kolpa bridges
+          are lightly rated.
+        </p>
+      </div>
+    </div>
+
+    <div class="contact-box">
+      <div class="icon">&#9742;</div>
+      <div>
+        <h4>First Call: VGP Sava — Regional Office Novo Mesto</h4>
+        <p>
+          The relevant water management authority for the Kolpa catchment is
+          <strong>VGP Sava d.o.o.</strong>, regional competence area covering
+          Dolenjska and Bela Krajina. Before any application to LAS DBK,
+          request an informal preliminary consultation (<em>predhodna konzultacija</em>)
+          to understand what is achievable and what conditions will apply.
+          ARSO environmental permitting desk: <a href="mailto:gp.arso@gov.si">gp.arso@gov.si</a> |
+          Tel: +386 1 4784 000. Target: get this meeting on the calendar in Q2 2026.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REQUIREMENTS TO APPLY
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Application Requirements</span>
+    <h2>What It Takes to Apply</h2>
+
+    <div class="grid-2" style="gap: 2.5rem;">
+      <div>
+        <h3>Who Can Be Lead Applicant</h3>
+        <ul class="checklist" style="grid-template-columns: 1fr;">
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Registered NGO or Association (društvo, zavod) active in the LAS DBK area</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Local municipality (MO Crnomelj, Metlika or Semič) as lead — strongest for infrastructure projects</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Public institution (e.g. public institute / javni zavod)</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Micro or small enterprise registered in the area — only for entrepreneurship measures</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Consortium of above — recommended: NGO lead + municipality co-applicant</span>
+          </li>
+        </ul>
+
+        <h3 style="margin-top: 1.75rem;">Co-Financing Structure</h3>
+        <ul class="checklist" style="grid-template-columns: 1fr;">
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>ESRR covers up to <strong>80% of eligible project costs</strong> for public/NGO applicants</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Minimum <strong>20% own contribution</strong> — can include in-kind, municipal budget, other grants</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Total ESRR available to LAS DBK: <strong>€1.817M</strong> — this project would use ~14% of total ESRR envelope</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Typical LAS project grant: <strong>€30,000–€250,000</strong> — this is at the upper ceiling</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Eligible Costs</h3>
+        <ul class="checklist" style="grid-template-columns: 1fr;">
+          <li><div class="check-icon">&#10003;</div><span>Platform construction and materials (modular floating structure)</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Solar equipment, batteries, electrical systems</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Anchoring, mooring systems, safety equipment</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Architectural and engineering design fees</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Environmental permit fees and consultant costs</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Programming costs (workshops, residencies, youth camps)</span></li>
+          <li><div class="check-icon">&#10003;</div><span>E-bike trail connection signage and infrastructure</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Marketing, website, visitor materials (up to a % cap)</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Project management (capped — typically 10–15%)</span></li>
+        </ul>
+
+        <h3 style="margin-top: 1.75rem;">Documents Required</h3>
+        <ul class="checklist" style="grid-template-columns: 1fr;">
+          <li><div class="check-icon">&#10003;</div><span>Completed LAS DBK application form (prijavni obrazec)</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Detailed project description and budget breakdown</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Proof of legal status of applicant (registration)</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Preliminary water consent or letter from VGP/ARSO</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Letters of support from partner organisations</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Environmental pre-screening document (Natura 2000)</span></li>
+          <li><div class="check-icon">&#10003;</div><span>Conceptual design drawings (not full architectural plans)</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TIMELINE
+============================================================ -->
+<section class="section section-mist">
+  <div class="container">
+    <span class="section-label">Implementation Plan</span>
+    <h2>Project Activities &amp; Phases</h2>
+
+    <div class="grid-2" style="gap: 3rem; align-items: start;">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background: var(--gold);"></div>
+          <div class="timeline-phase">Phase 1</div>
+          <div class="timeline-title">Permits, Design &amp; Preparation</div>
+          <span class="timeline-period">Months 1–8 (Q3 2026 – Q2 2027)</span>
+          <ul class="timeline-tasks">
+            <li>Preliminary consultation with VGP Sava and ARSO</li>
+            <li>Engage environmental consultant for Natura 2000 screening</li>
+            <li>Architect / marine engineer commissioned for platform design</li>
+            <li>Submit water consent application (vodno soglasje)</li>
+            <li>Partner formalisation — MoUs with NGOs, schools, Croatian cultural partners</li>
+            <li>LAS DBK application submitted (next open call)</li>
+            <li>Mooring site surveys — 3 locations identified and agreed</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background: var(--turquoise);"></div>
+          <div class="timeline-phase">Phase 2</div>
+          <div class="timeline-title">Construction &amp; Installation</div>
+          <span class="timeline-period">Months 9–16 (Q3 2027 – Q1 2028)</span>
+          <ul class="timeline-tasks">
+            <li>Off-site platform fabrication (workshop/boatyard)</li>
+            <li>Solar panel and battery system integration</li>
+            <li>Platform transport to river and water assembly</li>
+            <li>Anchoring, safety systems, navigation markings installed</li>
+            <li>E-bike trail connection signage and infrastructure</li>
+            <li>Load testing and safety certification</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background: var(--green);"></div>
+          <div class="timeline-phase">Phase 3</div>
+          <div class="timeline-title">Programming Launch</div>
+          <span class="timeline-period">Months 17–28 (Spring 2028 – Autumn 2028)</span>
+          <ul class="timeline-tasks">
+            <li>Official opening — cross-border ceremony with Croatian partners</li>
+            <li>Summer yoga and wellness season on Platform 01</li>
+            <li>Youth eco-camps (3 x 1-week sessions) on Platform 02</li>
+            <li>Bela Krajina cultural folklore evening series on Platform 03</li>
+            <li>First cross-border artist residencies (3 x Croatian artists, 2-week each)</li>
+            <li>Winter wellness retreat pilot (November–January)</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background: var(--mid-blue);"></div>
+          <div class="timeline-phase">Phase 4</div>
+          <div class="timeline-title">Evaluation &amp; Sustainability</div>
+          <span class="timeline-period">Months 29–36 (2029)</span>
+          <ul class="timeline-tasks">
+            <li>Visitor count and satisfaction surveys</li>
+            <li>Economic impact assessment (local business revenues)</li>
+            <li>Environmental monitoring report (river ecology)</li>
+            <li>Sustainability plan: ticket/membership revenue model</li>
+            <li>Application for Phase 2 — Interreg SI-HR cross-border co-funding</li>
+            <li>Final LAS DBK reporting and public dissemination</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-accent" style="margin-bottom: 1.5rem;">
+          <h3>Key Milestones</h3>
+          <div style="display:flex; flex-direction:column; gap:0.85rem; margin-top:0.5rem;">
+            <div style="display:grid; grid-template-columns: auto 1fr; gap:1rem; align-items:center;">
+              <span style="font-weight:700; color:var(--turquoise); font-family:var(--font-head);">M1</span>
+              <span style="font-size:0.88rem;">VGP/ARSO preliminary meeting — GO/SHAPE decision</span>
+            </div>
+            <div style="display:grid; grid-template-columns: auto 1fr; gap:1rem; align-items:center;">
+              <span style="font-weight:700; color:var(--turquoise); font-family:var(--font-head);">M6</span>
+              <span style="font-size:0.88rem;">Water consent received — application to LAS DBK</span>
+            </div>
+            <div style="display:grid; grid-template-columns: auto 1fr; gap:1rem; align-items:center;">
+              <span style="font-weight:700; color:var(--turquoise); font-family:var(--font-head);">M12</span>
+              <span style="font-size:0.88rem;">LAS DBK grant approval — construction starts</span>
+            </div>
+            <div style="display:grid; grid-template-columns: auto 1fr; gap:1rem; align-items:center;">
+              <span style="font-weight:700; color:var(--turquoise); font-family:var(--font-head);">M18</span>
+              <span style="font-size:0.88rem;">First platform on water — pilot programming begins</span>
+            </div>
+            <div style="display:grid; grid-template-columns: auto 1fr; gap:1rem; align-items:center;">
+              <span style="font-weight:700; color:var(--turquoise); font-family:var(--font-head);">M24</span>
+              <span style="font-size:0.88rem;">All three platforms operational — full season</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: rgba(59,191,191,0.04); border-color: rgba(59,191,191,0.2);">
+          <h4>A Note on Timing</h4>
+          <p style="font-size:0.88rem; color:var(--text-light);">
+            This timeline assumes a 2026 LAS DBK ESRR call. LAS DBK has already run
+            6 public calls (pozivi) — the next ESRR call timing should be confirmed
+            directly with the LAS DBK office in Novo Mesto. The permit process
+            (Phase 1) must begin regardless of grant status — permits cannot be
+            obtained retroactively and take 6–12 months.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BUDGET
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Financial Plan</span>
+    <h2>Budget Breakdown</h2>
+
+    <div class="grid-2" style="gap: 3rem; align-items: start;">
+      <div>
+        <div class="budget-bar-wrap">
+          <div class="budget-row">
+            <span class="budget-label">Platform Construction (3 units, modular pontoon)</span>
+            <span class="budget-amount">€95,000</span>
+          </div>
+          <div class="budget-bar-bg"><div class="budget-bar-fill" style="width: 38%;"></div></div>
+
+          <div class="budget-row">
+            <span class="budget-label">Solar Equipment, Batteries &amp; Electrical</span>
+            <span class="budget-amount">€35,000</span>
+          </div>
+          <div class="budget-bar-bg"><div class="budget-bar-fill" style="width: 14%; background: linear-gradient(90deg, var(--gold), #E8A830);"></div></div>
+
+          <div class="budget-row">
+            <span class="budget-label">Design, Engineering &amp; Permits</span>
+            <span class="budget-amount">€28,000</span>
+          </div>
+          <div class="budget-bar-bg"><div class="budget-bar-fill" style="width: 11.2%; background: linear-gradient(90deg, var(--green), var(--green-light));"></div></div>
+
+          <div class="budget-row">
+            <span class="budget-label">E-Bike Trail Connection &amp; Signage</span>
+            <span class="budget-amount">€18,000</span>
+          </div>
+          <div class="budget-bar-bg"><div class="budget-bar-fill" style="width: 7.2%; background: linear-gradient(90deg, var(--mid-blue), var(--sky));"></div></div>
+
+          <div class="budget-row">
+            <span class="budget-label">Programming (Camps, Residencies, Workshops)</span>
+            <span class="budget-amount">€38,000</span>
+          </div>
+          <div class="budget-bar-bg"><div class="budget-bar-fill" style="width: 15.2%; background: linear-gradient(90deg, #9B59B6, var(--mid-blue));"></div></div>
+
+          <div class="budget-row">
+            <span class="budget-label">Marketing, Website &amp; Communications</span>
+            <span class="budget-amount">€15,000</span>
+          </div>
+          <div class="budget-bar-bg"><div class="budget-bar-fill" style="width: 6%; background: linear-gradient(90deg, var(--turquoise), var(--sky));"></div></div>
+
+          <div class="budget-row">
+            <span class="budget-label">Project Management (10%)</span>
+            <span class="budget-amount">€21,000</span>
+          </div>
+          <div class="budget-bar-bg"><div class="budget-bar-fill" style="width: 8.4%; background: linear-gradient(90deg, var(--stone), var(--mid-blue));"></div></div>
+        </div>
+
+        <div class="budget-total">
+          <span class="label">Total Estimated Budget</span>
+          <span class="value">€250,000</span>
+        </div>
+
+        <p class="cofinancing-note">
+          ESRR contribution at 80%: €200,000 | Own contribution (20%): €50,000 —
+          can include municipal co-financing, in-kind contributions from partners,
+          or complementary grants (e.g. Erasmus+ for youth camp component).
+        </p>
+      </div>
+
+      <div>
+        <div class="card card-gold" style="margin-bottom: 1.5rem;">
+          <h3>Cost Benchmarks</h3>
+          <p style="font-size:0.88rem; color:var(--text-light); margin-bottom:1rem;">
+            These estimates are based on floating pontoon platform market data
+            and comparable EU-funded river tourism projects.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:0.65rem;">
+            <div style="display:grid; grid-template-columns: 1fr auto; gap:0.5rem; font-size:0.85rem; border-bottom: 1px solid rgba(59,191,191,0.12); padding-bottom:0.65rem;">
+              <span>Modular floating pontoon (per 30m² unit, incl. structure, decking, anchor)</span>
+              <span style="font-weight:700; color:var(--navy); white-space:nowrap;">€25–35K</span>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr auto; gap:0.5rem; font-size:0.85rem; border-bottom: 1px solid rgba(59,191,191,0.12); padding-bottom:0.65rem;">
+              <span>Solar array + battery storage (off-grid, 3–5kW per platform)</span>
+              <span style="font-weight:700; color:var(--navy); white-space:nowrap;">€8–14K</span>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr auto; gap:0.5rem; font-size:0.85rem; border-bottom: 1px solid rgba(59,191,191,0.12); padding-bottom:0.65rem;">
+              <span>Environmental permitting + consultant (Natura 2000 assessment)</span>
+              <span style="font-weight:700; color:var(--navy); white-space:nowrap;">€6–10K</span>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr auto; gap:0.5rem; font-size:0.85rem;">
+              <span>1-week youth eco-camp (20 participants, facilitators, materials)</span>
+              <span style="font-weight:700; color:var(--navy); white-space:nowrap;">€4–6K</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: rgba(58,125,94,0.05); border-color: rgba(58,125,94,0.2); border-top: 3px solid var(--green);">
+          <h4>Revenue Sustainability Model</h4>
+          <p style="font-size:0.88rem; color:var(--text-light);">
+            After the grant period, the platforms generate revenue through:
+            wellness session ticket sales (€15–25/person), school camp fees
+            (€200–350/student/week), artist residency fees (co-funded by HR partners),
+            corporate team retreat packages (€800–1,500/day), and seasonal e-bike
+            trail visitor contributions. Target: operational cost-neutral by Year 3.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     POTENTIAL PARTNERS
+============================================================ -->
+<section class="section section-mist">
+  <div class="container">
+    <span class="section-label">Partnership Network</span>
+    <h2>Potential Partners</h2>
+
+    <div class="grid-2" style="gap: 2.5rem;">
+      <div>
+        <h3>Slovenian Partners</h3>
+        <div class="partner-list">
+          <div class="partner-item">
+            <span class="partner-type">Lead</span>
+            <div>
+              <div class="partner-name">NGO / Local Association (TBD)</div>
+              <div class="partner-role">Lead applicant, project management, programming coordination</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type">Institutional</span>
+            <div>
+              <div class="partner-name">MO Črnomelj / Metlika / Semič</div>
+              <div class="partner-role">Co-applicant, municipal co-financing, land access facilitation, permit support</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type">Education</span>
+            <div>
+              <div class="partner-name">OŠ Mirana Jarca Črnomelj &amp; OŠ Metlika</div>
+              <div class="partner-role">Youth eco-camp participants, school programming partner</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type">Tourism</span>
+            <div>
+              <div class="partner-name">TIC Metlika / Turistično Društvo Bela Krajina</div>
+              <div class="partner-role">Visitor promotion, e-bike trail integration, booking coordination</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type">Wellness</span>
+            <div>
+              <div class="partner-name">Local Wellness Entrepreneurs (Yoga, Fitness, Outdoor)</div>
+              <div class="partner-role">Platform 01 programming operators — commercial co-use agreement</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type">Research</span>
+            <div>
+              <div class="partner-name">Inštitut za vode RS / ARSO</div>
+              <div class="partner-role">Environmental monitoring, river ecology data, permitting consultation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Croatian &amp; International Partners</h3>
+        <div class="partner-list">
+          <div class="partner-item">
+            <span class="partner-type" style="background:rgba(200,148,58,0.1); color:var(--gold); border-color:rgba(200,148,58,0.2);">Cross-Border</span>
+            <div>
+              <div class="partner-name">Cultural Associations — Karlovac / Kupa Valley, HR</div>
+              <div class="partner-role">Artist residency participants, Platform 03 cultural programming, joint folklore events</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type" style="background:rgba(200,148,58,0.1); color:var(--gold); border-color:rgba(200,148,58,0.2);">Cross-Border</span>
+            <div>
+              <div class="partner-name">Turistička Zajednica Karlovačke Županije, HR</div>
+              <div class="partner-role">Cross-border tourism packaging, co-promotion to Croatian visitors</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type" style="background:rgba(200,148,58,0.1); color:var(--gold); border-color:rgba(200,148,58,0.2);">Education</span>
+            <div>
+              <div class="partner-name">Croatian border schools (Ozalj, Kamanje area)</div>
+              <div class="partner-role">Youth cross-border exchange — shared eco-camp sessions (Erasmus+ KA2 potential)</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type">Technical</span>
+            <div>
+              <div class="partner-name">Floating Platform Manufacturer (CE/EU certified)</div>
+              <div class="partner-role">Platform fabrication — modular pontoon sections, safety certification, maintenance</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <span class="partner-type">Advisory</span>
+            <div>
+              <div class="partner-name">LAS DBK Office, Novo Mesto</div>
+              <div class="partner-role">Application guidance, eligibility checks, monitoring and reporting support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CROSS-BORDER
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="crossborder-box">
+      <div class="crossborder-inner">
+        <div class="crossborder-flags">
+          <span title="Slovenia">&#127 Slovenia</span>
+          <span class="flag-divider">&#126;&#126; Kolpa &#126;&#126;</span>
+          <span title="Croatia">&#127 Croatia</span>
+        </div>
+
+        <h3>The Cross-Border Opportunity</h3>
+        <p>
+          The Kolpa river is not just an asset — it is a shared asset, belonging equally
+          to Slovenia and Croatia. The EU has already funded cross-border collaboration on
+          this exact stretch through the Misterion project (ERDF, €1.24M, 2014-2020), which
+          created the Bela Krajina Nature Centre in Semič and archaeological heritage work on
+          the Croatian side. That precedent makes the Kolpa Floating Hubs a natural next
+          chapter — building on established relationships, moving from cultural heritage into
+          living culture and contemporary wellness.
+        </p>
+
+        <ul class="crossborder-points">
+          <li>Artist residencies with Croatian cultural organisations — 3–5 residencies per year, 2 weeks each</li>
+          <li>Joint SI-HR folklore and music evenings on Platform 03 — bilingual programming</li>
+          <li>Cross-border youth eco-camp exchange — Slovenian and Croatian school groups together</li>
+          <li>Co-promoted wellness tourism package — marketed jointly to Ljubljana, Zagreb and Vienna visitors</li>
+          <li>Shared monitoring of Kolpa river ecology — citizen science across both banks</li>
+          <li>Pathway to Interreg SI-HR application in Phase 2 (2029–2030) — scale the model</li>
+        </ul>
+
+        <div style="margin-top:1.75rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.15);">
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin:0;">
+            <strong style="color:var(--sky);">Interreg SI-HR Precedent:</strong>
+            Misterion project — Total investment €1,239,205 — ERDF contribution €1,053,325 —
+            Municipalities Semič, Metlika (SI) + Kamanje (HR). Source: EC Regional Policy, Inforegio.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RISK ASSESSMENT
+============================================================ -->
+<section class="section section-mist">
+  <div class="container">
+    <span class="section-label">Honest Risk Assessment</span>
+    <h2>Risks &amp; Mitigations</h2>
+
+    <div class="risk-grid">
+      <div class="risk-card risk-high">
+        <span class="risk-level level-high">High Risk</span>
+        <h4>Regulatory / Permit Delays</h4>
+        <p>Water consent and Natura 2000 assessment could take 12+ months and potentially be refused or require major redesign of platform size, location, or anchoring method.</p>
+        <div class="risk-mitigation">Mitigation: Start regulatory process before submitting LAS application. Engage VGP informally first. Build 6-month buffer into timeline. Commission preliminary Natura 2000 screening early.</div>
+      </div>
+
+      <div class="risk-card risk-high">
+        <span class="risk-level level-high">High Risk</span>
+        <h4>Budget Ceiling Stretch</h4>
+        <p>€250,000 is at the top of what LAS DBK typically funds in a single project. The ESRR envelope (€1.817M total) means this project alone consumes 14% of all available ESRR funds — raising competitiveness concerns.</p>
+        <div class="risk-mitigation">Mitigation: Consider phasing — Platform 01 only in first application (€95K), with platforms 02-03 in subsequent call. Or combine with Erasmus+ for youth camp component to reduce LAS ask.</div>
+      </div>
+
+      <div class="risk-card risk-med">
+        <span class="risk-level level-med">Medium Risk</span>
+        <h4>Seasonal Operational Viability</h4>
+        <p>High water events, floods, and winter conditions on the Kolpa could make the platforms unusable for extended periods, reducing utilisation and programming revenue.</p>
+        <div class="risk-mitigation">Mitigation: Platform design must include rapid-release mooring for flood events. Seasonal removal protocol built into operational plan. Insurance for weather disruption included in budget.</div>
+      </div>
+
+      <div class="risk-card risk-med">
+        <span class="risk-level level-med">Medium Risk</span>
+        <h4>Programming Sustainability</h4>
+        <p>After the grant period, maintaining year-round programming quality requires dedicated staff and ongoing revenue. Rural areas can struggle to sustain premium wellness/cultural programming.</p>
+        <div class="risk-mitigation">Mitigation: Revenue model includes commercial wellness operators using platforms on a concession basis. Community ownership model (cooperative/zadružna oblika) builds local commitment to sustainability.</div>
+      </div>
+
+      <div class="risk-card risk-low">
+        <span class="risk-level level-low">Low Risk</span>
+        <h4>Cross-Border Complexity</h4>
+        <p>Croatian partner engagement requires MoU formalities and cross-border coordination. Staff and participants crossing the border adds administrative overhead.</p>
+        <div class="risk-mitigation">Mitigation: Misterion established exactly these partnerships — use existing relationships. SI-HR is an EU internal border, Schengen since 2023. Border zone coordination is procedural, not prohibitive.</div>
+      </div>
+
+      <div class="risk-card risk-low">
+        <span class="risk-level level-low">Low Risk</span>
+        <h4>Technology &amp; Maintenance</h4>
+        <p>Floating solar platforms and modular pontoon systems are mature technologies with falling costs. Off-grid solar for small-scale loads is well-understood.</p>
+        <div class="risk-mitigation">Mitigation: Use CE-certified European platform manufacturers with established maintenance contracts. Solar module costs at historic lows (~€0.13/Wp, 2025). Include 3-year maintenance contract in budget.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NEXT STEPS
+============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">What To Do Now</span>
+    <h2>Next Steps — Practical Preparation</h2>
+
+    <div class="grid-2" style="gap: 2.5rem;">
+      <div>
+        <ol class="steps-list">
+          <li class="step-urgent">
+            <div class="step-content">
+              <strong>Call VGP Sava — Book the Preliminary Meeting</strong>
+              <p>This is the single most important first step. Request an informal consultancy meeting to understand what floating structures require on the Kolpa. Get their read before investing in design or permits. Contact: VGP Sava d.o.o., Novo Mesto office.</p>
+            </div>
+          </li>
+          <li class="step-urgent">
+            <div class="step-content">
+              <strong>Contact LAS DBK Office Directly</strong>
+              <p>Call or email LAS DBK in Novo Mesto to ask: (a) when is the next ESRR open call, (b) is floating infrastructure eligible as "minor infrastructure investment", (c) can a phased project be submitted across two calls. Website: las-dbk.si</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Commission a Natura 2000 Pre-Screening</strong>
+              <p>Hire an environmental consultant for a preliminary Natura 2000 screening report. This document will be essential for the water consent application and reassures the LAS DBK selection committee that environmental risks are understood.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Identify Lead Applicant Entity</strong>
+              <p>Decide whether an NGO, a municipality, or a new entity leads. The municipality carries more credibility for infrastructure co-financing but may be slower. A local zavod (public institute) or novo društvo (new association) with municipal backing is often the sweet spot.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Reach Out to Croatian Cultural Organisations</strong>
+              <p>Contact cultural associations in the Karlovac county and Kupa valley area to gauge interest in a residency partnership. A signed letter of intent from a Croatian partner significantly strengthens cross-border narrative in the LAS application.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Request Preliminary Platform Design Sketch</strong>
+              <p>Get a concept-level sketch from an architect or marine/civil engineer to confirm what 3 modular platforms at ~30m² each look like, cost, and what mooring footprint they require. This is not a full design — just enough to validate the budget and present to regulators and LAS DBK.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-content">
+              <strong>Explore Erasmus+ KA2 for the Youth Camp Component</strong>
+              <p>The cross-border youth eco-camp (SI + HR school groups) is a near-perfect fit for Erasmus+ KA2 (Strategic Partnerships). A parallel Erasmus+ application for the youth component reduces the LAS DBK ask and adds a second funding source.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div>
+        <div class="card card-accent" style="margin-bottom: 1.5rem;">
+          <h3>Recommended Reading</h3>
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <div style="font-size:0.88rem;">
+              <strong style="display:block; margin-bottom:0.2rem;">LAS DBK Strategija 2021–2027</strong>
+              <span style="color:var(--text-light);">las-dbk.si/o-las-dbk/priprava-strategije/ — Full strategy PDF with eligible measures and budget breakdown</span>
+            </div>
+            <div style="font-size:0.88rem; padding-top:0.65rem; border-top:1px solid rgba(59,191,191,0.12);">
+              <strong style="display:block; margin-bottom:0.2rem;">Misterion Project Case Study</strong>
+              <span style="color:var(--text-light);">ec.europa.eu/regional_policy — The SI-HR precedent for Kolpa cross-border EU funding. Study their partnership structure.</span>
+            </div>
+            <div style="font-size:0.88rem; padding-top:0.65rem; border-top:1px solid rgba(59,191,191,0.12);">
+              <strong style="display:block; margin-bottom:0.2rem;">Zakon o vodah (ZV-1) — Article 153</strong>
+              <span style="color:var(--text-light);">zakonodaja.com — Vodno soglasje provisions. Understand what the water consent requires before first VGP meeting.</span>
+            </div>
+            <div style="font-size:0.88rem; padding-top:0.65rem; border-top:1px solid rgba(59,191,191,0.12);">
+              <strong style="display:block; margin-bottom:0.2rem;">EDEN Designation — Kolpa River</strong>
+              <span style="color:var(--text-light);">europeanbestdestinations.com — Kolpa's European Destination of Excellence status is a strong credentials element in any EU project application.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: linear-gradient(135deg, rgba(59,191,191,0.08), rgba(46,125,166,0.04)); border-color: rgba(59,191,191,0.2);">
+          <h4>The Core Argument in One Sentence</h4>
+          <p style="font-size:0.95rem; font-style:italic; color:var(--navy); line-height:1.6; margin:0;">
+            "Bela Krajina has Slovenia's warmest, cleanest, most culturally rich borderland river —
+            and three floating solar platforms for wellness, learning and cross-border culture
+            would be the boldest, most replicable piece of green rural infrastructure
+            funded by LAS DBK in the 2021–2027 cycle."
+          </p>
+        </div>
+
+        <div class="card" style="margin-top: 1.5rem; border-left: 4px solid var(--gold);">
+          <h4>Bottom Line Honesty</h4>
+          <p style="font-size:0.88rem; color:var(--text-light);">
+            This is the most ambitious and most complex project in the LAS DBK brainstorm set.
+            The regulatory path requires real effort — there is no shortcut on the water consent.
+            But it is also the project with the longest legs: if permitted and built, it becomes
+            a model for every LAS region with a clean river in Slovenia and beyond.
+            Start with the VGP call. Everything else follows from that.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INFO STRIP
+============================================================ -->
+<div class="info-strip">
+  <p>LAS DBK Total Budget 2021–2027: <strong>€4,073,000</strong> | ESRR Share: <strong>€1,817,000</strong> | EKSRP Share: <strong>€2,256,000</strong></p>
+  <p>This project targets ESRR | Lead: LAS DBK Office, Novo Mesto | <strong>las-dbk.si</strong></p>
+</div>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <p>Kolpa Floating Wellness &amp; Learning Hubs — Plavajoče eko-platforme za učenje in wellbeing ob Kolpi</p>
+    <div class="footer-divider"></div>
+    <p>Prepared for brainstorming purposes — March 2026, Bela Krajina</p>
+    <p>LAS DBK: <a href="https://las-dbk.si" target="_blank">las-dbk.si</a> &nbsp;|&nbsp; ARSO: <a href="https://arso.gov.si" target="_blank">arso.gov.si</a> &nbsp;|&nbsp; Misterion: <a href="https://www.misterion.si" target="_blank">misterion.si</a></p>
+    <p style="margin-top:1rem; color:rgba(255,255,255,0.3); font-size:0.75rem;">Document 04 of the BK LAS 2026 Project Series &nbsp;·&nbsp; Not a formal funding application &nbsp;·&nbsp; All figures are estimates</p>
+  </div>
+</footer>
+
+</body>
+</html>

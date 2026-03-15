@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIFE 2026-SSC — Navodila za prijavo | BK LAS 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --orange: #f0883e;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --life-green: #1a7a4a;
+    --life-light: #2ea866;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+  .header {
+    background: linear-gradient(135deg, #0d3320 0%, #1a5c35 50%, #0d4a28 100%);
+    border-bottom: 3px solid var(--life-light);
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(46,168,102,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(26,122,74,0.1) 0%, transparent 60%);
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--life-green);
+    border: 1px solid var(--life-light);
+    color: #7fff9a;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(24px, 4vw, 44px);
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    font-size: 16px;
+    color: #90e8b0;
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .meta-chip {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .meta-chip .label { color: var(--muted); }
+  .meta-chip .value { color: #fff; font-weight: 600; }
+
+  .urgent-banner {
+    background: linear-gradient(90deg, #2d1a00, #3d2400, #2d1a00);
+    border: 1px solid var(--orange);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 24px auto;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .urgent-icon { font-size: 28px; }
+  .urgent-text strong { color: var(--orange); font-size: 15px; }
+  .urgent-text p { color: var(--text); font-size: 13px; margin-top: 4px; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 14px; margin-bottom: 30px;
+    transition: all 0.2s;
+  }
+  .nav-back:hover { color: var(--text); border-color: var(--accent); }
+
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--life-light);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .kv { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid rgba(48,54,61,0.5); padding-bottom: 8px; }
+  .kv:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .kv .k { color: var(--muted); font-size: 13px; }
+  .kv .v { color: var(--text); font-size: 13px; font-weight: 500; text-align: right; max-width: 55%; }
+
+  .step-list { counter-reset: steps; }
+  .step {
+    counter-increment: steps;
+    display: flex; gap: 16px; margin-bottom: 20px;
+    padding: 16px; background: var(--surface2); border-radius: 10px;
+    border-left: 3px solid var(--life-light);
+  }
+  .step-num {
+    width: 32px; height: 32px; min-width: 32px;
+    background: var(--life-green); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700;
+    color: #fff;
+  }
+  .step-num::before { content: counter(steps); }
+  .step-content h4 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .step-content p, .step-content ul { font-size: 13px; color: var(--muted); }
+  .step-content ul { padding-left: 16px; margin-top: 6px; }
+  .step-content li { margin-bottom: 4px; }
+  .step-content a { color: var(--accent); }
+  .step-content strong { color: var(--text); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .tag-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .tag-orange { background: rgba(240,136,62,0.15); color: var(--orange); border: 1px solid rgba(240,136,62,0.3); }
+  .tag-blue { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+  .tag-purple { background: rgba(188,140,255,0.15); color: var(--purple); border: 1px solid rgba(188,140,255,0.3); }
+  .tag-red { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.3); }
+
+  .info-box {
+    background: rgba(88,166,255,0.08);
+    border: 1px solid rgba(88,166,255,0.25);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  .info-box strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 14px; }
+
+  .warn-box {
+    background: rgba(210,153,34,0.08);
+    border: 1px solid rgba(210,153,34,0.3);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: #deba7a;
+  }
+  .warn-box strong { color: var(--yellow); display: block; margin-bottom: 6px; }
+
+  .contact-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .contact-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .contact-card p { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .contact-card a { color: var(--accent); }
+
+  .deadline-banner {
+    background: linear-gradient(135deg, #1a2d0d, #243d12);
+    border: 2px solid var(--green);
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-align: center;
+    margin: 24px 0;
+  }
+  .deadline-banner .deadline-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+  .deadline-banner .deadline-date { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: var(--green); }
+  .deadline-banner .deadline-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .two-phase {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;
+  }
+  @media (max-width: 600px) { .two-phase { grid-template-columns: 1fr; } }
+  .phase-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .phase-card.active { border-color: var(--orange); background: rgba(240,136,62,0.07); }
+  .phase-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .phase-label.active { color: var(--orange); }
+  .phase-label.future { color: var(--muted); }
+  .phase-card h4 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .phase-card p { font-size: 12px; color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(48,54,61,0.5); color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .header { background: #1a7a4a; }
+    .nav-back, .urgent-banner { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">🌿 EU LIFE Program — Narava &amp; Biotska raznovrstnost</div>
+  <h1>LIFE 2026 — Standard Action Grants</h1>
+  <p class="subtitle">Največji EU program za okolje in naravo — priložnost za Belo krajino in Kolpo</p>
+  <div class="header-meta">
+    <div class="meta-chip"><span class="label">Program</span><span class="value">LIFE 2021–2027</span></div>
+    <div class="meta-chip"><span class="label">1. faza rok</span><span class="value">23. april 2026</span></div>
+    <div class="meta-chip"><span class="label">Razpon</span><span class="value">€2M – €10M</span></div>
+    <div class="meta-chip"><span class="label">EU delež</span><span class="value">60%</span></div>
+    <div class="meta-chip"><span class="label">Oblika</span><span class="value">2-fazni postopek</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <a href="index.html" class="nav-back">← Nazaj na pregled</a>
+
+  <div class="urgent-banner">
+    <div class="urgent-icon">🌿</div>
+    <div class="urgent-text">
+      <strong>FAZA 1 — Konceptna prijava: 23. april 2026</strong>
+      <p>LIFE Standard Action Grants zahtevajo 2-fazni postopek. Faza 1 (concept note) je kratka — 5-8 strani. Bela krajina je idealen kandidat z Natura 2000, Kolpo in endemičnimi vrstami rib.</p>
+    </div>
+  </div>
+
+  <!-- DEADLINE -->
+  <div class="two-phase">
+    <div class="phase-card active">
+      <div class="phase-label active">⚡ ODPRTO ZDAJ — Faza 1</div>
+      <h4>Concept Note (kratek opis)</h4>
+      <p>Rok: <strong style="color:var(--orange)">23. april 2026</strong><br>Obseg: ~5-8 strani<br>Cilj: pridi skozi presejanje</p>
+    </div>
+    <div class="phase-card">
+      <div class="phase-label future">Faza 2 (po povabilu)</div>
+      <h4>Polna prijava</h4>
+      <p>Samo povabljeni projekti<br>Obseg: 50–100 strani<br>Rok: ~ jesen 2026</p>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <h2 class="section-title">📋 Pregled programa LIFE</h2>
+    <div class="card">
+      <div class="kv"><span class="k">Program</span><span class="v">LIFE 2021–2027 (EU)</span></div>
+      <div class="kv"><span class="k">Razpis</span><span class="v">LIFE-2026-SAP-NAT-ENV (Standard Action Projects)</span></div>
+      <div class="kv"><span class="k">Upravljavec</span><span class="v">CINEA (European Climate, Infrastructure and Environment Executive Agency)</span></div>
+      <div class="kv"><span class="k">Proračun razpisa</span><span class="v">~€500M (ocena, odvisno od prioritet)</span></div>
+      <div class="kv"><span class="k">Min. vrednost projekta</span><span class="v">€2.000.000</span></div>
+      <div class="kv"><span class="k">Max. vrednost projekta</span><span class="v">€10.000.000</span></div>
+      <div class="kv"><span class="k">EU sofinanciranje</span><span class="v">60% (narava: do 75%)</span></div>
+      <div class="kv"><span class="k">Lastna udeležba</span><span class="v">40% (oz. 25% za prioritetne habitate)</span></div>
+    </div>
+    <div class="info-box">
+      <strong>Zakaj je LIFE za Kolpo smiseln?</strong>
+      Reka Kolpa je Natura 2000 območje z 39 endemičnimi vrstami rib — to je izjemna biotska raznovrstnost za EU merila. LIFE prioritizira <em>konkretne varstvene rezultate</em> v Natura 2000 habitatih, čezmejne projekte (SI+HR) in inovativne pristope. Bela krajina ustreza vsem trem kriterijem.
+    </div>
+  </div>
+
+  <!-- PRIORITETNA PODROČJA -->
+  <div class="section">
+    <h2 class="section-title">🎯 Prioritetna področja za 2026</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>🐟 Narava in biotska raznovrstnost</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Najprimernejše za Kolpo:</p>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Ohranjanje habitatnih tipov Natura 2000</li>
+          <li>Varstvo endemičnih vrst rib (ogrožene po Aneksu II Habitatne direktive)</li>
+          <li>Obnova poplavnih ravnic ob rekah</li>
+          <li>Čezmejno upravljanje (SI-HR)</li>
+          <li>Vključevanje lokalnih skupnosti v varstvo</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-green">Visoka prednost</span>
+          <span class="tag tag-blue">Kolpa ✓</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🌊 Krožno gospodarstvo in kakovost vode</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Sekundarno relevantno:</p>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Varstvo kakovosti voda (Vodna direktiva)</li>
+          <li>Trajnostni turizem v ranljivih območjih</li>
+          <li>Zelena infrastruktura</li>
+          <li>Ekosistemske storitve</li>
+        </ul>
+        <div class="tags">
+          <span class="tag tag-orange">Srednja prednost</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <strong>⚠️ LIFE ni za manjše projekte</strong>
+      Minimalna vrednost €2M pomeni, da je LIFE projekt partnerski napor — potrebuješ konzorcij (občine, ZRSVN, LAG Vallis Colapis HR, morda univerza). LIFE ne financira posameznih podjetij ali malih lokalnih iniciativ. Je pa idealna nadgradnja za BK po uspešnem LEADER projektu.
+    </div>
+  </div>
+
+  <!-- UPRAVIČENOST -->
+  <div class="section">
+    <h2 class="section-title">✅ Kdo se lahko prijavi?</h2>
+    <div class="card">
+      <h3>Upravičeni prijavitelji</h3>
+      <div class="kv"><span class="k">Javni sektor</span><span class="v">Občine, ZRSVN, ARSO, državne agencije</span></div>
+      <div class="kv"><span class="k">Nevladne organizacije</span><span class="v">DOPPS, Umanotera, okoljske NVO s pravno osebnostjo</span></div>
+      <div class="kv"><span class="k">Zasebni sektor</span><span class="v">Podjetja z jasnim okoljskim ciljem (manjša vloga)</span></div>
+      <div class="kv"><span class="k">Raziskovalne inst.</span><span class="v">Univerze, BF Ljubljana, ZRC SAZU</span></div>
+      <div class="kv"><span class="k">Konzorciji</span><span class="v">Priporočeni — min. 2 partnerja, čezmejna vrednost +</span></div>
+      <div class="kv"><span class="k">Vodilni partner</span><span class="v">Pravna oseba s sedežem v EU</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Idealni konzorcij za Kolpo</h3>
+      <table>
+        <tr><th>Partner</th><th>Vloga</th><th>Država</th></tr>
+        <tr><td>Občina Metlika ali Semič</td><td>Vodilni partner</td><td>🇸🇮 SI</td></tr>
+        <tr><td>ZRSVN — Zavod RS za varstvo narave</td><td>Strokovni partner (Natura 2000)</td><td>🇸🇮 SI</td></tr>
+        <tr><td>LAG Vallis Colapis (Ozalj)</td><td>Čezmejni partner</td><td>🇭🇷 HR</td></tr>
+        <tr><td>Biotehniška fakulteta (UL)</td><td>Znanstveni partner</td><td>🇸🇮 SI</td></tr>
+        <tr><td>LAS DBK (GIZ)</td><td>Partner skupnosti</td><td>🇸🇮 SI</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- KORAKI -->
+  <div class="section">
+    <h2 class="section-title">📝 Koraki za prijavo — Faza 1</h2>
+    <div class="info-box">
+      <strong>Faza 1 (Concept Note) — Rok: 23. april 2026</strong>
+      Concept Note je relativno kratek dokument (~5-8 strani), ki opisuje projekt na visoki ravni. Namen je presejanje — ali projekt ustreza ciljem programa. Ocenjuje se ga hitro (3-4 mesece). Povabljeni prejmejo navodila za Fazo 2.
+    </div>
+
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Registracija na EU Funding &amp; Tenders Portal</h4>
+          <p>Vsak partner potrebuje <strong>PIC (Participant Identification Code)</strong>.<br>
+          <a href="https://ec.europa.eu/info/funding-tenders/opportunities/portal" target="_blank">funding-tenders.ec.europa.eu</a> → My Organisation → Register<br><br>
+          Potrebuješ: davčno številko, IBAN, zastopnika organizacije.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Preveri razpis LIFE-2026-SAP-NAT-ENV</h4>
+          <p>Na portalu poišči razpis ali preveri CINEA spletno stran:<br>
+          <a href="https://cinea.ec.europa.eu/programmes/life_en" target="_blank">cinea.ec.europa.eu/programmes/life</a><br><br>
+          Natančne smernice (Guidelines for Applicants) bodo objavljene ~6-8 tednov pred rokom.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pripravi Concept Note — vsebina</h4>
+          <p>Standardna struktura concept note vsebuje:</p>
+          <ul>
+            <li><strong>Relevantnost:</strong> Natura 2000 habitati, ogrožene vrste (po Aneksu II)</li>
+            <li><strong>Cilji:</strong> Merljivi varstveni cilji (npr. populacija sulca +20%)</li>
+            <li><strong>Metodologija:</strong> Kako bodo cilji doseženi</li>
+            <li><strong>Konzorcij:</strong> Vloge partnerjev, čezmejna vrednost</li>
+            <li><strong>Proračun:</strong> Okvirna ocena po aktivnostih</li>
+            <li><strong>Trajnost:</strong> Kako se bodo rezultati ohranili po projektu</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Kontaktiraj CINEA National Contact Point (NCP)</h4>
+          <p>Slovenija ima LIFE NCP pri Ministrstvu za naravne vire:<br>
+          <strong>Matjaž Mastnak</strong> — LIFE NCP Slovenija<br>
+          E-mail: <a href="mailto:matjaz.mastnak@gov.si">matjaz.mastnak@gov.si</a><br>
+          NCP je brezplačna, neformalna pomoč pred prijavo — PRIPOROČA SE!</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Oddaj Concept Note na portalu</h4>
+          <p>Concept Note se odda elektronsko prek EU Funding &amp; Tenders portala.<br>
+          <strong>Deadline: 23. april 2026, 17:00 CET</strong><br>
+          Sistem se pogosto zamašuje v zadnjih urah — oddaj vsaj 48h prej.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJEKTNE IDEJE ZA BK -->
+  <div class="section">
+    <h2 class="section-title">💡 Konkretne projektne ideje za Belo krajino</h2>
+
+    <div class="card">
+      <h3>🐟 Projekt 1: "KOLPA LIFE — Obnova habitatov endemičnih rib"</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Čezmejni projekt SI-HR za obnovo poplavnih habitatov in varstvo 39 endemičnih vrst rib. Partnerji: občine BK + ZRSVN + LAG Vallis Colapis.</p>
+      <div class="two-col">
+        <div>
+          <div class="kv"><span class="k">Ocenjena vrednost</span><span class="v">€3.5M</span></div>
+          <div class="kv"><span class="k">EU delež (75%)</span><span class="v">€2.625M</span></div>
+          <div class="kv"><span class="k">Lastna sredstva</span><span class="v">€875K</span></div>
+        </div>
+        <div>
+          <div class="kv"><span class="k">Trajanje</span><span class="v">5 let (2027-2032)</span></div>
+          <div class="kv"><span class="k">Prioriteta LIFE</span><span class="v">Natura 2000 — visoka</span></div>
+          <div class="kv"><span class="k">Precedens</span><span class="v">Misterion (€1.24M Interreg)</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag tag-green">Priporočen</span>
+        <span class="tag tag-blue">Natura 2000</span>
+        <span class="tag tag-purple">SI-HR čezmejni</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🌿 Projekt 2: "STELJNICE LIFE — Ohranjanje belokranjskih senokoš"</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Edinstvene "steljnice" (brezove gozdiče) v BK so Natura 2000 habitatni tip 9190 — ogrožen po vsej EU. Partnerji: ZRSVN + Biotehniška fakulteta + lokalni kmetje.</p>
+      <div class="two-col">
+        <div>
+          <div class="kv"><span class="k">Ocenjena vrednost</span><span class="v">€2.2M</span></div>
+          <div class="kv"><span class="k">EU delež (60%)</span><span class="v">€1.32M</span></div>
+          <div class="kv"><span class="k">Lastna sredstva</span><span class="v">€880K</span></div>
+        </div>
+        <div>
+          <div class="kv"><span class="k">Trajanje</span><span class="v">4 leta (2027-2031)</span></div>
+          <div class="kv"><span class="k">Prioriteta LIFE</span><span class="v">Habitatna direktiva — visoka</span></div>
+          <div class="kv"><span class="k">Unikatnost</span><span class="v">Edinstvene v EU</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag tag-green">Visoka unikatnost</span>
+        <span class="tag tag-orange">Potrebni kmetje</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINANCIRANJE -->
+  <div class="section">
+    <h2 class="section-title">💰 Struktura financiranja LIFE</h2>
+    <div class="card">
+      <table>
+        <tr><th>Tip aktivnosti</th><th>Opis</th><th>% EU</th></tr>
+        <tr><td>Varstveni ukrepi (prioritetni habitati)</td><td>Neposredni varstveni ukrepi za prioritetne habitate in vrste</td><td style="color:var(--green); font-weight:600">75%</td></tr>
+        <tr><td>Varstveni ukrepi (ostali)</td><td>Ukrepi za ostale Natura 2000 habitate in vrste</td><td style="color:var(--green); font-weight:600">60%</td></tr>
+        <tr><td>Pilotni/demonstracijski projekti</td><td>Inovativne metode varstva narave</td><td style="color:var(--green); font-weight:600">60%</td></tr>
+        <tr><td>Ozaveščanje in diseminacija</td><td>Komunikacijske aktivnosti projekta</td><td style="color:var(--yellow); font-weight:600">50%</td></tr>
+        <tr><td>Upravljanje projekta</td><td>Koordinacija, finančno upravljanje</td><td style="color:var(--yellow); font-weight:600">50%</td></tr>
+      </table>
+    </div>
+    <div class="info-box">
+      <strong>Tip stroškov — LIFE sprejme:</strong>
+      Stroški osebja, potni stroški, zunanja izvajanja (zunanji strokovnjaki), oprema (do 25% stroškov), investicije v naravo (habitatna obnova, rastlinski material), izobraževalne aktivnosti, komunikacijske aktivnosti, koordinacija projekta. <em>NE sprejme:</em> DDV (razen nevračljiv), dolgovi, obresti, nakup nepremičnin nad 10% stroškov.
+    </div>
+  </div>
+
+  <!-- KONTAKTI -->
+  <div class="section">
+    <h2 class="section-title">📞 Ključni kontakti</h2>
+    <div class="contact-card">
+      <h4>LIFE National Contact Point — Slovenija</h4>
+      <p><strong>Matjaž Mastnak</strong> — Ministrstvo za naravne vire in prostor</p>
+      <p>📧 <a href="mailto:matjaz.mastnak@gov.si">matjaz.mastnak@gov.si</a></p>
+      <p>Brezplačno svetovanje pred prijavo — obvezno kontaktiraj pred pisanjem!</p>
+    </div>
+    <div class="contact-card">
+      <h4>CINEA — Executing Agency</h4>
+      <p>European Climate, Infrastructure and Environment Executive Agency</p>
+      <p>🌐 <a href="https://cinea.ec.europa.eu/programmes/life_en" target="_blank">cinea.ec.europa.eu/programmes/life</a></p>
+      <p>Webinarji za prijavitelje: objavljeni na CINEA spletni strani ~3 mesece pred rokom</p>
+    </div>
+    <div class="contact-card">
+      <h4>ZRSVN — Zavod RS za varstvo narave</h4>
+      <p>Ključni strokovni partner za Natura 2000 habitatno dokumentacijo</p>
+      <p>🌐 <a href="https://www.zrsvn.si" target="_blank">www.zrsvn.si</a></p>
+      <p>Območna enota: Novo Mesto — kontaktiraj za BK specifičnost</p>
+    </div>
+    <div class="contact-card">
+      <h4>LAG Vallis Colapis — Hrvaški partner (Ozalj)</h4>
+      <p>Lokalna akcijska skupina za hrvaško stran Kolpe</p>
+      <p>📧 <a href="mailto:lag-valliscolapis@ozalj.hr">lag-valliscolapis@ozalj.hr</a></p>
+      <p>Izkušnje z Interreg SI-HR (Misterion projekt) — idealni čezmejni partner</p>
+    </div>
+  </div>
+
+  <!-- ČASOVNICA -->
+  <div class="section">
+    <h2 class="section-title">📅 Časovnica LIFE 2026</h2>
+    <div class="card">
+      <table>
+        <tr><th>Datum</th><th>Mejnik</th><th>Akcija</th></tr>
+        <tr><td style="color:var(--orange)"><strong>ZDAJ</strong></td><td>Priprava Concept Note</td><td>Kontaktiraj NCP, zberi partnerje, definiraj habitat/vrsto</td></tr>
+        <tr><td style="color:var(--orange)"><strong>23. apr 2026</strong></td><td>Rok Faza 1 — Concept Note</td><td>Oddaj na EU F&amp;T portalu do 17:00 CET</td></tr>
+        <tr><td>Jul-sep 2026</td><td>Evaluacija Faze 1</td><td>CINEA oceni concept notes (~3-4 mesece)</td></tr>
+        <tr><td>Sep-okt 2026</td><td>Povabila za Fazo 2</td><td>Povabljeni prejmejo navodila za polno prijavo</td></tr>
+        <tr><td>Jan-mar 2027</td><td>Rok Faza 2 — Polna prijava</td><td>Detajlna prijava (predvidoma)</td></tr>
+        <tr><td>Jul-sep 2027</td><td>Odločitve o financiranju</td><td>Podpis pogodb z CINEA</td></tr>
+        <tr><td>2027-2028</td><td>Začetek projekta</td><td>Projekt se začne</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- POVEZAVE Z BK PROJEKTI -->
+  <div class="section">
+    <h2 class="section-title">🔗 Relevantni BK LAS projekti za LIFE prijavo</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3><a href="01-kolpa-biodiversity-citizen-science.html" style="color:var(--accent); text-decoration:none;">01 — Kolpa Biodiversity Citizen Science</a></h3>
+        <p style="font-size:13px; color:var(--muted);">Pilotni monitoring projekt — idealna osnova za LIFE projekt. Podatki o biodiverziteti + skupnostno vključevanje = LIFE kriteriji.</p>
+        <div class="tags"><span class="tag tag-blue">EKSRP €80k → LIFE predhodnik</span></div>
+      </div>
+      <div class="card">
+        <h3><a href="03-perma-kolpa-gardens.html" style="color:var(--accent); text-decoration:none;">03 — Perma-Kolpa Gardens</a></h3>
+        <p style="font-size:13px; color:var(--muted);">Semenska banka + permakultura = ohranjanje agro-biodiverzitete. Belokranjska čebula, fižol — lokalne sorte so del biotske dediščine.</p>
+        <div class="tags"><span class="tag tag-blue">EKSRP €200k → LIFE komplementarno</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deadline-banner">
+    <div class="deadline-label">Rok za Concept Note (Faza 1)</div>
+    <div class="deadline-date">23. april 2026</div>
+    <div class="deadline-note">Faza 2 (polna prijava) samo za povabljene — po evaluaciji Faze 1</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>BK LAS 2026 Research Hub · <a href="index.html">← Nazaj na pregled</a></p>
+  <p style="margin-top:6px;">Informacije na podlagi javnih podatkov CINEA in LIFE programa · Vedno preveri uradne razpisne smernice</p>
+</div>
+
+</body>
+</html>

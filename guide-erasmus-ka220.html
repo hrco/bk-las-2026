@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ Erasmus+ KA220 — Vodič za prijavo | Bela Krajina 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --urgent: #b71c1c;
+  --urgent-mid: #c62828;
+  --amber: #e65100;
+  --navy: #1a1a2e;
+  --cream: #faf8f4;
+  --text: #1a1a1a;
+  --muted: #666;
+  --border: #e0e0e0;
+  --radius: 10px;
+}
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); line-height: 1.65; }
+a { color: #c62828; }
+
+/* NAV */
+.nav { background: var(--navy); padding: 10px 24px; display: flex; align-items: center; gap: 12px; }
+.nav a { color: rgba(255,255,255,.7); font-size: .85rem; text-decoration: none; }
+.nav a:hover { color: #fff; }
+.nav span { color: rgba(255,255,255,.3); }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--urgent) 0%, #7b0000 100%);
+  color: #fff;
+  padding: 50px 24px 60px;
+  text-align: center;
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 50px;
+  background: linear-gradient(to bottom right, transparent 49%, var(--cream) 50%);
+}
+.urgency-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.2);
+  border: 2px solid rgba(255,255,255,.6);
+  border-radius: 50px;
+  padding: 6px 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  letter-spacing: .05em;
+  margin-bottom: 16px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.7} }
+.hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem,4vw,2.6rem); font-weight: 700; margin-bottom: 10px; }
+.hero .sub { font-size: 1rem; opacity: .85; max-width: 550px; margin: 0 auto 24px; }
+.deadline-box {
+  display: inline-block;
+  background: rgba(0,0,0,.3);
+  border: 2px solid rgba(255,255,255,.4);
+  border-radius: var(--radius);
+  padding: 14px 30px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.deadline-box .label { font-size: .75rem; opacity: .8; letter-spacing: .1em; text-transform: uppercase; }
+.deadline-box .date { font-size: 2rem; font-weight: 700; }
+.deadline-box .days { font-size: .85rem; opacity: .8; }
+
+/* MAIN */
+.container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+section { padding: 40px 0; border-bottom: 1px solid var(--border); }
+h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--navy); margin-bottom: 18px; padding-left: 12px; border-left: 4px solid var(--urgent); }
+p { margin-bottom: 12px; }
+
+/* INFO GRID */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.info-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; text-align: center; }
+.info-card .label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.info-card .value { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--navy); margin-top: 4px; }
+
+/* STEPS */
+.steps { list-style: none; padding: 0; }
+.steps li {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.steps li:last-child { border-bottom: none; }
+.step-num {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: var(--urgent);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-body h4 { font-weight: 600; margin-bottom: 4px; font-size: .95rem; }
+.step-body p { font-size: .85rem; color: var(--muted); margin: 0; }
+.step-body a { color: var(--urgent); }
+
+/* CHECKLIST */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: .9rem;
+}
+.checklist li::before {
+  content: '☐';
+  font-size: 1.1rem;
+  color: var(--urgent);
+  min-width: 20px;
+  margin-top: -1px;
+}
+.checklist li.done::before { content: '✓'; color: #2e7d32; }
+
+/* BUDGET TABLE */
+table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+th { background: var(--navy); color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: .8rem; }
+tr:nth-child(even) { background: #f9f9f9; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content:''; position:absolute; left:6px; top:0; bottom:0; width:2px; background:var(--urgent); }
+.tl-item { position: relative; padding: 0 0 20px 20px; }
+.tl-item::before { content:''; position:absolute; left:-6px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--urgent); border:2px solid #fff; box-shadow:0 0 0 2px var(--urgent); }
+.tl-item .tl-date { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:.85rem; color:var(--urgent); }
+.tl-item .tl-task { font-size:.9rem; }
+
+/* TIPS */
+.tips { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.tip { background: #fff3e0; border-left: 4px solid var(--amber); border-radius: 6px; padding: 14px; }
+.tip h4 { font-weight: 600; font-size: .9rem; margin-bottom: 4px; }
+.tip p { font-size: .83rem; color: var(--muted); margin: 0; }
+
+/* ALERT */
+.alert { background: #ffebee; border: 1px solid #ffcdd2; border-left: 4px solid var(--urgent); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 16px; font-size: .9rem; }
+.alert strong { color: var(--urgent); }
+
+/* LINKS */
+.link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.link-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+.link-item a { color: var(--urgent); font-weight: 600; font-size: .9rem; }
+.link-item p { font-size: .78rem; color: var(--muted); margin: 4px 0 0; }
+
+footer { background: var(--navy); color: rgba(255,255,255,.6); text-align: center; padding: 20px; font-size: .78rem; margin-top: 40px; }
+@media(max-width:600px){ .info-grid{grid-template-columns:repeat(2,1fr)} }
+@media print { .nav,footer{display:none} .hero{background:var(--urgent)!important;-webkit-print-color-adjust:exact} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html">← Nazaj na pregled</a>
+  <span>|</span>
+  <a href="https://erasmus-plus.ec.europa.eu" target="_blank">erasmus-plus.ec.europa.eu ↗</a>
+</nav>
+
+<div class="hero">
+  <div class="urgency-badge">⚡ NUJNO — ROK ČEZ 11 DNI</div>
+  <h1>Erasmus+ KA220<br>Small-Scale Partnerships</h1>
+  <p class="sub">Vodič za prijavo za Zeleni podjetniški inkubator za mlade ob Kolpi<br>Partnerstvo Slovenija + Hrvaška</p>
+  <div class="deadline-box">
+    <div class="label">Rok za prijavo</div>
+    <div class="date">26. 3. 2026</div>
+    <div class="days">do 12:00 CET — portal Erasmus+</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <section>
+    <div class="info-grid">
+      <div class="info-card"><div class="label">Budget (lump sum)</div><div class="value">€60k–200k</div></div>
+      <div class="info-card"><div class="label">Sofinanciranje EU</div><div class="value">100% lump sum</div></div>
+      <div class="info-card"><div class="label">Min. partnerjev</div><div class="value">2 (SI + HR)</div></div>
+      <div class="info-card"><div class="label">Trajanje projekta</div><div class="value">12–24 mes.</div></div>
+      <div class="info-card"><div class="label">Vloga prek</div><div class="value">EU Portal</div></div>
+      <div class="info-card"><div class="label">NCA Slovenija</div><div class="value">CMEPIUS</div></div>
+    </div>
+
+    <div class="alert">
+      <strong>⚡ 11 dni do roka!</strong> Danes (15.3.2026) je zadnji trenutek za začetek prijave. Prioriteta #1: kontaktiraj CMEPIUS in zagotovi hrvaško partnersko organizacijo.
+    </div>
+  </section>
+
+  <section>
+    <h2>Kaj je KA220-SCH Small-Scale Partnership?</h2>
+    <p>Erasmus+ KA220 (Partnerships for Cooperation) je program EU za sodelovanje med organizacijami iz različnih držav na področju izobraževanja. <strong>Small-Scale Partnerships</strong> so poenostavljena različica z nižjim budgetom in manj birokracije — idealne za prve Erasmus+ projekte.</p>
+    <p><strong>KA220-SCH</strong> = School Education (šolsko izobraževanje). Primerno za šole, nevladne organizacije in lokalne skupnosti, ki delajo z mladimi.</p>
+    <p>Financiranje je v obliki <strong>lump sum</strong> (pavšal) — EU ne preverja vsakega računa. Odobren znesek prejmete po dokazilu o opravljenih aktivnostih in doseženih rezultatih.</p>
+  </section>
+
+  <section>
+    <h2>Kdo lahko kandidira?</h2>
+    <ul class="checklist">
+      <li>Šole, srednje šole (npr. SŠ Črnomelj) — kot vodilni partner</li>
+      <li>Nevladne organizacije, zavodi, društva s področja izobraževanja</li>
+      <li>Lokalne skupnosti in občine (v vlogi partnerja)</li>
+      <li>Podjetja, zadruge — samo kot partnerji, ne kot vodilni</li>
+      <li>Vsaj 2 organizaciji iz 2 različnih EU držav (SI + HR zadostuje)</li>
+      <li>Vodilni partner mora biti registriran v EU/EEA/Turčiji</li>
+      <li>Vsi partnerji morajo imeti OID (Organisation ID)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Zakaj ta projekt ustreza KA220?</h2>
+    <p>Kolpa Youth Green Venture Lab je idealen KA220 projekt:</p>
+    <ul class="checklist done">
+      <li>Mladi (15–29 let) iz Bele Krajine — primarna ciljna skupina</li>
+      <li>Čezmejno partnerstvo SI + HR (Karlovac county)</li>
+      <li>Zeleno podjetništvo = Erasmus+ zelena prednostna tema</li>
+      <li>Ruralni kontekst — EU prednostna geografska kategorija</li>
+      <li>Šola kot vodilni partner (SŠ Črnomelj) = KA220-SCH</li>
+      <li>Oprijemljivi rezultati: curriculum, startup prototip, pitch event</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Korak za korakom — aplikacijski proces</h2>
+    <ol class="steps">
+      <li><div class="step-num">1</div><div class="step-body"><h4>Registracija EU Login (danes!)</h4><p>Pojdi na <a href="https://webgate.ec.europa.eu/cas">webgate.ec.europa.eu/cas</a> in ustvari EU Login račun za tvojo organizacijo. Potrebuješ ga za prijavo na portalu.</p></div></li>
+      <li><div class="step-num">2</div><div class="step-body"><h4>Pridobi OID za svojo organizacijo</h4><p>Pojdi na <a href="https://webgate.ec.europa.eu/erasmus-oid">Erasmus+ OID portal</a>. Registriraj organizacijo in pridobi Organisation Identification Number. Ta korak traja 1–3 delovne dni — naredi TAKOJ.</p></div></li>
+      <li><div class="step-num">3</div><div class="step-body"><h4>Poišči hrvaškega partnerja (ta teden)</h4><p>Kontaktiraj: LAG "Vallis Colapis" (Karlovačka županija), osnovna šola ali NGO v Ozlju/Kamanju/Karlovcu. Potrebuješ le pismo o nameri (Letter of Intent) in njihov OID.</p></div></li>
+      <li><div class="step-num">4</div><div class="step-body"><h4>Izpolni prijavo na EU portalu</h4><p>Pojdi na <a href="https://erasmus-plus.ec.europa.eu/apply-now">erasmus-plus.ec.europa.eu/apply-now</a>. Izberi: KA220-SCH. Izpolni opis projekta, cilje, aktivnosti, rezultate in budget po kategorijah lump sum.</p></div></li>
+      <li><div class="step-num">5</div><div class="step-body"><h4>Kontaktiraj CMEPIUS za podporo</h4><p>CMEPIUS je slovenska nacionalna agencija za Erasmus+. Telefon: <strong>+386 1 430 47 47</strong>. Imajo brezplačno telefonsko svetovanje in POGOSTO pomagajo urediti zadnje stvari.</p></div></li>
+      <li><div class="step-num">6</div><div class="step-body"><h4>Oddaj do 26.3.2026 do 12:00 CET</h4><p>Sistem se zaklene točno ob 12:00. Pošlji prijavo vsaj dan prej. Po oddaji prejmete automatsko potrdilo.</p></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Dokumenti — kaj pripraviti</h2>
+    <ul class="checklist">
+      <li>EU Login račun (vodilni partner)</li>
+      <li>OID za vodilnega partnerja (registracija Erasmus+ OID portal)</li>
+      <li>OID za hrvaškega partnerja</li>
+      <li>Pismo o nameri (Letter of Intent) — podpisano s strani obeh partnerjev</li>
+      <li>Opis projekta — cilji, aktivnosti, pričakovani rezultati (spletni obrazec)</li>
+      <li>Budget plan — po kategorijah lump sum (A1: upravljanje, A2: aktivnosti, A3: rezultati)</li>
+      <li>Časovni načrt aktivnosti</li>
+      <li>Dokazilo o registraciji organizacije (izpisek iz registra)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Budget — sistem lump sum</h2>
+    <p>KA220 Small-Scale ne zahteva računov za vsak strošek. Finančne kategorije so standardizirane:</p>
+    <table>
+      <thead><tr><th>Kategorija</th><th>Znesek</th><th>Za kaj</th></tr></thead>
+      <tbody>
+        <tr><td>A1 — Upravljanje projekta</td><td>€500/mes./partner</td><td>Koordinacija, administracija, sestanki</td></tr>
+        <tr><td>A2 — Projektne aktivnosti</td><td>€350–500/aktivnost/udeleženec</td><td>Delavnice, usposabljanja, dogodki</td></tr>
+        <tr><td>A3 — Intelektualni produkti</td><td>po dogovoru z CMEPIUS</td><td>Kurikulumi, priročniki, aplikacije</td></tr>
+        <tr><td>Skupaj Small-Scale</td><td>do €60.000</td><td>Celoten projekt 12–24 mesecev</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:.85rem;color:var(--muted)">Opomba: Znesek se izplača po predložitvi poročila in dokazil o opravljenih aktivnostih — ne potrebuješ računov za posamezne stroške.</p>
+  </section>
+
+  <section>
+    <h2>Kritična časovnica — 11 dni</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">15.3 (danes)</div><div class="tl-task">Registracija EU Login + začni OID postopek + kontaktiraj CMEPIUS (+386 1 430 47 47)</div></div>
+      <div class="tl-item"><div class="tl-date">16–17.3</div><div class="tl-task">Poišči hrvaškega partnerja — LAG Vallis Colapis ali šola v Karlovcu. Pošlji e-mail z opisom projekta.</div></div>
+      <div class="tl-item"><div class="tl-date">18–20.3</div><div class="tl-task">OID registracija odobrena. Začni izpolnjevati prijavo na portalu. Pripravi opis aktivnosti (6-mes. akademija, 50 mladih, pitch event).</div></div>
+      <div class="tl-item"><div class="tl-date">21–23.3</div><div class="tl-task">Dokonči opis projekta, budget plan, pismo o nameri (podpisano s hrvaško stranjo).</div></div>
+      <div class="tl-item"><div class="tl-date">24–25.3</div><div class="tl-task">Pregled prijave z CMEPIUS. Odpraviti napake. Prevod ključnih delov v angleščino.</div></div>
+      <div class="tl-item"><div class="tl-date">26.3 do 11:00</div><div class="tl-task">⚡ ODDAJA na erasmus-plus.ec.europa.eu. Ne čakaj na 12:00 — sistem je pogosto preobremenjen ob roku.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Nasveti za visoke točke</h2>
+    <div class="tips">
+      <div class="tip"><h4>🌱 Poudari zeleno tranzicijo</h4><p>Erasmus+ ima "green priority" — bio-kozmetika, eko-turizem, krožno gospodarstvo iz kolpskih rastlin. Uporabi besede: sustainable, green economy, circular.</p></div>
+      <div class="tip"><h4>🌍 Čezmejni učinek</h4><p>Poudarite, da projekt gradi SI-HR mrežo mladih podjetnikov vzdolž celotnega koridorja Kolpa/Kupa — ne samo lokalni projekt.</p></div>
+      <div class="tip"><h4>📊 Konkretni rezultati</h4><p>KA220 ocenjuje oprijemljive izhode: 1 kurikulum, 50 udeležencev, 1 priročnik, 1 SI-HR pitch event. Bodi specifičen s številkami.</p></div>
+      <div class="tip"><h4>🏫 Šola kot vodilni</h4><p>SŠ Črnomelj kot vodilni partner (KA220-SCH) ima prednost pred NGO — jasna šolska ciljno skupina mladih.</p></div>
+      <div class="tip"><h4>📝 Ruralnost</h4><p>Navedi, da je Bela Krajina ruralno območje z omejenimi možnostmi za mlade — to je EU prednostna kategorija.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ključni kontakti in viri</h2>
+    <div class="link-grid">
+      <div class="link-item"><a href="https://www.cmepius.si" target="_blank">cmepius.si — Erasmus+ NCA Slovenija</a><p>+386 1 430 47 47 · info@cmepius.si · brezplačno svetovanje</p></div>
+      <div class="link-item"><a href="https://erasmus-plus.ec.europa.eu/apply-now" target="_blank">Erasmus+ aplikacijski portal</a><p>Tukaj oddaš prijavo. Registriraj se z EU Login računom.</p></div>
+      <div class="link-item"><a href="https://erasmus-plus.ec.europa.eu/programme-guide" target="_blank">Erasmus+ Programme Guide 2026</a><p>Uradni vodič — KA220 poglavje: stran ~250+</p></div>
+      <div class="link-item"><a href="https://webgate.ec.europa.eu/erasmus-oid" target="_blank">OID registracija</a><p>Pridobi Organisation ID za svojo organizacijo (1–3 dni).</p></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Bela Krajina LAS Vodič za prijave · Erasmus+ KA220-SCH · Pripravljeno 15.3.2026</p>
+  <p style="margin-top:4px">Vse informacije preverite na <strong>erasmus-plus.ec.europa.eu</strong> in pri CMEPIUS pred oddajo prijave.</p>
+</footer>
+</body>
+</html>

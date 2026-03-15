@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zvezdna pot ob Kolpi — LAS DBK 2026 Project Brief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+       ============================================================ */
+    :root {
+      --navy:        #0a0e1a;
+      --navy-mid:    #0f1729;
+      --navy-deep:   #060a12;
+      --indigo:      #1a2456;
+      --purple:      #2d1b69;
+      --purple-soft: #3d2880;
+      --gold:        #c9993a;
+      --gold-light:  #e8be6a;
+      --gold-pale:   #f5e4b8;
+      --cream:       #faf6ef;
+      --cream-warm:  #f4ede0;
+      --terracotta:  #b85c38;
+      --terra-soft:  #d4784f;
+      --terra-pale:  #f0d5c8;
+      --sage:        #7a9e7e;
+      --sage-soft:   #a8c4ab;
+      --slate:       #4a5568;
+      --text-dark:   #1a1a2e;
+      --text-mid:    #3d3d5c;
+      --text-light:  #6b6b8a;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-dark);
+      background: var(--cream);
+    }
+
+    /* ============================================================
+       TYPOGRAPHY
+       ============================================================ */
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    h3 {
+      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    h4 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-mid);
+    }
+
+    strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       STAR FIELD — CSS-ONLY
+       CSS box-shadow technique: each comma-separated value
+       is one "star" (a 1px dot at a different position).
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 20% 60%, #1a1060 0%, #0a0e1a 40%, #060a12 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem 5rem;
+      text-align: center;
+    }
+
+    /* Layer 1: tiny distant stars */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 1px;
+      height: 1px;
+      background: transparent;
+      box-shadow:
+        87px 34px 0 rgba(255,255,255,0.7),
+        234px 89px 0 rgba(255,255,255,0.5),
+        456px 23px 0 rgba(255,255,255,0.8),
+        789px 156px 0 rgba(255,255,255,0.4),
+        123px 267px 0 rgba(255,255,255,0.6),
+        345px 189px 0 rgba(255,255,255,0.9),
+        567px 312px 0 rgba(255,255,255,0.5),
+        901px 45px 0 rgba(255,255,255,0.7),
+        678px 234px 0 rgba(255,255,255,0.6),
+        234px 456px 0 rgba(255,255,255,0.4),
+        1100px 89px 0 rgba(255,255,255,0.8),
+        56px 512px 0 rgba(255,255,255,0.3),
+        789px 423px 0 rgba(255,255,255,0.7),
+        1200px 312px 0 rgba(255,255,255,0.5),
+        345px 567px 0 rgba(255,255,255,0.6),
+        890px 178px 0 rgba(255,255,255,0.9),
+        178px 689px 0 rgba(255,255,255,0.4),
+        1050px 456px 0 rgba(255,255,255,0.7),
+        623px 89px 0 rgba(255,255,255,0.5),
+        412px 723px 0 rgba(255,255,255,0.8),
+        967px 534px 0 rgba(255,255,255,0.3),
+        78px 401px 0 rgba(255,255,255,0.6),
+        1150px 623px 0 rgba(255,255,255,0.5),
+        534px 145px 0 rgba(255,255,255,0.7),
+        289px 334px 0 rgba(255,255,255,0.4),
+        745px 678px 0 rgba(255,255,255,0.9),
+        1023px 234px 0 rgba(255,255,255,0.6),
+        167px 789px 0 rgba(255,255,255,0.5),
+        856px 567px 0 rgba(255,255,255,0.3),
+        423px 890px 0 rgba(255,255,255,0.7),
+        612px 401px 0 rgba(255,255,255,0.8),
+        934px 712px 0 rgba(255,255,255,0.4),
+        278px 56px 0 rgba(255,255,255,0.6),
+        1178px 145px 0 rgba(255,255,255,0.5),
+        489px 623px 0 rgba(255,255,255,0.7),
+        723px 289px 0 rgba(255,255,255,0.3),
+        145px 934px 0 rgba(255,255,255,0.8),
+        1089px 378px 0 rgba(255,255,255,0.5),
+        367px 712px 0 rgba(255,255,255,0.6),
+        812px 823px 0 rgba(255,255,255,0.4),
+        56px 178px 0 rgba(255,255,255,0.9),
+        678px 512px 0 rgba(255,255,255,0.3),
+        1234px 689px 0 rgba(255,255,255,0.6),
+        490px 34px 0 rgba(255,255,255,0.5),
+        234px 823px 0 rgba(255,255,255,0.7),
+        978px 112px 0 rgba(255,255,255,0.4),
+        145px 567px 0 rgba(255,255,255,0.8),
+        756px 934px 0 rgba(255,255,255,0.5),
+        1012px 845px 0 rgba(255,255,255,0.3),
+        389px 178px 0 rgba(255,255,255,0.7),
+        623px 756px 0 rgba(255,255,255,0.6),
+        890px 389px 0 rgba(255,255,255,0.4),
+        112px 312px 0 rgba(255,255,255,0.9),
+        1145px 534px 0 rgba(255,255,255,0.5),
+        534px 867px 0 rgba(255,255,255,0.3),
+        267px 623px 0 rgba(255,255,255,0.7),
+        845px 145px 0 rgba(255,255,255,0.6),
+        1267px 423px 0 rgba(255,255,255,0.4),
+        456px 289px 0 rgba(255,255,255,0.8),
+        789px 756px 0 rgba(255,255,255,0.5),
+        78px 845px 0 rgba(255,255,255,0.3),
+        967px 623px 0 rgba(255,255,255,0.7),
+        312px 467px 0 rgba(255,255,255,0.6),
+        1189px 756px 0 rgba(255,255,255,0.4),
+        623px 512px 0 rgba(255,255,255,0.8),
+        178px 145px 0 rgba(255,255,255,0.5),
+        856px 867px 0 rgba(255,255,255,0.3),
+        412px 534px 0 rgba(255,255,255,0.7),
+        1034px 678px 0 rgba(255,255,255,0.6),
+        256px 912px 0 rgba(255,255,255,0.4);
+      animation: starTwinkle 8s ease-in-out infinite alternate;
+    }
+
+    /* Layer 2: brighter, slightly larger stars (2px) */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 2px;
+      height: 2px;
+      background: transparent;
+      box-shadow:
+        156px 78px 0 rgba(255,255,230,0.9),
+        567px 234px 0 rgba(255,255,200,0.8),
+        923px 89px 0 rgba(255,255,230,0.95),
+        345px 456px 0 rgba(200,220,255,0.7),
+        1089px 312px 0 rgba(255,255,230,0.85),
+        712px 678px 0 rgba(255,230,180,0.9),
+        89px 623px 0 rgba(255,255,230,0.7),
+        456px 812px 0 rgba(200,220,255,0.8),
+        823px 534px 0 rgba(255,255,230,0.9),
+        234px 267px 0 rgba(255,200,150,0.6),
+        1167px 512px 0 rgba(255,255,230,0.8),
+        645px 145px 0 rgba(200,220,255,0.9),
+        312px 734px 0 rgba(255,255,230,0.7),
+        978px 423px 0 rgba(255,230,180,0.85),
+        134px 912px 0 rgba(255,255,230,0.6),
+        789px 267px 0 rgba(200,220,255,0.8),
+        512px 589px 0 rgba(255,255,230,0.95),
+        1234px 178px 0 rgba(255,200,150,0.7),
+        367px 845px 0 rgba(255,255,230,0.8),
+        845px 712px 0 rgba(200,220,255,0.6);
+      animation: starTwinkle 5s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes starTwinkle {
+      0%   { opacity: 0.7; }
+      50%  { opacity: 1; }
+      100% { opacity: 0.85; }
+    }
+
+    /* Milky Way glow strip */
+    .milky-way {
+      position: absolute;
+      top: 0;
+      left: -10%;
+      right: -10%;
+      height: 100%;
+      background: linear-gradient(
+        125deg,
+        transparent 20%,
+        rgba(100, 80, 180, 0.06) 35%,
+        rgba(150, 120, 220, 0.08) 50%,
+        rgba(100, 80, 180, 0.05) 65%,
+        transparent 80%
+      );
+      pointer-events: none;
+    }
+
+    /* Horizon glow — riverbank warmth */
+    .horizon-glow {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(
+        to top,
+        rgba(180, 90, 30, 0.18) 0%,
+        rgba(200, 130, 40, 0.08) 40%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       HERO CONTENT
+       ============================================================ */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 820px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .badge-funding {
+      background: rgba(201, 153, 58, 0.2);
+      border: 1px solid rgba(201, 153, 58, 0.5);
+      color: var(--gold-light);
+    }
+
+    .badge-offseason {
+      background: rgba(45, 27, 105, 0.6);
+      border: 1px solid rgba(100, 80, 200, 0.4);
+      color: #c4b5f8;
+    }
+
+    .badge-crossborder {
+      background: rgba(184, 92, 56, 0.25);
+      border: 1px solid rgba(184, 92, 56, 0.5);
+      color: #f4a070;
+    }
+
+    .badge-esrr {
+      background: rgba(122, 158, 126, 0.2);
+      border: 1px solid rgba(122, 158, 126, 0.45);
+      color: #a8d4ab;
+    }
+
+    .hero-subtitle-line {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0.85;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 300;
+      color: #ffffff;
+      text-shadow: 0 0 60px rgba(200, 150, 60, 0.3);
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--gold-light), #fff9e0, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-en-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.2vw, 1.5rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 2rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+
+    .hero-meta-item {
+      text-align: center;
+    }
+
+    .hero-meta-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-meta-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--gold-light);
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 2rem auto;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0.5;
+    }
+
+    .scroll-hint span {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .scroll-arrow {
+      width: 18px;
+      height: 18px;
+      border-right: 1.5px solid white;
+      border-bottom: 1.5px solid white;
+      transform: rotate(45deg);
+    }
+
+    /* ============================================================
+       SECTION STRUCTURE
+       ============================================================ */
+    .section {
+      padding: 5rem 2rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .container-wide {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    /* ============================================================
+       SECTION: PROJECT OVERVIEW
+       ============================================================ */
+    .overview-section {
+      background: var(--cream);
+      border-top: 3px solid var(--gold);
+    }
+
+    .overview-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .overview-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+      column-gap: 3rem;
+    }
+
+    @media (min-width: 700px) {
+      .overview-body {
+        column-count: 2;
+      }
+    }
+
+    /* ============================================================
+       SECTION: WHY THIS WINS
+       ============================================================ */
+    .wins-section {
+      background: linear-gradient(180deg, var(--navy-mid) 0%, var(--indigo) 100%);
+    }
+
+    .wins-section h2 {
+      color: var(--gold-light);
+    }
+
+    .wins-section .section-label {
+      color: rgba(232, 190, 106, 0.65);
+    }
+
+    .wins-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .win-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201, 153, 58, 0.2);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: border-color 0.3s;
+    }
+
+    .win-card:hover {
+      border-color: rgba(201, 153, 58, 0.5);
+    }
+
+    .win-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .win-card h4 {
+      color: var(--gold-light);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .win-card p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ============================================================
+       SECTION: DARK SKY TRAIL
+       ============================================================ */
+    .darksky-section {
+      background: var(--cream-warm);
+    }
+
+    .trail-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2.5rem;
+    }
+
+    @media (max-width: 680px) {
+      .trail-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pod-visual {
+      background: linear-gradient(135deg, var(--navy-mid), var(--purple));
+      border-radius: 16px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pod-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 30%, rgba(201,153,58,0.08) 0%, transparent 70%);
+    }
+
+    .pod-visual-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .pod-features {
+      list-style: none;
+      position: relative;
+    }
+
+    .pod-features li {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .pod-features li::before {
+      content: '★';
+      color: var(--gold);
+      font-size: 0.7rem;
+      margin-top: 0.25rem;
+      flex-shrink: 0;
+    }
+
+    .trail-stops {
+      margin-top: 0;
+    }
+
+    .trail-stop {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .stop-marker {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--indigo), var(--purple));
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--gold-light);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .stop-content h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .stop-content p {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    .ida-box {
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, var(--navy-deep), var(--purple));
+      border-radius: 12px;
+      padding: 2rem;
+      border-left: 4px solid var(--gold);
+    }
+
+    .ida-box h3 {
+      color: var(--gold-light);
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .ida-box p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .ida-steps {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .ida-step {
+      background: rgba(201,153,58,0.15);
+      border: 1px solid rgba(201,153,58,0.35);
+      border-radius: 6px;
+      padding: 0.4rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       SECTION: GASTRO
+       ============================================================ */
+    .gastro-section {
+      background: var(--terra-pale);
+      position: relative;
+    }
+
+    .gastro-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--terracotta), var(--gold), var(--terracotta));
+    }
+
+    .gastro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin: 2.5rem 0;
+    }
+
+    .gastro-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border-bottom: 3px solid var(--terracotta);
+      box-shadow: 0 2px 12px rgba(184, 92, 56, 0.1);
+    }
+
+    .gastro-card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .gastro-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--terracotta);
+      margin-bottom: 0.4rem;
+    }
+
+    .gastro-card p {
+      font-size: 0.87rem;
+      color: var(--text-mid);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .label-box {
+      background: linear-gradient(135deg, var(--terracotta), #8b3a20);
+      border-radius: 16px;
+      padding: 2.5rem;
+      color: white;
+      margin-top: 2rem;
+    }
+
+    .label-box h3 {
+      font-size: 1.8rem;
+      color: var(--gold-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .label-box p {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+    }
+
+    .label-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.9);
+      margin: 0.2rem;
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       SECTION: FESTIVAL CIRCUIT
+       ============================================================ */
+    .festival-section {
+      background: var(--cream);
+    }
+
+    .festival-days {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .festival-day {
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .festival-day-header {
+      padding: 1rem 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .day-1 .festival-day-header { background: var(--navy-mid); color: var(--gold-light); }
+    .day-2 .festival-day-header { background: var(--terracotta); color: #fff; }
+    .day-3 .festival-day-header { background: var(--purple); color: #e0d4ff; }
+
+    .festival-day-body {
+      background: white;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .festival-day-body ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .festival-day-body ul li {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .festival-day-body ul li::before {
+      content: '—';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .rotation-box {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--indigo) 100%);
+      border-radius: 14px;
+      padding: 2rem;
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    @media (max-width: 580px) {
+      .rotation-box {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .rotation-location {
+      text-align: center;
+    }
+
+    .rotation-flag {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .rotation-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .rotation-country {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .rotation-arrow {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+
+    /* ============================================================
+       SECTION: LAS DBK ALIGNMENT TABLE
+       ============================================================ */
+    .alignment-section {
+      background: var(--cream-warm);
+    }
+
+    .alignment-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .alignment-table thead tr {
+      background: linear-gradient(135deg, var(--navy-mid), var(--indigo));
+    }
+
+    .alignment-table thead th {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      color: var(--gold-light);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .alignment-table tbody tr {
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .alignment-table tbody tr:nth-child(even) {
+      background: rgba(201, 153, 58, 0.04);
+    }
+
+    .alignment-table tbody td {
+      padding: 0.9rem 1.25rem;
+      color: var(--text-mid);
+      vertical-align: top;
+    }
+
+    .alignment-table tbody td:first-child {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .fit-pill {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .fit-strong { background: #d4edda; color: #155724; }
+    .fit-good   { background: #fff3cd; color: #856404; }
+
+    /* ============================================================
+       SECTION: REQUIREMENTS CHECKLIST
+       ============================================================ */
+    .requirements-section {
+      background: var(--cream);
+    }
+
+    .req-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .req-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border-top: 3px solid var(--gold);
+    }
+
+    .req-card h3 {
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist li {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .checklist li::before {
+      content: '✓';
+      color: var(--sage);
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .checklist li.warn::before {
+      content: '!';
+      color: var(--terracotta);
+    }
+
+    .checklist li.note::before {
+      content: '→';
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       SECTION: TIMELINE
+       ============================================================ */
+    .timeline-section {
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+    }
+
+    .timeline-section h2 {
+      color: var(--gold-light);
+    }
+
+    .timeline-section .section-label {
+      color: rgba(232, 190, 106, 0.6);
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 3rem;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), var(--purple-soft), var(--gold));
+      opacity: 0.6;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.35rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--navy-mid);
+      box-shadow: 0 0 0 3px rgba(201,153,58,0.3);
+    }
+
+    .timeline-phase {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-item h3 {
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-item p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .timeline-duration {
+      display: inline-block;
+      background: rgba(201,153,58,0.15);
+      border: 1px solid rgba(201,153,58,0.3);
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.72rem;
+      color: var(--gold-light);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       SECTION: BUDGET BREAKDOWN
+       ============================================================ */
+    .budget-section {
+      background: var(--cream-warm);
+    }
+
+    .budget-total {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      color: var(--navy-mid);
+      margin: 1rem 0;
+    }
+
+    .budget-bars {
+      margin-top: 2rem;
+    }
+
+    .budget-bar-item {
+      margin-bottom: 1.2rem;
+    }
+
+    .budget-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.4rem;
+    }
+
+    .budget-bar-label {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .budget-bar-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy-mid);
+    }
+
+    .budget-bar-pct {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-left: 0.4rem;
+    }
+
+    .budget-bar-track {
+      height: 8px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .budget-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+
+    .fill-navy    { background: linear-gradient(to right, var(--indigo), var(--purple)); }
+    .fill-gold    { background: linear-gradient(to right, var(--gold), var(--gold-light)); }
+    .fill-terra   { background: linear-gradient(to right, var(--terracotta), var(--terra-soft)); }
+    .fill-sage    { background: linear-gradient(to right, var(--sage), var(--sage-soft)); }
+    .fill-purple  { background: linear-gradient(to right, var(--purple), #7c5cbf); }
+
+    .co-finance-note {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(201,153,58,0.1);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+
+    /* ============================================================
+       SECTION: PARTNERS
+       ============================================================ */
+    .partners-section {
+      background: var(--cream);
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .partner-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .partner-role {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .partner-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .partner-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ============================================================
+       SECTION: CROSS-BORDER
+       ============================================================ */
+    .crossborder-section {
+      background: linear-gradient(135deg, var(--navy-mid) 0%, var(--indigo) 50%, var(--navy-mid) 100%);
+    }
+
+    .crossborder-section h2 {
+      color: var(--gold-light);
+    }
+
+    .crossborder-section .section-label {
+      color: rgba(232, 190, 106, 0.6);
+    }
+
+    .crossborder-section p {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .petrova-note {
+      background: rgba(201,153,58,0.1);
+      border: 1px solid rgba(201,153,58,0.3);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-top: 2rem;
+    }
+
+    .petrova-note h3 {
+      color: var(--gold-light);
+      margin-bottom: 0.6rem;
+    }
+
+    .petrova-note p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.92rem;
+    }
+
+    .crossborder-benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .cb-benefit {
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1.25rem;
+      border-top: 2px solid rgba(201,153,58,0.35);
+    }
+
+    .cb-benefit h4 {
+      color: var(--gold-light);
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .cb-benefit p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin: 0;
+    }
+
+    /* ============================================================
+       SECTION: NEXT STEPS
+       ============================================================ */
+    .nextsteps-section {
+      background: var(--cream-warm);
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .steps-list {
+      counter-reset: steps;
+      list-style: none;
+      padding: 0;
+      margin-top: 2.5rem;
+    }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin-bottom: 1.75rem;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy-mid), var(--indigo));
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .step-content p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    .priority-badge {
+      display: inline-block;
+      background: var(--terracotta);
+      color: white;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      background: var(--navy-deep);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .footer-subtitle {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.5rem auto;
+      opacity: 0.4;
+    }
+
+    .footer-meta {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.8;
+    }
+
+    .footer-las {
+      font-size: 0.72rem;
+      color: rgba(201,153,58,0.5);
+      margin-top: 0.5rem;
+    }
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    .text-gold { color: var(--gold); }
+    .text-terra { color: var(--terracotta); }
+    .mt-1 { margin-top: 1rem; }
+    .mt-2 { margin-top: 2rem; }
+
+    /* ============================================================
+       PRINT STYLES
+       ============================================================ */
+    @media print {
+      .hero {
+        min-height: auto;
+        background: #0a0e1a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-after: always;
+        padding: 3rem 2rem;
+      }
+
+      /* Note: hero will print dark — this is intentional for colour printers.
+         For black-and-white printing, the content sections remain readable. */
+
+      .hero::before,
+      .hero::after {
+        display: none;
+      }
+
+      .scroll-hint { display: none; }
+
+      .section {
+        padding: 2.5rem 1.5rem;
+        page-break-inside: avoid;
+      }
+
+      .wins-section,
+      .timeline-section,
+      .crossborder-section {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .budget-bar-fill {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-meta { gap: 1rem; }
+      .alignment-table { font-size: 0.8rem; }
+      .alignment-table thead th,
+      .alignment-table tbody td { padding: 0.7rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+<!-- LAS-STATUS-BANNER -->
+
+<style id="las-status-css">
+.las-status-bar {
+    background: #0f1f0f;
+    color: #e8f5e8;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 13px;
+    border-bottom: 3px solid #4caf50;
+}
+.las-status-bar .status-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+}
+.las-status-bar .s-label {
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #81c784;
+    font-weight: 700;
+    margin-right: 2px;
+}
+.las-status-bar .s-none {
+    background: #c62828;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+.las-status-bar .s-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1b3a1b;
+    border: 1px solid #4caf50;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+.las-status-bar .s-call.hot {
+    border-color: #ff9800;
+    background: #2a1f00;
+    animation: pulse-hot 1.4s ease-in-out infinite;
+}
+@keyframes pulse-hot {
+    0%,100%{box-shadow:0 0 0 0 rgba(255,152,0,.4)}
+    50%{box-shadow:0 0 0 4px rgba(255,152,0,0)}
+}
+.las-status-bar .s-deadline { color: #a5d6a7; font-size: 11px; }
+.las-status-bar .s-deadline.hot-d { color: #ffb74d; font-weight:700; }
+.las-status-bar .s-budget { color: #81c784; font-size: 11px; }
+.las-status-bar .s-upcoming {
+    background: #1a2940;
+    border: 1px solid #4a90a4;
+    color: #90caf9;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+.las-status-bar .s-link { color: #4caf50; font-size: 11px; text-decoration:none; }
+.las-status-bar .s-link:hover { text-decoration:underline; }
+.las-status-bar .s-divider { color: #33691e; }
+@media(max-width:700px){.las-status-bar .status-inner{flex-direction:column;gap:6px}}
+@media print{.las-status-bar{display:none}}
+</style>
+
+<div class="las-status-bar">
+  <div class="status-inner">
+    <span><span class="s-label">LAS DBK</span><span class="s-none">Ni odprtega razpisa</span></span>
+    <span class="s-upcoming">⏳ Kmalu: 3. javni poziv ESRR — junij 2026</span>
+    <span class="s-divider">|</span>
+    <span class="s-label">Odprti zdaj →</span>
+    
+        <span class="s-call">
+            <a class="s-link" href="https://www.si-hr.eu" target="_blank">Interreg VI-A SI-HR – 4. poziv (P4 Tourism)</a>
+            <span class="s-deadline">rok: 15.6.2026</span>
+            <span class="s-budget">€200k–1.5M</span>
+        </span>
+        <span class="s-call">
+            <a class="s-link" href="https://spirit.si" target="_blank">SPIRIT Slovenia SIDT-2026-RURAL</a>
+            <span class="s-deadline">rok: 15.5.2026</span>
+            <span class="s-budget">€30k–300k</span>
+        </span>
+    <a class="s-link" style="margin-left:auto" href="https://las-dbk.si/javni-pozivi" target="_blank">las-dbk.si →</a>
+  </div>
+</div>
+<!-- /LAS-STATUS-BANNER -->
+
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" aria-label="Project hero">
+    <div class="milky-way"></div>
+    <div class="horizon-glow"></div>
+
+    <div class="hero-content">
+      <div class="hero-badges">
+        <span class="badge badge-funding">LAS DBK · LEADER/CLLD 2021–2027</span>
+        <span class="badge badge-esrr">ESRR · Kohezijski sklad</span>
+        <span class="badge badge-offseason">Off-Season Tourism Driver</span>
+        <span class="badge badge-crossborder">SI–HR Cross-Border Festival</span>
+      </div>
+
+      <p class="hero-subtitle-line">Projekt #07 — Bela Krajina · Kolpa · Zvezdno nebo</p>
+
+      <h1>
+        <em>Zvezdna pot ob Kolpi</em>
+      </h1>
+      <p class="hero-en-title">Kolpa Night Sky &amp; Gastro-River Festival Circuit</p>
+
+      <div class="hero-divider"></div>
+
+      <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem; max-width: 540px; margin: 0 auto; font-style: italic; font-family: 'Cormorant Garamond', serif; line-height: 1.75;">
+        Noč, okus in ogenj ob reki, ki meji dva svetova —<br>
+        <em style="color: rgba(232,190,106,0.75);">night, taste, and fire along the river that borders two worlds</em>
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Proračun / Budget</span>
+          <span class="hero-meta-value">€90,000</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Sklad / Fund</span>
+          <span class="hero-meta-value">ESRR</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Regija / Region</span>
+          <span class="hero-meta-value">Bela Krajina</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Trajanje / Duration</span>
+          <span class="hero-meta-value">24 mes.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Beri več</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PROJECT OVERVIEW
+       ============================================================ -->
+  <section class="section overview-section" id="overview">
+    <div class="container">
+      <span class="section-label">Opis projekta · Project Overview</span>
+      <h2>Kjer zvezde padajo v reko</h2>
+      <p class="overview-lead">
+        Vzdolž Kolpe — reke, ki med slovenskim in hrvaškim bregom rišeta skupno usodo — leži ena redkih regij v Srednji Evropi z resnično temnim nebom. Bela Krajina nima svetlobnega onesnaženja, kar pomeni, da je Rimska cesta vidna s prostim očesom. Ta projekt namerava ta privilegij spremeniti v trajnostni turistični produkt, ki deluje celo leto — ne zgolj poleti.
+      </p>
+      <div class="overview-body">
+        <p>
+          Zvezdna pot ob Kolpi je mreža opazovalnih postaj — trajnih sklopov zavetišč opremljenih s teleskopi in interpretativnimi panoji — razpostavljenih vzdolž reke med Metliko in Semiško kotlino. Vsako zavetišče je zasnovano z minimalnim svetlobnim odtisom in integrirano v naravno krajino Regijskega parka Kolpa. Ponoči služi astrofotografom in ljubiteljem nočnega neba; podnevi pa postane izhodišče za pohodništvo in kolesarjenje.
+        </p>
+        <p>
+          Gastro komponenta — <em>Okus Kolpe</em> — je znamka lokalnih pridelkov, ki poveže postrvne gostilne ob reki, zeliščne kmetije v ozadju in vinogradnike metliške črnine v skupen narativ: večerja pod zvezdami, sveže ujeta postrv z žara, divji šetraj in bezeg iz obrobnih hribov, vino z belokranjskih gričev. Vsaka postaja na zvezdni poti ima svojo "kulinarično zvezdo" — partnerja, ki gostom ponudi paket nočnega opazovanja z večerjo.
+        </p>
+        <p>
+          Enkrat letno se celotna izkušnja zgosti v tridnevni festival, ki rotira med Metliko in hrvaškim Ozljem. Ta čezmejni element ni zgolj šov — je strateška odločitev, ki odpira dostop do hrvaških obiskovalcev, gradi skupno blagovno znamko porečja Kolpe in krepi temelje za morebitno mednarodno certifikacijo temnega neba za celotno območje.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       WHY THIS WINS
+       ============================================================ -->
+  <section class="section wins-section" id="why">
+    <div class="container">
+      <span class="section-label">Prednosti projekta · Competitive Advantages</span>
+      <h2>Zakaj ta projekt zmaga</h2>
+
+      <div class="wins-grid">
+        <div class="win-card">
+          <span class="win-icon">🌑</span>
+          <h4>Temno nebo — redka, certifikatibilna prednost</h4>
+          <p>Bela Krajina je ena redkih regij v SLO z minimalnim svetlobnim onesnaženjem. Mednarodni certifikat DarkSky (IDA) bi regijo uvrstil na globalni zemljevid astro-turizma — poleg Petrove gore v HR, ki je že certificirana od 2019.</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">📅</span>
+          <h4>Off-season — celoletni prihodki</h4>
+          <p>Poleti je Kolpa zasedena. Temno nebo je najboljše jeseni in pozimi — ko so hoteli prazni, kmeti brez kupcev in gostilne zapirajo ob 20h. Ta projekt naredi hladne mesece privlačne in donosne.</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">🇸🇮🇭🇷</span>
+          <h4>Čezmejni festival — multiplikatorski učinek</h4>
+          <p>Rotacijski SI–HR format (Metlika ↔ Ozalj) pritegne hrvaške obiskovalce, ki sicer ne poznajo Bele Krajine, in odpira pot do programov čezmejnega sodelovanja (Interreg SI-HR). Skupna blagovna znamka porečja Kolpe presega meje ene LAS.</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">🐟</span>
+          <h4>Lokalna hrana kot produkt, ne kulisa</h4>
+          <p>Kolpska postrv, metliška črnina, belokranjska pogača (TSG zaščita EU!), divji med in zelišča postanejo del certifikiranega produkta "Okus Kolpe" — s tržno vrednostjo, ki ostane v regiji.</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">🌱</span>
+          <h4>Nizka okoljska obremenitev, visoka vrednost</h4>
+          <p>Projekt ne zahteva množičnega turizma. Manjše število obiskovalcev, višja potrošnja na osobo, minimalni infrastrukturni posegi. Idealno za varovano območje regionalnega parka Kolpa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       DARK SKY TRAIL
+       ============================================================ -->
+  <section class="section darksky-section" id="trail">
+    <div class="container">
+      <span class="section-label">Zvezdna pot · The Dark Sky Trail</span>
+      <h2>Pot med zvezdami</h2>
+      <p>Mreža 5–6 opazovalnih postaj vzdolž Kolpe — od Metlike do Dragatuša — ustvari "zvezdno necklace", ki jo obiskovalci prehodijo, prekolesarijo ali preplujejo v kajakih podnevi, da jo zvečer znova oživijo pod milijoni zvezd.</p>
+
+      <div class="trail-layout">
+
+        <div class="trail-stops">
+          <h3 style="margin-bottom:1.5rem; color: var(--navy-mid);">Predlagane postaje</h3>
+
+          <div class="trail-stop">
+            <div class="stop-marker">01</div>
+            <div class="stop-content">
+              <h4>Metlika — Grič</h4>
+              <p>Vstopna točka: informacijski center, izposoja daljnogledov, gostinska ponudba. Pogled na Kolpo in hrvaški breg Ozlja.</p>
+            </div>
+          </div>
+
+          <div class="trail-stop">
+            <div class="stop-marker">02</div>
+            <div class="stop-content">
+              <h4>Primostek — ob reki</h4>
+              <p>Osrednja postaja: leseno zavetišče z dvema teleskopoma, ploščad za astrofotografijo. Ob rečnem zalivu z odsevom zvezd.</p>
+            </div>
+          </div>
+
+          <div class="trail-stop">
+            <div class="stop-marker">03</div>
+            <div class="stop-content">
+              <h4>Učakovci — kmetija + zvezde</h4>
+              <p>Gastro-zvezdna postaja: večerja v odprti kleti, opazovanje Rimske ceste z bližnjega hriba. Partnerstvo z vinogradniškim turizmom.</p>
+            </div>
+          </div>
+
+          <div class="trail-stop">
+            <div class="stop-marker">04</div>
+            <div class="stop-content">
+              <h4>Podzemelj — kampirna postaja</h4>
+              <p>Nočitvena točka: glamping ali avtokamp z nocturnal-friendly osvetlitvijo. Jutranja opazovalna seansa (Venera, Luna).</p>
+            </div>
+          </div>
+
+          <div class="trail-stop">
+            <div class="stop-marker">05</div>
+            <div class="stop-content">
+              <h4>Dragatuš — vrh poti</h4>
+              <p>Zaključna točka: razgledna ploščad z najtemnejšim nebom na trasi, razdalja od vseh naselij zagotavlja SQM &gt;21.</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="pod-visual">
+            <p class="pod-visual-title">Tipično zavetišče (pod)</p>
+            <ul class="pod-features">
+              <li>Lesena ali CLT konstrukcija — minimalni ekološki odtis</li>
+              <li>Refraktorski teleskop 80–102mm + GoTo montaža</li>
+              <li>Rdeča svetloba (ne bela!) za ohranitev nočnega vida</li>
+              <li>QR-kod vodič: zvezde te noči, mitologije ozvezdij</li>
+              <li>Priročni ležalniki za opazovanje Rimske ceste leže</li>
+              <li>Dvojezično (SLO/HR) interpretativno besedilo</li>
+              <li>Solarni panel + baterija za napajanje teleskopa</li>
+              <li>Dostopno za invalidne osebe (vsaj 2 od 5 postaj)</li>
+            </ul>
+          </div>
+
+          <div class="ida-box">
+            <h3>IDA Dark Sky Park certifikat</h3>
+            <p>
+              <strong style="color: var(--gold);">DarkSky International</strong> (bivša IDA) podeljuje certifikate Dark Sky Park in Dark Sky Reserve. Hrvašká Petrova gora — le 40 km oddaljená — je certificirana že od 2019. Bela Krajina bi bila <strong style="color: var(--gold);">prva certifikatibilna lokacija v Slovenji</strong>.
+            </p>
+            <p>Postopek traja 1–3 leta. Zahteve: svetlobna politika občine, merjenje SQM, izobraževalni program.</p>
+            <div class="ida-steps">
+              <span class="ida-step">1. SQM meritve</span>
+              <span class="ida-step">2. Svetlobna politika</span>
+              <span class="ida-step">3. Vloga IDA</span>
+              <span class="ida-step">4. Certifikat</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       GASTRO COMPONENT
+       ============================================================ -->
+  <section class="section gastro-section" id="gastro">
+    <div class="container">
+      <span class="section-label">Gastro komponenta · Taste of Kolpa</span>
+      <h2>Okus Kolpe</h2>
+      <p>Lokalna kulinarika Bele Krajine je bogata in premalo vrednotena. Kolpska postrv (39 vrst rib v reki!), belokranjska pogača s TSG statusom EU, metliška črnina in črnič — to so sestavine mednarodne gastronomske identitete, ki čaka na ustrezno platformo.</p>
+
+      <div class="gastro-grid">
+        <div class="gastro-card">
+          <span class="gastro-card-icon">🐠</span>
+          <h4>Kolpska postrv</h4>
+          <p>Potočna postrv (Salmo trutta) in lipan iz neonesnaženega alpskega potoka. Ribiška tradicija ob Kolpi sega stoletja nazaj. Živo ujeta, na žaru — osrednji element večernega menija.</p>
+        </div>
+
+        <div class="gastro-card">
+          <span class="gastro-card-icon">🍞</span>
+          <h4>Belokranjska pogača</h4>
+          <p>TSG zaščita EU (Tradicionalna zajamčena posebnost). Okrogel, hrustljav kruh z oljčnim oljem in soljo — simbol Bele Krajine na mednarodnem jedilniku.</p>
+        </div>
+
+        <div class="gastro-card">
+          <span class="gastro-card-icon">🍷</span>
+          <h4>Metliška črnina &amp; črnič</h4>
+          <p>PTP zaščiteno belokranjsko rdeče vino iz modre frankinje. Peneče vino in pozne trgatve iz prvih vinogradov nad Metliko (1968). Edinstvena sorta tega kotičke Evrope.</p>
+        </div>
+
+        <div class="gastro-card">
+          <span class="gastro-card-icon">🌿</span>
+          <h4>Divji zelišča &amp; med</h4>
+          <p>Šetraj, bezeg, divji česen, materina dušica — zbrana v hribih za Kolpo. Čebelarstvo in zeliščarstvo sta ena glavnih poklicev v regiji; zeliščne rakije iz hišnih receptur.</p>
+        </div>
+
+        <div class="gastro-card">
+          <span class="gastro-card-icon">🧀</span>
+          <h4>Mlečni in mesni izdelki</h4>
+          <p>Klarificano maslo, jagnjetina, domači sir in sušeno meso — ponudba domačih kmetij, dostopnih za vključitev v produkt "Okus Kolpe".</p>
+        </div>
+      </div>
+
+      <div class="label-box">
+        <h3>"Okus Kolpe" — lokalna blagovna znamka</h3>
+        <p>
+          Na podlagi obstoječe platforme <strong>Bela Krajina Finest</strong> (ki že združuje lokalne pridelovalce) projekt vzpostavi posebno oznako <strong>Okus Kolpe / Taste of Kolpa</strong> — certifikat, ki zagotavlja, da je sestavina/produkt pridelana v razdalji 30 km od reke Kolpe. Vključeni partnerji:
+        </p>
+        <div style="margin-top: 1rem;">
+          <span class="label-tag">Restavracija Vir ob Kolpi</span>
+          <span class="label-tag">Big Berry / Kamp Kolpa</span>
+          <span class="label-tag">Kmetija Zupančič</span>
+          <span class="label-tag">Klet Šturm, Metlika</span>
+          <span class="label-tag">Zeliščna kmetija</span>
+          <span class="label-tag">Čebelarska zadruga BK</span>
+          <span class="label-tag">Ribiška zveza Bela Krajina</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FESTIVAL CIRCUIT
+       ============================================================ -->
+  <section class="section festival-section" id="festival">
+    <div class="container">
+      <span class="section-label">Festival · Tridnevni program</span>
+      <h2>Zvezdna pot — festival</h2>
+      <p>Enkrat letno (predlog: oktober — mesec temnih noči, pred zimskim časom) se mreža zbudi v tridnevni festival. Program je zasnovan kot "slow festival" — ne množičen rave, ampak globoka izkušnja za 300–500 obiskovalcev na dan, s poudarkom na kakovosti, ne kvantiteti.</p>
+
+      <div class="festival-days">
+        <div class="festival-day day-1">
+          <div class="festival-day-header">Dan 1 — Noč odprja nebo</div>
+          <div class="festival-day-body">
+            <ul>
+              <li>Odprtje zvezdne poti — skupinski pohod ob sončnem zahodu</li>
+              <li>Uvodni teleskopski seji z astronomom</li>
+              <li>Kmečka večerja pod zvezdami (Okus Kolpe meni)</li>
+              <li>Astrofotografska delavnica za začetnike</li>
+              <li>Živa glasba: folk in ambiental ob reki</li>
+              <li>Opazovanje meteorskega roja (sezonsko)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="festival-day day-2">
+          <div class="festival-day-header">Dan 2 — Okus in tradicija</div>
+          <div class="festival-day-body">
+            <ul>
+              <li>Gastronomski sejem: pridelovalci Bele Krajine</li>
+              <li>Delavnica: ribolov, čiščenje in priprava postrvi</li>
+              <li>Vinotoč &amp; pokušina: metliška črnina + zeliščne rakije</li>
+              <li>Predstavitev "Okus Kolpe" certifikata</li>
+              <li>Otroci: delavnica o zvezdnem nebu + lutkovna igra</li>
+              <li>Večerja z otvorenim ognjem ob reki</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="festival-day day-3">
+          <div class="festival-day-header">Dan 3 — Meja brez meja</div>
+          <div class="festival-day-body">
+            <ul>
+              <li>Čezmejni kajakaški izlet: SI do HR brega (Ozalj)</li>
+              <li>Skupno kosilo: SI + HR kuharji, lokalni pridelki</li>
+              <li>Hrvaška astronomska druščina: Beskraj-Petrova gora</li>
+              <li>Okrogla miza: certificiranje temnega neba za celotno Kolpo</li>
+              <li>Zaključno: gašenje luči ob Kolpi — minuta teme in zvezd</li>
+              <li>Povzetek festivala, napoved mesta prihodnje leto</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="rotation-box">
+        <div class="rotation-location">
+          <span class="rotation-flag">🇸🇮</span>
+          <span class="rotation-name">Metlika</span>
+          <span class="rotation-country">Slovenija · Leto 1, 3, 5…</span>
+        </div>
+        <div class="rotation-arrow">⇄</div>
+        <div class="rotation-location">
+          <span class="rotation-flag">🇭🇷</span>
+          <span class="rotation-name">Ozalj</span>
+          <span class="rotation-country">Hrvaška · Leto 2, 4, 6…</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       LAS DBK ALIGNMENT
+       ============================================================ -->
+  <section class="section alignment-section" id="alignment">
+    <div class="container">
+      <span class="section-label">Ujemanje s strategijo · LAS DBK Strategic Fit</span>
+      <h2>Ujemanje s strategijo LAS DBK 2021–2027</h2>
+      <p>LAS DBK pokriva občine Dolenjske in Bele Krajine z skupnim LEADER/CLLD proračunom €4,073M za period 2021–2027. Projekt "Zvezdna pot ob Kolpi" se neposredno ujema z naslednjimi prioritetami:</p>
+
+      <div style="overflow-x: auto; margin-top: 0.5rem;">
+        <table class="alignment-table">
+          <thead>
+            <tr>
+              <th>Prioritetna os LAS DBK</th>
+              <th>Sklad</th>
+              <th>Ujemanje projekta</th>
+              <th>Ocena</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Trajnostni turizem in razvoj podeželja</td>
+              <td>ESRR</td>
+              <td>Zvezdna pot, festivalski turizem, off-season razvoj</td>
+              <td><span class="fit-pill fit-strong">Odlično</span></td>
+            </tr>
+            <tr>
+              <td>Lokalni prehrambeni sistemi in kmetijstvo</td>
+              <td>EKSRP</td>
+              <td>"Okus Kolpe" blagovna znamka, postrv, vino, zelišča</td>
+              <td><span class="fit-pill fit-strong">Odlično</span></td>
+            </tr>
+            <tr>
+              <td>Varstvo narave in naravna dediščina</td>
+              <td>ESRR</td>
+              <td>Zaščita temnega neba, dark sky zavetišča z min. odtisom</td>
+              <td><span class="fit-pill fit-strong">Odlično</span></td>
+            </tr>
+            <tr>
+              <td>Kulturna dediščina in identiteta regije</td>
+              <td>ESRR</td>
+              <td>Astronomska in kulinarična identiteta Bele Krajine</td>
+              <td><span class="fit-pill fit-good">Dobro</span></td>
+            </tr>
+            <tr>
+              <td>Socialna vključenost in skupnostni razvoj</td>
+              <td>ESS+</td>
+              <td>Delavnice, izobraževanje, otroci, lokalne skupnosti</td>
+              <td><span class="fit-pill fit-good">Dobro</span></td>
+            </tr>
+            <tr>
+              <td>Digitalizacija in inovacije v podeželju</td>
+              <td>ESRR</td>
+              <td>QR-koda vodič, digitalni astro-priročnik, spletna prodaja</td>
+              <td><span class="fit-pill fit-good">Dobro</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       REQUIREMENTS TO APPLY
+       ============================================================ -->
+  <section class="section requirements-section" id="requirements">
+    <div class="container">
+      <span class="section-label">Pogoji prijave · Requirements to Apply</span>
+      <h2>Kdo, kako in kaj je potrebno</h2>
+
+      <div class="req-grid">
+        <div class="req-card">
+          <h3>Upravičeni prijavitelji</h3>
+          <ul class="checklist">
+            <li>Turistično društvo ali nevladna organizacija (NGO)</li>
+            <li>Lokalna akcijska skupina (LAS DBK sama)</li>
+            <li>Konzorcij: združeni prijavitelj + partnerji</li>
+            <li>Občina Metlika, Črnomelj ali Semič</li>
+            <li class="warn">Zasebno podjetje samo za določene aktivnosti</li>
+            <li class="note">Priporočen vodilni partner: Turistično društvo BK</li>
+          </ul>
+        </div>
+
+        <div class="req-card">
+          <h3>Financiranje &amp; sofinanciranje</h3>
+          <ul class="checklist">
+            <li>EU prispevek: do 80% upravičenih stroškov (ESRR)</li>
+            <li>Lastni delež: min. 20% — zagotovi občina ali TD</li>
+            <li>Skupna vrednost projekta: €5,000 – €200,000</li>
+            <li>Predhodna plačila ne — strošek najprej plačaš, nato zahtevaš refundacijo</li>
+            <li class="warn">Obvezno predfinanciranje — poskrbi za likvidnost!</li>
+            <li class="note">Možno: občinska posojila za premostitev</li>
+          </ul>
+        </div>
+
+        <div class="req-card">
+          <h3>Upravičeni stroški (ESRR)</h3>
+          <ul class="checklist">
+            <li>Gradnja in oprema (zavetišča, teleskopi, signalizacija)</li>
+            <li>Trženje in promocija (znamka, splet, tisk)</li>
+            <li>Organizacija prireditev in festivalov</li>
+            <li>Izobraževanje in delavnice za lokalne deležnike</li>
+            <li>Strokovno svetovanje in upravljanje projekta</li>
+            <li class="warn">NI upravičeno: tekočI stroški organizacije, DDV (za zavezance)</li>
+          </ul>
+        </div>
+
+        <div class="req-card">
+          <h3>Obvezna dokumentacija</h3>
+          <ul class="checklist">
+            <li>Projektna vloga z opisom aktivnosti in ciljev</li>
+            <li>Projektni finančni načrt (stroškovnik)</li>
+            <li>Dokazilo o sofinanciranju (sklepna pismo občine/banke)</li>
+            <li>Partnerske pogodbe za vse partnerje</li>
+            <li>Pismo namere od vsaj 2 ključnih partnerjev</li>
+            <li>Potrdilo o registraciji vodilnega partnerja</li>
+            <li class="note">Vsa dokumentacija: slo + EN za čezmejne el.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TIMELINE
+       ============================================================ -->
+  <section class="section timeline-section" id="timeline">
+    <div class="container">
+      <span class="section-label">Faze projekta · Project Phases</span>
+      <h2>Pot do zvezd</h2>
+      <p style="color: rgba(255,255,255,0.65); margin-bottom: 0.5rem;">Predlagana časovnica 24 mesecev, od potrditve vloge do prvega festivala.</p>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-phase">Faza 0 — Pred vlogo</div>
+          <h3>Dark sky assessment + konzultacije</h3>
+          <p>SQM (Sky Quality Meter) meritve na 5 lokacijah vzdolž Kolpe. Konzultacija z astronomskim društvom. Pregled svetlobne politike v treh občinah. Uvodni pogovor z LAS DBK o razpisnih pogojih. Partnerska pisma od ključnih deležnikov.</p>
+          <span class="timeline-duration">3–4 mesece pred oddajo vloge</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-phase">Faza 1 — Mese 1–4</div>
+          <h3>Projekt + načrtovanje poti</h3>
+          <p>Arhitekturni načrti za 5 zavetišč (minimalni, biorazgradljivi materiali). Določitev 5 lokacij na terenu — dogovor z lastniki zemljišč. Načrt zelišč in gastro partnerjev. Vzpostavitev upravljavske strukture projekta. Izvedba 1. partnerskega srečanja (SI + HR).</p>
+          <span class="timeline-duration">4 mesece</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-phase">Faza 2 — Meseci 5–12</div>
+          <h3>Gradnja zavetišč + signalizacija</h3>
+          <p>Konstrukcija 5 lesenih opazovalnih zavetišč. Postavitev teleskopov in opreme. Oblikovanje in postavitev interpretativnih panojev (SLO/HR/EN). Montaža dark-sky-friendly zunanjih svetil. Testiranje z astronomskim društvom (nočni test).</p>
+          <span class="timeline-duration">8 mesecev</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-phase">Faza 3 — Meseci 8–15</div>
+          <h3>Gastro mreža + "Okus Kolpe" certifikat</h3>
+          <p>Razvoj specifikacij za blagovno znamko "Okus Kolpe". Vključitev 6–8 kmetij in restavracij. Oblikovanje paketa "noč + večerja" (pricing, rezervacijski sistem). Fotografska in videoprodukcija za promocijo. Digitalni vodnik (spletna stran + QR).</p>
+          <span class="timeline-duration">8 mesecev (vzporedno s Fazo 2)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-phase">Faza 4 — Mesec 18–24</div>
+          <h3>1. festival "Zvezdna pot ob Kolpi"</h3>
+          <p>Priprava programa tridnevnega festivala v Metliki. Marketinška kampanja (SI + HR trg). Tisk in digitalna promocija. Izvedba festivala — oktober 2027. Evalvacija in poročilo za LAS DBK. Vloga za IDA dark sky park certifikat.</p>
+          <span class="timeline-duration">6 mesecev + event</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BUDGET BREAKDOWN
+       ============================================================ -->
+  <section class="section budget-section" id="budget">
+    <div class="container">
+      <span class="section-label">Finančni načrt · Budget Breakdown</span>
+      <h2>Finančni pregled</h2>
+
+      <div class="budget-total">€90,000</div>
+      <p>Skupna vrednost projekta · 80% ESRR + 20% lastni vir</p>
+
+      <div class="budget-bars">
+
+        <div class="budget-bar-item">
+          <div class="budget-bar-header">
+            <span class="budget-bar-label">Gradnja &amp; oprema — 5 opazovalnih zavetišč</span>
+            <span><span class="budget-bar-amount">€34,000</span><span class="budget-bar-pct">(37.8%)</span></span>
+          </div>
+          <div class="budget-bar-track">
+            <div class="budget-bar-fill fill-navy" style="width: 37.8%"></div>
+          </div>
+        </div>
+
+        <div class="budget-bar-item">
+          <div class="budget-bar-header">
+            <span class="budget-bar-label">Teleskopi, montaže &amp; astronomska oprema</span>
+            <span><span class="budget-bar-amount">€12,000</span><span class="budget-bar-pct">(13.3%)</span></span>
+          </div>
+          <div class="budget-bar-track">
+            <div class="budget-bar-fill fill-purple" style="width: 13.3%"></div>
+          </div>
+        </div>
+
+        <div class="budget-bar-item">
+          <div class="budget-bar-header">
+            <span class="budget-bar-label">Signalizacija, panoji, dark-sky razsvetljava</span>
+            <span><span class="budget-bar-amount">€8,000</span><span class="budget-bar-pct">(8.9%)</span></span>
+          </div>
+          <div class="budget-bar-track">
+            <div class="budget-bar-fill fill-gold" style="width: 8.9%"></div>
+          </div>
+        </div>
+
+        <div class="budget-bar-item">
+          <div class="budget-bar-header">
+            <span class="budget-bar-label">Gastro branding — "Okus Kolpe" (logotip, certifikat, tisk, web)</span>
+            <span><span class="budget-bar-amount">€9,000</span><span class="budget-bar-pct">(10.0%)</span></span>
+          </div>
+          <div class="budget-bar-track">
+            <div class="budget-bar-fill fill-terra" style="width: 10%"></div>
+          </div>
+        </div>
+
+        <div class="budget-bar-item">
+          <div class="budget-bar-header">
+            <span class="budget-bar-label">Festival — organizacija, produkcija, marketing (2× leti)</span>
+            <span><span class="budget-bar-amount">€16,000</span><span class="budget-bar-pct">(17.8%)</span></span>
+          </div>
+          <div class="budget-bar-track">
+            <div class="budget-bar-fill fill-terra" style="width: 17.8%"></div>
+          </div>
+        </div>
+
+        <div class="budget-bar-item">
+          <div class="budget-bar-header">
+            <span class="budget-bar-label">Upravljanje projekta, koordinacija, poročanje</span>
+            <span><span class="budget-bar-amount">€7,000</span><span class="budget-bar-pct">(7.8%)</span></span>
+          </div>
+          <div class="budget-bar-track">
+            <div class="budget-bar-fill fill-sage" style="width: 7.8%"></div>
+          </div>
+        </div>
+
+        <div class="budget-bar-item">
+          <div class="budget-bar-header">
+            <span class="budget-bar-label">SQM meritve, IDA vloga, dark sky konzultant</span>
+            <span><span class="budget-bar-amount">€4,000</span><span class="budget-bar-pct">(4.4%)</span></span>
+          </div>
+          <div class="budget-bar-track">
+            <div class="budget-bar-fill fill-purple" style="width: 4.4%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="co-finance-note">
+        <strong>Sofinanciranje:</strong> EU ESRR krije 80% = €72,000. Lastni delež 20% = €18,000 — prispevek občine Metlika ali konzorcija partnerjev. Skupna vrednost projekta: €90,000. Razpon javnega poziva LAS DBK: €5,000 – €200,000 — ta projekt leži v optimalnem koridorju.
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PARTNERS
+       ============================================================ -->
+  <section class="section partners-section" id="partners">
+    <div class="container">
+      <span class="section-label">Partnerji · Project Partners</span>
+      <h2>Kdo gradi to pot</h2>
+
+      <div class="partners-grid">
+
+        <div class="partner-card">
+          <span class="partner-role">Vodilni partner</span>
+          <span class="partner-name">Turistično društvo Bela Krajina</span>
+          <p class="partner-desc">Koordinacija projekta, upravljanje poti, stik z obiskovalci. Izkušnje z lokalnim turizmom in poznanstvo deležnikov.</p>
+        </div>
+
+        <div class="partner-card">
+          <span class="partner-role">Sofinancer + zemlja</span>
+          <span class="partner-name">Občine Metlika, Črnomelj, Semič</span>
+          <p class="partner-desc">Lastni delež sofinanciranja, dostop do javnih zemljišč ob Kolpi, podpora pri svetlobni politiki za IDA certifikat.</p>
+        </div>
+
+        <div class="partner-card">
+          <span class="partner-role">Strokovna podpora</span>
+          <span class="partner-name">Astronomsko društvo (Novo Mesto ali Ljubljana)</span>
+          <p class="partner-desc">SQM meritve, IDA vloga, vodene opazovalne seanse, izobraževalni program za obiskovalce in lokalne šole.</p>
+        </div>
+
+        <div class="partner-card">
+          <span class="partner-role">Gastro mreža</span>
+          <span class="partner-name">Lokalne kmetije in restavracije</span>
+          <p class="partner-desc">Kmetija Zupančič (postrv), Klet Šturm (vino), zeliščne in čebelarske kmetije — nosilci blagovne znamke Okus Kolpe.</p>
+        </div>
+
+        <div class="partner-card">
+          <span class="partner-role">Čezmejni partner</span>
+          <span class="partner-name">Turistička zajednica Ozalj (HR)</span>
+          <p class="partner-desc">Soorganizator festivala v hrvaških sodnih — Karlovačka županija. Dostop do hrvaških obiskovalcev in medijev.</p>
+        </div>
+
+        <div class="partner-card">
+          <span class="partner-role">Certificirani zgled</span>
+          <span class="partner-name">Beskraj Astron. Društvo — Petrova gora</span>
+          <p class="partner-desc">Hrvaška astronomska organizacija, ki je pridobila 1. IDA certifikat za HR (2019). Mentorstvo in model dobre prakse.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CROSS-BORDER OPPORTUNITY
+       ============================================================ -->
+  <section class="section crossborder-section" id="crossborder">
+    <div class="container">
+      <span class="section-label">Čezmejni potencial · Cross-Border Opportunity</span>
+      <h2>Reka brez meja</h2>
+      <p>Kolpa ni le geografska meja — je skupna naravna dediščina Slovencev in Hrvatov. Ozalj leži le 25 km od Metlike; njuna reka je ista, njun zvezdnat nebo je skupen.</p>
+
+      <div class="crossborder-benefits">
+        <div class="cb-benefit">
+          <h4>Petrova gora — bližnji IDA zgled</h4>
+          <p>Prva IDA certificirana lokacija v HR (2019, Beskraj društvo) leži 40 km od Metlike. Neposredna vzporednica: Bela Krajina bi bila prva v SLO. Skupno trženje mogočnih mest.</p>
+        </div>
+        <div class="cb-benefit">
+          <h4>Interreg SI-HR možnost</h4>
+          <p>Projekt je dovolj majhen za LAS DBK ESRR, a dovolj mednaroden za kasnejšo Interreg prijavo za skupno dark sky certifikacijo celotnega Kolpa / Kupa koridorja.</p>
+        </div>
+        <div class="cb-benefit">
+          <h4>Hrvaški trg = novi obiskovalci</h4>
+          <p>Karlovčani in Zagrepčani pogosto ne poznajo belokranjske kulinarike. Festival v Ozlju je naravni vstop: oni pridejo po festival, ostanejo za Metliko.</p>
+        </div>
+        <div class="cb-benefit">
+          <h4>Skupna blagovna znamka "Kolpa / Kupa"</h4>
+          <p>Dolgoročni cilj: skupna certifikacija Dark Sky Reserve za celoten Kolpa/Kupa koridorje (SI + HR skupaj) — to bi bila ena večjih takšnih pobud v regiji.</p>
+        </div>
+      </div>
+
+      <div class="petrova-note">
+        <h3>Petrova gora — model za Belo Krajino</h3>
+        <p>
+          Petrova gora (Karlovačka županija, HR) je dobila status <strong>International Dark Sky Park</strong> leta 2019 po več kot desetih letih dela astronomskega društva Beskraj. Certifikat je prinesel mednarodni medijski interes, porast astro-turizma in zakonsko zaščito temnega neba na območju parka. Razdalja od Metlike: <strong>~40 km</strong>. Skupaj bi obe lokaciji tvorili eno od redkih čezmejnih dark sky destinacij v Srednji Evropi.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       NEXT STEPS
+       ============================================================ -->
+  <section class="section nextsteps-section" id="nextsteps">
+    <div class="container">
+      <span class="section-label">Naslednji koraki · Next Steps</span>
+      <h2>Od ideje do vloge</h2>
+      <p>Preden pošljemo karkoli na LAS DBK, moramo opraviti naslednje konkretne korake. Začni takoj z dark sky oceno — ostalo sledi.</p>
+
+      <ol class="steps-list">
+
+        <li>
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Kontaktiraj LAS DBK <span class="priority-badge">Takoj</span></h4>
+            <p>Pokliči LAS DBK (las-dbk.si) in preveri, kdaj je naslednji javni poziv za ESRR projekte. Vprašaj o konzultaciji pred prijavo — ponujajo brezplačno svetovanje prijaviteljem. Tel. na spletni strani.</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Dark sky assessment — SQM meritve <span class="priority-badge">1. mesec</span></h4>
+            <p>Kontaktiraj katero koli astronomsko društvo v SLO (Ljubljana, Novo Mesto) in jih prosi za SQM (Sky Quality Meter) meritve na Kolpi. To je brezplačno ali za simbolično povračilo stroškov. Rezultat ti pove, ali je nebo dovolj temno za IDA certifikat.</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Partnerski pogovori s TD Bela Krajina</h4>
+            <p>Turistično društvo Bela Krajina je najprimernejši vodilni partner. Preveri interes za projekt in možnost skupne vloge. Ugotovi, ali imajo izkušnje z LAS projektno administracijo.</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Pogovor z občino Metlika — sofinanciranje</h4>
+            <p>20% lastni delež (€18,000) mora nekdo zagotoviti. Občina Metlika ali Črnomelj je naravni partner. Pripravi kratek 1-strani povzetek projekta za župana ali za svet. Prosi za pismo namere (Letter of Intent) — to boš potreboval za vlogo.</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h4>Kontaktiraj hrvaške partnerje (Ozalj)</h4>
+            <p>Turistička zajednica Ozalj (visitozalj.hr) in Beskraj astronomsko društvo za Petrovo goro. Sestanek ni nujno formalen — neformalni pogovor o skupni viziji je dovolj za prvo fazo.</p>
+          </div>
+        </li>
+
+        <li>
+          <div class="step-number">6</div>
+          <div class="step-content">
+            <h4>Pripravi projektno vlogo</h4>
+            <p>Ko imaš: SQM rezultate, TD kot partnerja, pismo namere od občine in neformalni dogovor s HR — si pripravljen na vlogo. LAS DBK bo pomagal z obrazci. Rok oddaje: preveriti na las-dbk.si.</p>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-title">Zvezdna pot ob Kolpi</p>
+      <p class="footer-subtitle">Kolpa Night Sky &amp; Gastro-River Festival Circuit</p>
+
+      <div class="footer-divider"></div>
+
+      <p class="footer-meta">
+        Pripravljeno za namene idejnega načrtovanja — март 2026, Bela Krajina<br>
+        <em>Prepared for brainstorming purposes — March 2026, Bela Krajina</em>
+      </p>
+
+      <p class="footer-meta" style="margin-top: 0.75rem;">
+        Program: LEADER/CLLD 2021–2027<br>
+        LAS Dolenjska in Bela krajina (LAS DBK) · <span style="color: rgba(201,153,58,0.6);">las-dbk.si</span><br>
+        ESRR · Skupni proračun LAS DBK: €4,073M
+      </p>
+
+      <div class="footer-divider"></div>
+
+      <p class="footer-las">
+        Ta dokument ne predstavlja uradne vloge ali zaveze s strani katerekoli institucije.<br>
+        Podatki o financiranju so okvirni in podvrženi pogojem aktualnih razpisov.<br>
+        This document is a preliminary brainstorm brief, not an official application.
+      </p>
+
+      <p style="margin-top: 1.5rem; font-size: 0.65rem; color: rgba(255,255,255,0.15); letter-spacing: 0.1em; text-transform: uppercase;">
+        Projekt #07 iz serije 7 LAS DBK idejnih predlogov
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

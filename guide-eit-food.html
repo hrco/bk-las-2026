@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EIT Food RIS 2026 — Navodila za prijavo | BK LAS 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --surface2: #1c2330; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --green: #3fb950; --yellow: #d29922; --orange: #f0883e; --red: #f85149;
+    --purple: #bc8cff; --teal: #14b8a6; --teal-light: #5eead4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+  .header {
+    background: linear-gradient(135deg, #0d2626 0%, #134040 50%, #0d3030 100%);
+    border-bottom: 3px solid var(--teal-light); padding: 40px 20px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.12) 0%, transparent 60%);
+  }
+  .header-badge {
+    display: inline-block; background: rgba(20,184,166,0.25); border: 1px solid var(--teal-light);
+    color: var(--teal-light); font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 16px; position: relative;
+  }
+  .header h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(22px, 4vw, 40px); font-weight: 700; color: #fff; position: relative; margin-bottom: 8px; }
+  .header .subtitle { font-size: 16px; color: var(--teal-light); position: relative; margin-bottom: 24px; }
+  .header-meta { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; }
+  .meta-chip { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .meta-chip .label { color: var(--muted); }
+  .meta-chip .value { color: #fff; font-weight: 600; }
+
+  .urgent-banner { background: linear-gradient(90deg, #1a1200, #2d2000, #1a1200); border: 1px solid var(--yellow); border-radius: 10px; padding: 16px 20px; margin: 24px auto; max-width: 900px; display: flex; align-items: center; gap: 16px; }
+  .urgent-text strong { color: var(--yellow); font-size: 15px; }
+  .urgent-text p { color: var(--text); font-size: 13px; margin-top: 4px; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+  .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 13px; border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; margin-bottom: 30px; transition: all 0.2s; }
+  .nav-back:hover { color: var(--text); border-color: var(--accent); }
+
+  .section { margin-bottom: 40px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--teal-light); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; }
+  .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .kv { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid rgba(48,54,61,0.5); padding-bottom: 8px; }
+  .kv:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .kv .k { color: var(--muted); font-size: 13px; }
+  .kv .v { color: var(--text); font-size: 13px; font-weight: 500; text-align: right; max-width: 55%; }
+
+  .step-list { counter-reset: steps; }
+  .step { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 20px; padding: 16px; background: var(--surface2); border-radius: 10px; border-left: 3px solid var(--teal-light); }
+  .step-num { width: 32px; height: 32px; min-width: 32px; background: var(--teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: #fff; }
+  .step-num::before { content: counter(steps); }
+  .step-content h4 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .step-content p, .step-content ul { font-size: 13px; color: var(--muted); }
+  .step-content ul { padding-left: 16px; margin-top: 6px; }
+  .step-content li { margin-bottom: 4px; }
+  .step-content a { color: var(--accent); }
+  .step-content strong { color: var(--text); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .tag-teal { background: rgba(20,184,166,0.15); color: var(--teal-light); border: 1px solid rgba(20,184,166,0.3); }
+  .tag-orange { background: rgba(240,136,62,0.15); color: var(--orange); border: 1px solid rgba(240,136,62,0.3); }
+  .tag-blue { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+  .tag-yellow { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); }
+
+  .info-box { background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.25); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; }
+  .info-box strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 14px; }
+
+  .teal-box { background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.3); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; }
+  .teal-box strong { color: var(--teal-light); display: block; margin-bottom: 6px; font-size: 14px; }
+
+  .warn-box { background: rgba(210,153,34,0.08); border: 1px solid rgba(210,153,34,0.3); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; color: #deba7a; }
+  .warn-box strong { color: var(--yellow); display: block; margin-bottom: 6px; }
+
+  .contact-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .contact-card p { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .contact-card a { color: var(--accent); }
+
+  .deadline-banner { background: linear-gradient(135deg, #0d2626, #134040); border: 2px solid var(--teal-light); border-radius: 12px; padding: 20px 24px; text-align: center; margin: 24px 0; }
+  .deadline-banner .deadline-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+  .deadline-banner .deadline-date { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: var(--teal-light); }
+  .deadline-banner .deadline-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .ris-countries { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 16px 0; }
+  .ris-country { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; font-size: 12px; color: var(--text); }
+  .ris-country.si { border-color: rgba(20,184,166,0.5); background: rgba(20,184,166,0.08); }
+  .ris-country.hr { border-color: rgba(88,166,255,0.3); }
+  .ris-country .flag { font-size: 20px; margin-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(48,54,61,0.5); color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+
+  .footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media print { body { background: #fff; color: #000; } .header { background: #0d4040; } .nav-back { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">🥗 EIT Food — Regional Innovation Scheme</div>
+  <h1>EIT Food RIS 2026</h1>
+  <p class="subtitle">Inovacije v prehranskem sistemu za RIS+ države · Slovenija je upravičena · €50k–200k</p>
+  <div class="header-meta">
+    <div class="meta-chip"><span class="label">Program</span><span class="value">EIT Food RIS 2026</span></div>
+    <div class="meta-chip"><span class="label">Predvideni rok</span><span class="value">30. april 2026</span></div>
+    <div class="meta-chip"><span class="label">Razpon</span><span class="value">€50k – €200k</span></div>
+    <div class="meta-chip"><span class="label">EU delež</span><span class="value">do 50%</span></div>
+    <div class="meta-chip"><span class="label">Oblika</span><span class="value">Projektna prijava</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <a href="index.html" class="nav-back">← Nazaj na pregled</a>
+
+  <div class="urgent-banner">
+    <div style="font-size:28px">🥗</div>
+    <div class="urgent-text">
+      <strong>EIT Food RIS 2026 — Rok: ~30. april 2026</strong>
+      <p>EIT Food vsako leto odpira RIS razpis za inovacije v hrani. Slovenija je RIS+ država — to pomeni prioritetno obravnavo. Preveri <a href="https://www.eitfood.eu/ris" target="_blank" style="color:var(--accent)">eitfood.eu/ris</a> za aktualni razpis.</p>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <h2 class="section-title">📋 Kaj je EIT Food RIS?</h2>
+    <div class="card">
+      <div class="kv"><span class="k">Organizacija</span><span class="v">EIT Food (European Institute of Innovation & Technology)</span></div>
+      <div class="kv"><span class="k">Program</span><span class="v">Regional Innovation Scheme (RIS) — za manj razvite EU regije</span></div>
+      <div class="kv"><span class="k">Slovenija</span><span class="v">RIS+ država — upravičena do višje pomoči</span></div>
+      <div class="kv"><span class="k">Fokus</span><span class="v">Inovacije v prehranskem sistemu — od kmetije do krožnika</span></div>
+      <div class="kv"><span class="k">Min. vrednost projekta</span><span class="v">€50.000</span></div>
+      <div class="kv"><span class="k">Max. vrednost projekta</span><span class="v">€200.000</span></div>
+      <div class="kv"><span class="k">EU sofinanciranje</span><span class="v">do 50% (RIS+ do 60%)</span></div>
+      <div class="kv"><span class="k">Trajanje projekta</span><span class="v">12–18 mesecev</span></div>
+    </div>
+
+    <div class="teal-box">
+      <strong>Zakaj je EIT Food idealen za Belo krajino?</strong>
+      EIT Food RIS financira <em>inovativne prehransko-kmetijske koncepte</em> v regijah z nižjim inovacijskim indeksom. Bela krajina ima enkratne prehranske produkte (Belokranjska pogača TSG, Metliška črnina PTP, belokranjska čebula, lokalni med) — to je natanko tisto, kar EIT Food želi razvijati: lokalna identiteta + tržna inovacija + digitalizacija prehranskega sistema.
+    </div>
+  </div>
+
+  <!-- RIS+ COUNTRIES -->
+  <div class="section">
+    <h2 class="section-title">🗺️ RIS+ države — Slovenija je vključena</h2>
+    <div class="ris-countries">
+      <div class="ris-country si"><div class="flag">🇸🇮</div><strong>Slovenija</strong><br>RIS+</div>
+      <div class="ris-country hr"><div class="flag">🇭🇷</div>Hrvaška<br>RIS+</div>
+      <div class="ris-country"><div class="flag">🇷🇴</div>Romunija<br>RIS</div>
+      <div class="ris-country"><div class="flag">🇧🇬</div>Bolgarija<br>RIS</div>
+      <div class="ris-country"><div class="flag">🇵🇱</div>Poljska<br>RIS</div>
+      <div class="ris-country"><div class="flag">🇸🇰</div>Slovaška<br>RIS</div>
+      <div class="ris-country"><div class="flag">🇭🇺</div>Madžarska<br>RIS</div>
+      <div class="ris-country"><div class="flag">🇵🇹</div>Portugalska<br>RIS</div>
+    </div>
+    <div class="info-box">
+      <strong>Prednost RIS+ statusa</strong>
+      SI in HR sta partnerici pri Interreg SI-HR projektih — čezmejna EIT Food prijava SI+HR je izvedljiva in poveča točke. Primer: Zeliščna kmetija (SI) + hrvaški partner (LAG Vallis Colapis, Ozalj) = čezmejna inovacija lokalnih zelišč.
+    </div>
+  </div>
+
+  <!-- TEMATSKA PODROČJA -->
+  <div class="section">
+    <h2 class="section-title">🎯 Tematska področja EIT Food 2026</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>🌿 Trajnostna hrana iz narave</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Divje rastline kot prehranska inovacija ("Blue Food")</li>
+          <li>Fermentacija lokalnih zelišč in rastlin</li>
+          <li>Razvoj novih bio-produktov iz lokalnih virov</li>
+          <li>Kratke prehranske verige (farm-to-fork)</li>
+        </ul>
+        <div class="tags"><span class="tag tag-teal">Idealno za BK</span></div>
+      </div>
+      <div class="card">
+        <h3>🔬 Inovacije v prehranski tehnologiji</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Digitalizacija kmetijstva (precision farming)</li>
+          <li>Zmanjšanje odpadne hrane (food waste)</li>
+          <li>Inovativno pakiranje (biorazgradljivo)</li>
+          <li>Sledljivost pridelkov (blockchain, QR)</li>
+        </ul>
+        <div class="tags"><span class="tag tag-blue">Tech komponenta</span></div>
+      </div>
+      <div class="card">
+        <h3>🎓 Izobraževanje in kapacitete</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Podjetniška izobražev. za mlade v hrani</li>
+          <li>Praktični inkubatorji za preh. startupe</li>
+          <li>Mentorstvo od univerze do trga</li>
+        </ul>
+        <div class="tags"><span class="tag tag-green">Youth Venture Lab</span></div>
+      </div>
+      <div class="card">
+        <h3>🌍 Zdravje in prehrana</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Funkcionalna hrana (adaptogeni, rastlinska zdravila)</li>
+          <li>Zdravi prehranjevalni vzorci v regijah</li>
+          <li>Wellness turizem + lokalna hrana</li>
+        </ul>
+        <div class="tags"><span class="tag tag-orange">Zelišča Kolpe</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONKRETNE IDEJE -->
+  <div class="section">
+    <h2 class="section-title">💡 Konkretne projektne ideje za Belo krajino</h2>
+
+    <div class="card">
+      <h3>🌿 Ideja 1: "Wild Kolpa — Divje rastline Kolpe kot premium prehranski produkt"</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Razvoj linije prehrambenih produktov iz divjih rastlin Kolpe (kopriva, bezeg, divji slez, šentjanževo olje, hmelj) — kombucha, adaptogeni ekstrakti, bio-zeliščne mešanice za horeca trg.</p>
+      <div class="two-col">
+        <div>
+          <div class="kv"><span class="k">Vrednost projekta</span><span class="v">€120.000</span></div>
+          <div class="kv"><span class="k">EU delež (50%)</span><span class="v">€60.000</span></div>
+          <div class="kv"><span class="k">Lastna udeležba</span><span class="v">€60.000</span></div>
+        </div>
+        <div>
+          <div class="kv"><span class="k">Partner</span><span class="v">Biotehniška fakulteta UL</span></div>
+          <div class="kv"><span class="k">Trg</span><span class="v">Premium SI + EU gostinstvo</span></div>
+          <div class="kv"><span class="k">Precedens</span><span class="v">Nordic wild food trend</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag tag-teal">EIT tema: divja hrana</span>
+        <span class="tag tag-green">Kolpa specifično</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🥖 Ideja 2: "Belokranjska pogača 2.0 — Digitalna sledljivost TSG produkta"</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Uvedba blockchain/QR sledljivosti za Belokranjsko pogačo (EU TSG produkt) — od pšeničnega zrna do pečene pogače. Digitalna platforma za direkt prodajo (D2C) + e-commerce za TSG produkte.</p>
+      <div class="two-col">
+        <div>
+          <div class="kv"><span class="k">Vrednost projekta</span><span class="v">€80.000</span></div>
+          <div class="kv"><span class="k">EU delež (50%)</span><span class="v">€40.000</span></div>
+          <div class="kv"><span class="k">Lastna udeležba</span><span class="v">€40.000</span></div>
+        </div>
+        <div>
+          <div class="kv"><span class="k">Partner</span><span class="v">Zadruga + IT partner</span></div>
+          <div class="kv"><span class="k">Trg</span><span class="v">EU TSG certificirani trgi</span></div>
+          <div class="kv"><span class="k">Unikatnost</span><span class="v">EU TSG + digitalizacija</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag tag-blue">EIT tema: digitalizacija</span>
+        <span class="tag tag-teal">TSG produkt</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🌱 Ideja 3: "BK Youth Food Lab — Podjetniški inkubator za prehranske inovatorje"</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Kombinacija z Youth Venture Lab (projekt 05) — EIT Food financira izobraževalno komponento in mentorstvo, LEADER financira fizično infrastrukturo. Mladi do 30 let, fokus na kmetijsko-prehranskih startupih.</p>
+      <div class="two-col">
+        <div>
+          <div class="kv"><span class="k">Vrednost projekta</span><span class="v">€150.000</span></div>
+          <div class="kv"><span class="k">EU delež (50%)</span><span class="v">€75.000</span></div>
+          <div class="kv"><span class="k">Lastna udeležba</span><span class="v">€75.000</span></div>
+        </div>
+        <div>
+          <div class="kv"><span class="k">Partner</span><span class="v">EIT Food + Biotehniška</span></div>
+          <div class="kv"><span class="k">Komplementarno</span><span class="v">05 Youth Venture Lab</span></div>
+          <div class="kv"><span class="k">Stackable</span><span class="v">LEADER + EIT Food</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag tag-green">EIT tema: izobraževanje</span>
+        <span class="tag tag-teal">Youth bonus</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KORAKI -->
+  <div class="section">
+    <h2 class="section-title">📝 Koraki za prijavo EIT Food RIS</h2>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Preveri aktualni razpis na EIT Food portalu</h4>
+          <p><a href="https://www.eitfood.eu/ris" target="_blank">eitfood.eu/ris</a> — tu so objavljeni vsi RIS razpisi, smernice, FAQ.<br>
+          Slovenija ima EIT Food National Contact Point — kontaktiraj ga pred prijavo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Poišči konzorcijskega partnerja</h4>
+          <p>EIT Food RIS zahteva vsaj <strong>2 partnerja</strong>, od tega vsaj 1 z EIT Food omrežjem (univerza, research center, večje podjetje).<br>
+          Priporoča se: <strong>Biotehniška fakulteta (UL)</strong> ali <strong>Inštitut za nutricionistiko</strong> kot akademski partner.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Registriraj se na EIT Community portal</h4>
+          <p>Portal: <a href="https://community.eit.eu" target="_blank">community.eit.eu</a><br>
+          Registracija je predpogoj za oddajo prijave. Vsak partner potrebuje profil.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pripravi projektno prijavo</h4>
+          <p>Standardna EIT Food prijava vsebuje:</p>
+          <ul>
+            <li><strong>Opis inovacije:</strong> Kaj je novega v primerjavi z obstoječim?</li>
+            <li><strong>Poslovni model:</strong> Kako bo projekt komercialno vzdržen po financiranju?</li>
+            <li><strong>Konzorcij:</strong> Vloge partnerjev, kompetence</li>
+            <li><strong>Proračun:</strong> Po WP (Work Packages), z opravičilom vsakega stroška</li>
+            <li><strong>KPIs:</strong> Merljivi cilji (npr. 50 udeležencev, 3 produkte na trg)</li>
+            <li><strong>Vpliv:</strong> Ekonomski, socialni, okoljski vpliv na regijo</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Oddaj prijavo do roka</h4>
+          <p><strong>Predvideni rok: 30. april 2026</strong> (preveri na eitfood.eu/ris)<br>
+          Prijava se odda elektronsko prek EIT Community portala.<br>
+          Evalvacijski rok: ~3 mesece po roku oddaje.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRORAČUN -->
+  <div class="section">
+    <h2 class="section-title">💰 Struktura proračuna EIT Food RIS</h2>
+    <div class="card">
+      <table>
+        <tr><th>Kategorija stroškov</th><th>Opis</th><th>Opomba</th></tr>
+        <tr><td>Personnel costs</td><td>Stroški osebja (po dnevni stopnji)</td><td>Glavni strošek</td></tr>
+        <tr><td>Travel & subsistence</td><td>Potni stroški in dnevnice</td><td>Max 15% proračuna</td></tr>
+        <tr><td>Equipment</td><td>Oprema (amortizacija, ne nakup)</td><td>Praviloma do 10%</td></tr>
+        <tr><td>Subcontracting</td><td>Zunanji izvajalci</td><td>Max 25% proračuna</td></tr>
+        <tr><td>Other direct costs</td><td>Materiali, storitve, komunikacije</td><td>Specifičen prag</td></tr>
+        <tr><td>Indirect costs</td><td>Overhead (fiksna stopnja)</td><td>25% direct costs</td></tr>
+      </table>
+    </div>
+    <div class="warn-box">
+      <strong>⚠️ EIT Food ni za naložbe v fizično infrastrukturo</strong>
+      EIT Food financira inovacijo, razvoj, izobraževanje, pilote — NE za gradnjo ali nakup opreme v veliki meri. Za fizično infrastrukturo kombiniraš EIT Food (inovacijska komponenta) + LEADER/ARSKTRP (naložbena komponenta). Stackanje je dovoljeno, le brez dvojnega financiranja istih stroškov.
+    </div>
+  </div>
+
+  <!-- KONTAKTI -->
+  <div class="section">
+    <h2 class="section-title">📞 Ključni kontakti</h2>
+    <div class="contact-card">
+      <h4>EIT Food RIS — Spletni portal</h4>
+      <p>🌐 <a href="https://www.eitfood.eu/ris" target="_blank">eitfood.eu/ris</a></p>
+      <p>📧 Splošni kontakt: <a href="mailto:info@eitfood.eu">info@eitfood.eu</a></p>
+    </div>
+    <div class="contact-card">
+      <h4>Biotehniška fakulteta UL — Potencialni partner</h4>
+      <p>Oddelek za živilstvo, nutricionistiko in dietetiko</p>
+      <p>🌐 <a href="https://www.bf.uni-lj.si" target="_blank">bf.uni-lj.si</a></p>
+      <p>Ima izkušnje z EIT Food projekti — priporoča se zgodnje partnerstvo</p>
+    </div>
+    <div class="contact-card">
+      <h4>SPIRIT Slovenia — Podpora pri EIT Food prijavah</h4>
+      <p>Agencija za spodbujanje internacionalizacije</p>
+      <p>🌐 <a href="https://www.spirit.si" target="_blank">spirit.si</a></p>
+      <p>📞 01 5898 550</p>
+    </div>
+  </div>
+
+  <!-- POVEZAVE Z BK PROJEKTI -->
+  <div class="section">
+    <h2 class="section-title">🔗 Relevantni BK LAS projekti za EIT Food stackanje</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3><a href="05-kolpa-youth-venture-lab.html" style="color:var(--accent); text-decoration:none;">05 — Youth Green Venture Lab</a></h3>
+        <p style="font-size:13px; color:var(--muted);">LEADER €40k za fizični hub + EIT Food za izobraževanje in mentorstvo = idealna kombinacija. EIT Food financira inovacijsko komponento, LEADER fizično infrastrukturo.</p>
+        <div class="tags"><span class="tag tag-teal">Stack LEADER + EIT Food</span></div>
+      </div>
+      <div class="card">
+        <h3><a href="03-perma-kolpa-gardens.html" style="color:var(--accent); text-decoration:none;">03 — Perma-Kolpa Gardens</a></h3>
+        <p style="font-size:13px; color:var(--muted);">Semenska banka + divje zelišče = prehranska inovacija. EIT Food bi financiral R&D komponento (testiranje novih prehrambenih produktov iz lokalnih zelišč).</p>
+        <div class="tags"><span class="tag tag-teal">Wild food innovation</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deadline-banner">
+    <div class="deadline-label">Predvideni rok za oddajo prijave</div>
+    <div class="deadline-date">30. april 2026</div>
+    <div class="deadline-note">Preveri aktualni rok na eitfood.eu/ris · Slovenia = RIS+ prioriteta</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>BK LAS 2026 Research Hub · <a href="index.html">← Nazaj na pregled</a></p>
+  <p style="margin-top:6px;">Informacije na podlagi EIT Food javnih dokumentov · Vedno preveri uradne razpisne smernice</p>
+</div>
+
+</body>
+</html>

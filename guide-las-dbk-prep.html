@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAS DBK — Priprava za razpis 2026 | BK LAS 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --surface2: #1c2330; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --green: #3fb950; --yellow: #d29922; --orange: #f0883e; --red: #f85149;
+    --purple: #bc8cff; --gold: #f59e0b; --gold-light: #fcd34d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+  .header {
+    background: linear-gradient(135deg, #1a1400 0%, #2d2200 50%, #1a1800 100%);
+    border-bottom: 3px solid var(--gold); padding: 40px 20px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(245,158,11,0.12) 0%, transparent 70%);
+  }
+  .header-badge {
+    display: inline-block; background: rgba(245,158,11,0.2); border: 1px solid var(--gold);
+    color: var(--gold-light); font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 16px; position: relative;
+  }
+  .header h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(22px, 4vw, 42px); font-weight: 700; color: #fff; position: relative; margin-bottom: 8px; }
+  .header .subtitle { font-size: 15px; color: var(--gold-light); position: relative; margin-bottom: 24px; }
+  .header-meta { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; }
+  .meta-chip { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .meta-chip .label { color: var(--muted); }
+  .meta-chip .value { color: #fff; font-weight: 600; }
+
+  .status-banner {
+    background: linear-gradient(90deg, #0d1a0d, #1a300a);
+    border: 1px solid rgba(63,185,80,0.5); border-radius: 10px;
+    padding: 16px 20px; margin: 24px auto; max-width: 900px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .status-text strong { color: var(--green); font-size: 15px; }
+  .status-text p { color: var(--text); font-size: 13px; margin-top: 4px; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+  .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 13px; border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; margin-bottom: 30px; transition: all 0.2s; }
+  .nav-back:hover { color: var(--text); border-color: var(--accent); }
+
+  .section { margin-bottom: 40px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; }
+  .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 700px) { .three-col { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 450px) { .three-col { grid-template-columns: 1fr; } }
+
+  .kv { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid rgba(48,54,61,0.5); padding-bottom: 8px; }
+  .kv:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .kv .k { color: var(--muted); font-size: 13px; }
+  .kv .v { color: var(--text); font-size: 13px; font-weight: 500; text-align: right; max-width: 60%; }
+
+  .step-list { counter-reset: steps; }
+  .step { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 20px; padding: 16px; background: var(--surface2); border-radius: 10px; border-left: 3px solid var(--gold); }
+  .step-num { width: 32px; height: 32px; min-width: 32px; background: #92400e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: #fcd34d; }
+  .step-num::before { content: counter(steps); }
+  .step-content h4 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .step-content p, .step-content ul { font-size: 13px; color: var(--muted); }
+  .step-content ul { padding-left: 16px; margin-top: 6px; }
+  .step-content li { margin-bottom: 4px; }
+  .step-content a { color: var(--accent); }
+  .step-content strong { color: var(--text); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .tag-gold { background: rgba(245,158,11,0.15); color: var(--gold-light); border: 1px solid rgba(245,158,11,0.3); }
+  .tag-orange { background: rgba(240,136,62,0.15); color: var(--orange); border: 1px solid rgba(240,136,62,0.3); }
+  .tag-blue { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+  .tag-red { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.3); }
+
+  .info-box { background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.25); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; }
+  .info-box strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 14px; }
+
+  .gold-box { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; }
+  .gold-box strong { color: var(--gold-light); display: block; margin-bottom: 6px; font-size: 14px; }
+
+  .warn-box { background: rgba(210,153,34,0.08); border: 1px solid rgba(210,153,34,0.3); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; color: #deba7a; }
+  .warn-box strong { color: var(--yellow); display: block; margin-bottom: 6px; }
+
+  .contact-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .contact-card p { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .contact-card a { color: var(--accent); }
+
+  .budget-card {
+    background: linear-gradient(135deg, #1a1400, #2d2200);
+    border: 1px solid var(--gold); border-radius: 12px; padding: 24px; text-align: center;
+  }
+  .budget-amount { font-family: 'Space Grotesk', sans-serif; font-size: 42px; font-weight: 700; color: var(--gold); }
+  .budget-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .budget-breakdown { display: flex; justify-content: center; gap: 30px; margin-top: 16px; flex-wrap: wrap; }
+  .budget-item { text-align: center; }
+  .budget-item .amount { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; }
+  .budget-item .label { font-size: 11px; color: var(--muted); }
+  .budget-item.eksrp .amount { color: #4ade80; }
+  .budget-item.esrr .amount { color: #60a5fa; }
+
+  .project-grid { display: grid; gap: 12px; }
+  .project-row {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 80px; gap: 12px; align-items: center;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; font-size: 13px;
+  }
+  @media (max-width: 600px) { .project-row { grid-template-columns: 1fr 1fr; } }
+  .project-name { color: var(--text); font-weight: 500; }
+  .project-fund { color: var(--muted); font-size: 12px; }
+  .project-amount { color: var(--gold-light); font-weight: 600; text-align: right; }
+  .project-status { text-align: center; }
+  .badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 10px; text-transform: uppercase; white-space: nowrap; }
+  .badge-ready { background: rgba(63,185,80,0.2); color: var(--green); border: 1px solid rgba(63,185,80,0.4); }
+  .badge-prep { background: rgba(210,153,34,0.2); color: var(--yellow); border: 1px solid rgba(210,153,34,0.4); }
+  .badge-idea { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+
+  .checklist { list-style: none; }
+  .checklist li { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(48,54,61,0.3); font-size: 13px; }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist .icon { font-size: 16px; min-width: 20px; }
+  .checklist .text { color: var(--text); }
+  .checklist .text .sub { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; padding: 0 0 24px 24px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -13px; top: 5px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--bg);
+  }
+  .timeline-item.future::before { background: var(--border); }
+  .timeline-date { font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+  .timeline-date.future { color: var(--muted); }
+  .timeline-title { font-size: 15px; font-weight: 600; color: var(--text); margin: 4px 0; }
+  .timeline-desc { font-size: 13px; color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(48,54,61,0.5); color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+
+  .footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media print { body { background: #fff; color: #000; } .header { background: #78340f; } .nav-back { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">🏘️ LAS DBK — Lokalni LEADER razpis</div>
+  <h1>LAS DBK — Priprava za razpis 2026</h1>
+  <p class="subtitle">LAS Dolenjska in Bela krajina · EKSRP (april) + ESRR (junij) · €4.073M skupni proračun 2021-2027</p>
+  <div class="header-meta">
+    <div class="meta-chip"><span class="label">Upravljavec</span><span class="value">LAS DBK / RA Dolenjska Karst</span></div>
+    <div class="meta-chip"><span class="label">Nasl. EKSRP razpis</span><span class="value">april 2026</span></div>
+    <div class="meta-chip"><span class="label">Nasl. ESRR razpis</span><span class="value">junij 2026</span></div>
+    <div class="meta-chip"><span class="label">Max na projekt</span><span class="value">€200.000</span></div>
+    <div class="meta-chip"><span class="label">Min na projekt</span><span class="value">€5.000</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <a href="index.html" class="nav-back">← Nazaj na pregled</a>
+
+  <div class="status-banner">
+    <div style="font-size:28px">📅</div>
+    <div class="status-text">
+      <strong>Status: Ni odprtega razpisa (15.3.2026) — Pripravljaj se zdaj!</strong>
+      <p>LAS DBK nima odprtega razpisa na dan 15.3.2026. Naslednji EKSRP razpis pričakovan april 2026, ESRR junij 2026. Čas do razpisa je čas za pripravo partnerjev, dokumentacije in vloge.</p>
+    </div>
+  </div>
+
+  <!-- BUDGET OVERVIEW -->
+  <div class="section">
+    <h2 class="section-title">💰 Proračun LAS DBK 2021-2027</h2>
+    <div class="budget-card">
+      <div class="budget-amount">€4.073M</div>
+      <div class="budget-label">skupni EU proračun LAS DBK za 2021-2027</div>
+      <div class="budget-breakdown">
+        <div class="budget-item eksrp">
+          <div class="amount">€2.256M</div>
+          <div class="label">EKSRP (Osi 1+2)<br>Kmetijstvo / Biotska raznovrstnost</div>
+        </div>
+        <div class="budget-item esrr">
+          <div class="amount">€1.817M</div>
+          <div class="label">ESRR (Osi 3+4)<br>Turizem / Socialno / Podjetnišvo</div>
+        </div>
+      </div>
+    </div>
+    <div class="gold-box">
+      <strong>LEADER specifičnost — Bottom-up pristop</strong>
+      LEADER razpisi niso "standardni EU razpisi" — so odločitev lokalne skupnosti. LAS DBK ima lastno Lokalno razvojno strategijo (LRS 2021-2027) z 4 prednostnimi osmi. Projekti morajo <em>ustrezati lokalnim prioritetam</em>, ki jih je določila sama skupnost. To pomeni, da ima lokalno znanje in mreža (kdo je v LAS svetu) velik vpliv.
+    </div>
+  </div>
+
+  <!-- LRS OSI -->
+  <div class="section">
+    <h2 class="section-title">🎯 Prednostne osi LRS DBK 2021-2027</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3 style="color:#4ade80">OS 1 — Narava in biotska raznovrstnost (EKSRP)</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Varstvo narave, ekološko kmetijstvo, ohranjanje habitatov, izobraževanje o naravi.</p>
+        <div class="kv"><span class="k">Projekti BK</span><span class="v">01-Biodiverziteta, 03-Perma-Kolpa</span></div>
+        <div class="kv"><span class="k">Sofinanciranje</span><span class="v">do 85% (javni subjekti)</span></div>
+        <div class="kv"><span class="k">Max projekt</span><span class="v">€80-150k tipično</span></div>
+      </div>
+      <div class="card">
+        <h3 style="color:#4ade80">OS 2 — Kmetijstvo in lokalna hrana (EKSRP)</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Tržne poti za lokalne pridelke, kratke prehranske verige, ekološki in lokalni produkti.</p>
+        <div class="kv"><span class="k">Projekti BK</span><span class="v">02-Farm Trail, 03-Perma-Kolpa</span></div>
+        <div class="kv"><span class="k">Sofinanciranje</span><span class="v">do 65% (podjetja)</span></div>
+        <div class="kv"><span class="k">Max projekt</span><span class="v">€100-200k</span></div>
+      </div>
+      <div class="card">
+        <h3 style="color:#60a5fa">OS 3 — Trajnostni turizem (ESRR)</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Eko-turizem, kulturna dediščina, rekreacijska infrastruktura, čezmejni turizem.</p>
+        <div class="kv"><span class="k">Projekti BK</span><span class="v">04-Floating Hubs, 07-Nočno nebo</span></div>
+        <div class="kv"><span class="k">Sofinanciranje</span><span class="v">do 80% (javni subjekti)</span></div>
+        <div class="kv"><span class="k">Max projekt</span><span class="v">€200-250k</span></div>
+      </div>
+      <div class="card">
+        <h3 style="color:#60a5fa">OS 4 — Socialno in podjetništvo (ESRR)</h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">Socialno vključevanje, mladi, podjetništvo, dostopnost, skupnostni projekti.</p>
+        <div class="kv"><span class="k">Projekti BK</span><span class="v">05-Youth Lab, 06-Inkl. dostopnost</span></div>
+        <div class="kv"><span class="k">Sofinanciranje</span><span class="v">do 80% (NVO, javni)</span></div>
+        <div class="kv"><span class="k">Max projekt</span><span class="v">€40-100k</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAŠI PROJEKTI -->
+  <div class="section">
+    <h2 class="section-title">📊 Status pripravljenosti — 7 projektov BK</h2>
+    <div class="project-grid">
+      <div class="project-row">
+        <div>
+          <div class="project-name"><a href="01-kolpa-biodiversity-citizen-science.html" style="color:var(--accent); text-decoration:none;">01 — Kolpa Biodiversity Citizen Science</a></div>
+          <div class="project-fund">EKSRP — OS 1 — Natura 2000</div>
+        </div>
+        <div class="project-amount">€80.000</div>
+        <div style="font-size:12px; color:var(--muted)">Občina Semič ali Metlika</div>
+        <div class="project-status"><span class="badge badge-ready">Pripravljen</span></div>
+      </div>
+      <div class="project-row">
+        <div>
+          <div class="project-name"><a href="02-kolpa-farm-trail-markets.html" style="color:var(--accent); text-decoration:none;">02 — Eko-Farm Trail &amp; Pop-Up Markets</a></div>
+          <div class="project-fund">ESRR — OS 3 — Turizem</div>
+        </div>
+        <div class="project-amount">€120.000</div>
+        <div style="font-size:12px; color:var(--muted)">GTM Metlika + kmetije</div>
+        <div class="project-status"><span class="badge badge-ready">Pripravljen</span></div>
+      </div>
+      <div class="project-row">
+        <div>
+          <div class="project-name"><a href="03-perma-kolpa-gardens.html" style="color:var(--accent); text-decoration:none;">03 — Perma-Kolpa Gardens</a></div>
+          <div class="project-fund">EKSRP — OS 1+2 — Semenska banka</div>
+        </div>
+        <div class="project-amount">€200.000</div>
+        <div style="font-size:12px; color:var(--muted)">Kmetijsko društvo + KGZS</div>
+        <div class="project-status"><span class="badge badge-ready">Pripravljen</span></div>
+      </div>
+      <div class="project-row">
+        <div>
+          <div class="project-name"><a href="04-kolpa-floating-hubs.html" style="color:var(--accent); text-decoration:none;">04 — Floating Wellness Hubs</a></div>
+          <div class="project-fund">ESRR — OS 3 — Turizem</div>
+        </div>
+        <div class="project-amount">€250.000</div>
+        <div style="font-size:12px; color:var(--muted)">Občina + podjetje (vodno soglasje!)</div>
+        <div class="project-status"><span class="badge badge-prep">V pripravi</span></div>
+      </div>
+      <div class="project-row">
+        <div>
+          <div class="project-name"><a href="05-kolpa-youth-venture-lab.html" style="color:var(--accent); text-decoration:none;">05 — Youth Green Venture Lab</a></div>
+          <div class="project-fund">ESRR — OS 4 — Mladi</div>
+        </div>
+        <div class="project-amount">€40.000</div>
+        <div style="font-size:12px; color:var(--muted)">Mladinski center + SPIRIT</div>
+        <div class="project-status"><span class="badge badge-ready">Pripravljen</span></div>
+      </div>
+      <div class="project-row">
+        <div>
+          <div class="project-name"><a href="06-kolpa-inclusive-access.html" style="color:var(--accent); text-decoration:none;">06 — Inclusive Access Nodes</a></div>
+          <div class="project-fund">EKSRP — OS 1 — Dostopnost</div>
+        </div>
+        <div class="project-amount">€100.000</div>
+        <div style="font-size:12px; color:var(--muted)">Občina Metlika</div>
+        <div class="project-status"><span class="badge badge-prep">V pripravi</span></div>
+      </div>
+      <div class="project-row">
+        <div>
+          <div class="project-name"><a href="07-kolpa-night-sky-gastro.html" style="color:var(--accent); text-decoration:none;">07 — Night Sky &amp; Gastro Festival</a></div>
+          <div class="project-fund">ESRR — OS 3 — Turizem</div>
+        </div>
+        <div class="project-amount">€90.000</div>
+        <div style="font-size:12px; color:var(--muted)">Turistično društvo + Astronomical Society</div>
+        <div class="project-status"><span class="badge badge-idea">Ideja</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KORAKI PRIPRAVE -->
+  <div class="section">
+    <h2 class="section-title">📝 Koraki priprave pred razpisom (do aprila 2026)</h2>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Kontaktiraj LAS DBK — uganaj, kdaj bo razpis</h4>
+          <p>LAS DBK objavi razpis na svoji spletni strani, a jih je vredno kontaktirati pred razpisom:<br>
+          📧 <a href="mailto:las@ra-dc.si">las@ra-dc.si</a> | 📞 07 337 42 23<br>
+          <a href="https://www.las-dbk.si" target="_blank">las-dbk.si</a><br><br>
+          Vprašaj: <em>"Kdaj pričakujete razpis za EKSRP in ESRR v letu 2026? Ali so prioritetna področja določena?"</em></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Zberi partnerje in prijavitelja</h4>
+          <p>Vsak projekt potrebuje jasnega prijavitelja (pravna oseba z žigom):<br>
+          <ul>
+            <li>Občine (Metlika, Semič, Črnomelj) — za javno infrastrukturo</li>
+            <li>NVO (turistična, kmetijska, okoljska društva) — za mehke vsebine</li>
+            <li>Podjetja (s.p., d.o.o.) — za komercialne projekte</li>
+            <li>Zadruge — za skupne kmetijske projekte</li>
+          </ul>
+          <strong>Odloči: Kdo bo prijavil kateri projekt?</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pripravi projektno idejo (1-2 strani)</h4>
+          <p>Kratki opis projekta za LAS DBK informativni razgovor:</p>
+          <ul>
+            <li>Opis aktivnosti (kaj konkretno naredimo)</li>
+            <li>Ciljna skupina (kdo koristi)</li>
+            <li>Partnerji (kdo sodeluje)</li>
+            <li>Ocena stroškov (groba ocena)</li>
+            <li>Vezava na LRS os (kateri cilj LRS naslavljamo)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Zberi vso dokumentacijo prijavitelja</h4>
+          <p>Standardna dokumentacija za LAS vloge:</p>
+          <ul>
+            <li>Izpisek iz sodnega registra (ne starejši od 30 dni)</li>
+            <li>Potrdilo FURS (ni davčnih dolgov)</li>
+            <li>Letno poročilo (za podjetja) oz. statut (za društva)</li>
+            <li>Sklep pristojnega organa o odobritvi projekta (npr. sklep občinskega sveta)</li>
+            <li>Ponudbe/predračuni za načrtovane stroške</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pošlji vlogo takoj, ko se razpis odpre</h4>
+          <p>LAS DBK razpisi imajo <strong>omejen proračun</strong> — sredstva se razdelijo po vrstnem redu točk ali primera. <em>Ne čakaj na zadnji dan.</em><br>
+          Vloge se oddajajo prek <strong>eVloga portala ARSKTRP</strong> (za EKSRP) ali <strong>e-portala za ESRR</strong>.<br>
+          LAS DBK te bo usmeril na pravi portal po razpisu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOFINANCIRANJE -->
+  <div class="section">
+    <h2 class="section-title">💸 Stopnje sofinanciranja LAS DBK</h2>
+    <div class="card">
+      <table>
+        <tr><th>Tip prijavitelja</th><th>Tip projekta</th><th>% sofinanciranja</th><th>Max EU znesek</th></tr>
+        <tr><td>Občine / javne institucije</td><td>Investicije (infrastruktura)</td><td style="color:var(--green); font-weight:600">80%</td><td>€160k (pri €200k projektu)</td></tr>
+        <tr><td>Občine / javne institucije</td><td>Mehki ukrepi (izobraž., ohranjanje)</td><td style="color:var(--green); font-weight:600">85%</td><td>€170k (pri €200k projektu)</td></tr>
+        <tr><td>NVO / društva</td><td>Investicije in mehki ukrepi</td><td style="color:var(--yellow); font-weight:600">80%</td><td>€160k</td></tr>
+        <tr><td>Podjetja (MSP)</td><td>Investicije v turistično infrastrukturo</td><td style="color:var(--orange); font-weight:600">65%</td><td>€130k</td></tr>
+        <tr><td>Podjetja (MSP)</td><td>Mehki ukrepi, razvoj produktov</td><td style="color:var(--orange); font-weight:600">60%</td><td>€120k</td></tr>
+        <tr><td>Kmetijsko/gozd. subjekti</td><td>Kmetijsko-okoljski projekti</td><td style="color:var(--green); font-weight:600">80-85%</td><td>€170k</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- TOČKOVALNI KRITERIJI -->
+  <div class="section">
+    <h2 class="section-title">🏆 Točkovalni kriteriji (splošni za LAS DBK)</h2>
+    <div class="card">
+      <table>
+        <tr><th>Kriterij</th><th>Pomen</th><th>Točke</th></tr>
+        <tr><td>Uskladitev z LRS osmi</td><td>Koliko projektnih ciljev naslavljaš iz LRS</td><td style="color:var(--green)">visoko</td></tr>
+        <tr><td>Inovativnost</td><td>Nov pristop za BK območje (ne kopija obstoječega)</td><td style="color:var(--green)">visoko</td></tr>
+        <tr><td>Partnerstvo</td><td>Število in kvaliteta partnerjev (različni sektorji)</td><td style="color:var(--yellow)">srednje</td></tr>
+        <tr><td>Mladi (&lt;29 let) ali ženske</td><td>Prijavitelj ali vodilna oseba je mlad oz. ženska</td><td style="color:var(--yellow)">srednje</td></tr>
+        <tr><td>Lokalna vrednost</td><td>Korist za lokalno skupnost, ne le za prijavitelja</td><td style="color:var(--green)">visoko</td></tr>
+        <tr><td>Trajnost</td><td>Kaj ostane po projektu? Vzdrževanje, nadaljevanje</td><td style="color:var(--yellow)">srednje</td></tr>
+        <tr><td>Čezmejni element</td><td>Projektna vrednost za Hrvaško stran (Kolpa, SI-HR)</td><td style="color:var(--yellow)">srednje</td></tr>
+        <tr><td>Finančni vzvod</td><td>Stackanje z drugimi financiranjem (SPIRIT, ARSKTRP)</td><td style="color:var(--accent)">bonus</td></tr>
+      </table>
+    </div>
+    <div class="warn-box">
+      <strong>⚠️ Točkovalni kriteriji so specifični za vsak razpis!</strong>
+      Zgornje je informativna ocena na podlagi preteklih LAS DBK razpisov. Vsak razpis ima lastno točkovalno lestvico. Vedno preberi razpisno dokumentacijo takoj, ko je objavljena.
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section">
+    <h2 class="section-title">✅ Checklist pred oddajo vloge</h2>
+    <div class="card">
+      <ul class="checklist">
+        <li><span class="icon">📋</span><span class="text">Prebrana razpisna dokumentacija in razpisni pogoji<span class="sub">Vsaka stran — podmene in izjeme so v podrobnostih</span></span></li>
+        <li><span class="icon">🤝</span><span class="text">Dogovorjeni vsi partnerji (pisni dogovor o sodelovanju)<span class="sub">Vsak partner mora podpisati partnersko izjavo</span></span></li>
+        <li><span class="icon">💰</span><span class="text">Zagotovljeni lastni prispevek (bancni izpisek ali pismo banke)<span class="sub">Sofinanciranje pride šele po realizaciji stroškov — cash flow je treba planirati</span></span></li>
+        <li><span class="icon">📄</span><span class="text">Pridobljene 3 ponudbe za vsako večjo postavko<span class="sub">ARSKTRP/ESRR zahteva primerjavo cen za vsak strošek nad pragom</span></span></li>
+        <li><span class="icon">🏛️</span><span class="text">Sklep prisojnega organa (za NVO: skupščina, za občino: OS)<span class="sub">Organ mora odobriti projekt in lastno udeležbo pred oddajo vloge</span></span></li>
+        <li><span class="icon">📝</span><span class="text">Izpolnjen vprašalnik o inovativnosti projekta<span class="sub">LAS DBK zahteva opis, kako je projekt nov za območje</span></span></li>
+        <li><span class="icon">🌿</span><span class="text">Izjava o ustreznosti s habitatno direktivo (za EKSRP projekte)<span class="sub">Za projekte, ki so blizu Natura 2000 območij</span></span></li>
+        <li><span class="icon">⏰</span><span class="text">Vloga oddana vsaj 48h pred rokom<span class="sub">Sistem se zamašuje na zadnji dan — oddaj prej!</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- KONTAKTI -->
+  <div class="section">
+    <h2 class="section-title">📞 Ključni kontakti LAS DBK</h2>
+    <div class="contact-card">
+      <h4>LAS DBK — Lokalna akcijska skupina Dolenjska in Bela krajina</h4>
+      <p>Upravljavec: Razvojna agencija Dolenjska in Karst (RA-DC)</p>
+      <p>📧 <a href="mailto:las@ra-dc.si">las@ra-dc.si</a></p>
+      <p>📞 07 337 42 23</p>
+      <p>🌐 <a href="https://www.las-dbk.si" target="_blank">las-dbk.si</a></p>
+      <p>Kontaktiraj za: informativne pogovore, svetovanje pri pisanju vloge, aktualne razpise.</p>
+    </div>
+    <div class="contact-card">
+      <h4>RA-DC — Razvojna agencija Dolenjska in Karst</h4>
+      <p>Technični in administrativni partner LAS DBK</p>
+      <p>📍 Novo Mesto</p>
+      <p>📞 07 337 42 00</p>
+      <p>🌐 <a href="https://www.ra-dc.si" target="_blank">ra-dc.si</a></p>
+    </div>
+    <div class="contact-card">
+      <h4>Ministrstvo za kmetijstvo, gozdarstvo in prehrano (MKGP)</h4>
+      <p>Nacionalni koordinator LEADER/CLLD programa</p>
+      <p>🌐 <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-kmetijstvo-gozdarstvo-in-prehrano/" target="_blank">gov.si/mkgp</a></p>
+    </div>
+  </div>
+
+  <!-- ČASOVNICA -->
+  <div class="section">
+    <h2 class="section-title">📅 Predvidena časovnica LAS DBK 2026</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Zdaj — april 2026</div>
+        <div class="timeline-title">Pripravna faza</div>
+        <div class="timeline-desc">Zberi partnerje · Pripravi projektno idejo · Kontaktiraj LAS DBK za info-razgovor · Zberi dokumentacijo prijavitelja</div>
+      </div>
+      <div class="timeline-item future">
+        <div class="timeline-date future">April 2026</div>
+        <div class="timeline-title">Pričakovan EKSRP razpis</div>
+        <div class="timeline-desc">Osi 1+2 — narava, kmetijstvo · Projekti 01, 03 imajo prioriteto · Rok oddaje praviloma 6-8 tednov po objavi</div>
+      </div>
+      <div class="timeline-item future">
+        <div class="timeline-date future">Junij 2026</div>
+        <div class="timeline-title">Pričakovan ESRR razpis</div>
+        <div class="timeline-desc">Osi 3+4 — turizem, socialno, podjetništvo · Projekti 02, 04, 05, 06, 07 · Rok oddaje praviloma 6-8 tednov po objavi</div>
+      </div>
+      <div class="timeline-item future">
+        <div class="timeline-date future">Sep-okt 2026</div>
+        <div class="timeline-title">Evalvacija in odločitve</div>
+        <div class="timeline-desc">LAS svet oceni vloge · Odločitve o financiranju · Obvestila prijaviteljem</div>
+      </div>
+      <div class="timeline-item future">
+        <div class="timeline-date future">Nov 2026 — jan 2027</div>
+        <div class="timeline-title">Podpis pogodb</div>
+        <div class="timeline-desc">Podpis pogodb z ARSKTRP/ESRR · Začetek realizacije projektov</div>
+      </div>
+      <div class="timeline-item future">
+        <div class="timeline-date future">2027-2028</div>
+        <div class="timeline-title">Realizacija projektov</div>
+        <div class="timeline-desc">Izvedba aktivnosti · Vmesna poročila · Zahtevki za plačilo</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: linear-gradient(135deg, #1a1400, #2d2200); border: 2px solid var(--gold); border-radius: 12px; padding: 24px; text-align: center; margin: 24px 0;">
+    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--gold-light); margin-bottom: 12px;">Kdaj ukrepati?</div>
+    <p style="font-size: 14px; color: var(--text); max-width: 600px; margin: 0 auto;">Razpis se odpre v aprilu — vloge se točkujejo! Kdor ima bolje pripravljeno vlogo in partnerje že dogovorjene, ima prednost. <strong>Pripravljaj zdaj, oddaj prvi teden po razpisu.</strong></p>
+    <div style="margin-top: 16px;">
+      <a href="mailto:las@ra-dc.si" style="display: inline-block; background: var(--gold); color: #000; font-family: 'Space Grotesk', sans-serif; font-weight: 700; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-size: 14px;">📧 Kontaktiraj LAS DBK zdaj</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>BK LAS 2026 Research Hub · <a href="index.html">← Nazaj na pregled</a></p>
+  <p style="margin-top:6px;">Informacije na podlagi LAS DBK LRS 2021-2027 in preteklih razpisov · Vedno preveri uradni razpis ko je objavljen · <a href="https://www.las-dbk.si" target="_blank">las-dbk.si</a></p>
+</div>
+
+</body>
+</html>

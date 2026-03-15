@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eko-kmetijska pot ob Kolpi — LAS DBK 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — Warm, earthy, food-market palette
+       ============================================================ */
+    :root {
+      --terracotta:      #C25C3E;
+      --terracotta-light:#E07A5F;
+      --terracotta-pale: #F7E8E3;
+      --wheat:           #D4A843;
+      --wheat-light:     #F0CC7A;
+      --wheat-pale:      #FDF6E3;
+      --olive:           #5A6B3E;
+      --olive-light:     #7A8F55;
+      --olive-pale:      #EDF2E5;
+      --cream:           #FAF6EF;
+      --cream-dark:      #F0E8D6;
+      --ink:             #2C2416;
+      --ink-mid:         #4A3F2E;
+      --ink-light:       #7A6E5A;
+      --border:          #E0D4BE;
+      --white:           #FFFFFF;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --radius-xl:  32px;
+
+      --shadow-sm:  0 1px 4px rgba(44,36,22,0.08);
+      --shadow-md:  0 4px 16px rgba(44,36,22,0.12);
+      --shadow-lg:  0 8px 32px rgba(44,36,22,0.16);
+
+      --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      line-height: 1.25;
+    }
+
+    a { color: var(--olive); text-decoration: underline; }
+
+    /* ============================================================
+       LAYOUT UTILITIES
+       ============================================================ */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      background:
+        linear-gradient(160deg, rgba(90,107,62,0.92) 0%, rgba(194,92,62,0.82) 60%, rgba(212,168,67,0.75) 100%),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 18px,
+          rgba(255,255,255,0.03) 18px,
+          rgba(255,255,255,0.03) 19px
+        );
+      color: var(--white);
+      padding: 80px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(212,168,67,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgba(90,107,62,0.3) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-program {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: var(--white);
+      backdrop-filter: blur(4px);
+    }
+
+    .badge-fund {
+      background: var(--wheat);
+      color: var(--ink);
+    }
+
+    .badge-region {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .hero-title-sl {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+
+    .hero-title-en {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      font-weight: 400;
+      font-style: italic;
+      opacity: 0.82;
+      margin-bottom: 36px;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 8px;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.3);
+      align-self: center;
+    }
+
+    /* ============================================================
+       OVERVIEW
+       ============================================================ */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .overview-grid { grid-template-columns: 1fr; }
+    }
+
+    .overview-text p + p {
+      margin-top: 18px;
+    }
+
+    .overview-text p {
+      font-size: 1.05rem;
+      color: var(--ink-mid);
+    }
+
+    .info-card {
+      background: var(--wheat-pale);
+      border: 1px solid var(--wheat-light);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+
+    .info-card-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 0.9rem;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .info-label { color: var(--ink-light); font-weight: 500; }
+    .info-value { color: var(--ink); font-weight: 600; text-align: right; }
+
+    /* ============================================================
+       WHY IT WINS — cards
+       ============================================================ */
+    .wins-bg {
+      background: var(--olive-pale);
+    }
+
+    .wins-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .win-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .win-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .win-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .win-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .win-text {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       ALIGNMENT TABLE
+       ============================================================ */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: var(--terracotta);
+      color: var(--white);
+    }
+
+    thead th {
+      padding: 14px 18px;
+      text-align: left;
+      font-family: var(--font-body);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      background: var(--white);
+      transition: background var(--transition);
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--terracotta-pale);
+    }
+
+    tbody tr:hover {
+      background: var(--wheat-pale);
+    }
+
+    tbody td {
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .tag-high  { background: #d4edda; color: #1a5e2a; }
+    .tag-med   { background: #fff3cd; color: #7a5e00; }
+    .tag-direct { background: var(--olive-pale); color: var(--olive); }
+
+    /* ============================================================
+       REQUIREMENTS CHECKLIST
+       ============================================================ */
+    .reqs-bg {
+      background: var(--cream-dark);
+    }
+
+    .reqs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 680px) {
+      .reqs-grid { grid-template-columns: 1fr; }
+    }
+
+    .req-block {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 24px;
+    }
+
+    .req-block-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .req-block-title .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .icon-olive { background: var(--olive-pale); }
+    .icon-wheat { background: var(--wheat-pale); }
+    .icon-terra { background: var(--terracotta-pale); }
+
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-mark {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--olive-pale);
+      color: var(--olive);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .check-mark.warn {
+      background: var(--wheat-pale);
+      color: #7a5e00;
+    }
+
+    /* ============================================================
+       TIMELINE / PHASES
+       ============================================================ */
+    .timeline {
+      position: relative;
+      padding-left: 48px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 8px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--terracotta), var(--wheat), var(--olive));
+      border-radius: 1px;
+    }
+
+    .phase {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .phase:last-child { margin-bottom: 0; }
+
+    .phase-dot {
+      position: absolute;
+      left: -40px;
+      top: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--terracotta), var(--shadow-sm);
+      background: var(--terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phase:nth-child(2) .phase-dot { background: var(--wheat); box-shadow: 0 0 0 2px var(--wheat), var(--shadow-sm); }
+    .phase:nth-child(3) .phase-dot { background: var(--olive-light); box-shadow: 0 0 0 2px var(--olive-light), var(--shadow-sm); }
+    .phase:nth-child(4) .phase-dot { background: var(--ink-mid); box-shadow: 0 0 0 2px var(--ink-mid), var(--shadow-sm); }
+
+    .phase-num {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .phase-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .phase-timespan {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--terracotta);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background: var(--terracotta-pale);
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+
+    .phase:nth-child(2) .phase-timespan { background: var(--wheat-pale); color: #7a5e00; }
+    .phase:nth-child(3) .phase-timespan { background: var(--olive-pale); color: var(--olive); }
+    .phase:nth-child(4) .phase-timespan { background: var(--cream-dark); color: var(--ink-mid); }
+
+    .phase-desc {
+      font-size: 0.92rem;
+      color: var(--ink-mid);
+      margin-bottom: 12px;
+    }
+
+    .phase-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .phase-item {
+      background: var(--cream-dark);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--ink-mid);
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       BUDGET BREAKDOWN
+       ============================================================ */
+    .budget-bg {
+      background: var(--wheat-pale);
+    }
+
+    .budget-total-banner {
+      background: linear-gradient(135deg, var(--terracotta) 0%, var(--terracotta-light) 100%);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .budget-total-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+
+    .budget-total-amount {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .budget-split {
+      text-align: right;
+      font-size: 0.88rem;
+      opacity: 0.85;
+    }
+
+    .budget-split strong { display: block; font-size: 1.1rem; margin-bottom: 2px; }
+
+    .budget-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .budget-line {
+      display: grid;
+      grid-template-columns: 220px 1fr 90px;
+      align-items: center;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .budget-line {
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+      }
+      .budget-bar-wrap { grid-column: 1 / -1; }
+    }
+
+    .budget-cat {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .budget-cat small {
+      display: block;
+      font-size: 11px;
+      color: var(--ink-light);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .budget-bar-wrap {
+      height: 12px;
+      background: var(--cream-dark);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .budget-bar {
+      height: 100%;
+      border-radius: 6px;
+      transition: width var(--transition);
+    }
+
+    .bar-1 { background: linear-gradient(90deg, var(--terracotta), var(--terracotta-light)); }
+    .bar-2 { background: linear-gradient(90deg, var(--wheat), var(--wheat-light)); }
+    .bar-3 { background: linear-gradient(90deg, var(--olive), var(--olive-light)); }
+    .bar-4 { background: linear-gradient(90deg, #8B7355, #B09070); }
+    .bar-5 { background: linear-gradient(90deg, var(--ink-mid), var(--ink-light)); }
+
+    .budget-amount {
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 0.95rem;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .budget-footer {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--ink-light);
+    }
+
+    /* ============================================================
+       PARTNERS
+       ============================================================ */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .partner-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--olive);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      transition: box-shadow var(--transition), border-left-color var(--transition);
+    }
+
+    .partner-card:hover {
+      box-shadow: var(--shadow-md);
+      border-left-color: var(--terracotta);
+    }
+
+    .partner-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .partner-role {
+      font-size: 0.83rem;
+      color: var(--ink-light);
+      line-height: 1.5;
+    }
+
+    .partner-type {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 2px 8px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .type-lead    { background: var(--terracotta-pale); color: var(--terracotta); }
+    .type-public  { background: var(--olive-pale); color: var(--olive); }
+    .type-ngo     { background: var(--wheat-pale); color: #7a5e00; }
+    .type-private { background: var(--cream-dark); color: var(--ink-mid); }
+    .type-hr      { background: #e8edf5; color: #2d4a7a; }
+
+    /* ============================================================
+       CROSS-BORDER
+       ============================================================ */
+    .crossborder-bg {
+      background: linear-gradient(135deg, var(--olive-pale) 0%, var(--cream) 100%);
+      border-top: 2px solid var(--olive);
+    }
+
+    .cb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 680px) {
+      .cb-grid { grid-template-columns: 1fr; }
+    }
+
+    .cb-block {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .cb-block-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cb-flag {
+      font-size: 1.2rem;
+    }
+
+    .cb-block p {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .cb-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cb-block ul li {
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .cb-block ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--olive);
+      font-weight: 600;
+    }
+
+    .interreg-note {
+      margin-top: 32px;
+      background: var(--white);
+      border: 1px solid var(--olive);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+    }
+
+    .interreg-note strong {
+      color: var(--olive);
+      font-family: var(--font-display);
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    /* ============================================================
+       NEXT STEPS
+       ============================================================ */
+    .steps-bg {
+      background: var(--terracotta-pale);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .step-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .step-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .step-num {
+      position: absolute;
+      top: -14px;
+      left: 20px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(194,92,62,0.4);
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+      margin-top: 6px;
+    }
+
+    .step-desc {
+      font-size: 0.87rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       SIDEBAR NOTE BOX
+       ============================================================ */
+    .note-box {
+      background: var(--olive-pale);
+      border-left: 4px solid var(--olive);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin-top: 28px;
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    .note-box strong {
+      display: block;
+      color: var(--olive);
+      font-family: var(--font-display);
+      margin-bottom: 4px;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.6);
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--wheat);
+      letter-spacing: -0.01em;
+    }
+
+    .footer-disclaimer {
+      font-size: 0.82rem;
+      max-width: 520px;
+      line-height: 1.6;
+      opacity: 0.7;
+    }
+
+    .footer-meta {
+      font-size: 0.78rem;
+      opacity: 0.45;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ============================================================
+       PRINT
+       ============================================================ */
+    @media print {
+      .hero {
+        background: var(--olive) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .win-card, .partner-card, .step-card { break-inside: avoid; }
+      .section { padding: 32px 0; }
+      .phase { break-inside: avoid; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 480px) {
+      .hero { padding: 52px 0 48px; }
+      .hero-stat-value { font-size: 1.4rem; }
+      .hero-divider { display: none; }
+      .budget-total-banner { flex-direction: column; text-align: center; }
+      .budget-split { text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+<!-- LAS-STATUS-BANNER -->
+
+<style id="las-status-css">
+.las-status-bar {
+    background: #0f1f0f;
+    color: #e8f5e8;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 13px;
+    border-bottom: 3px solid #4caf50;
+}
+.las-status-bar .status-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+}
+.las-status-bar .s-label {
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #81c784;
+    font-weight: 700;
+    margin-right: 2px;
+}
+.las-status-bar .s-none {
+    background: #c62828;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+.las-status-bar .s-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1b3a1b;
+    border: 1px solid #4caf50;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+.las-status-bar .s-call.hot {
+    border-color: #ff9800;
+    background: #2a1f00;
+    animation: pulse-hot 1.4s ease-in-out infinite;
+}
+@keyframes pulse-hot {
+    0%,100%{box-shadow:0 0 0 0 rgba(255,152,0,.4)}
+    50%{box-shadow:0 0 0 4px rgba(255,152,0,0)}
+}
+.las-status-bar .s-deadline { color: #a5d6a7; font-size: 11px; }
+.las-status-bar .s-deadline.hot-d { color: #ffb74d; font-weight:700; }
+.las-status-bar .s-budget { color: #81c784; font-size: 11px; }
+.las-status-bar .s-upcoming {
+    background: #1a2940;
+    border: 1px solid #4a90a4;
+    color: #90caf9;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+.las-status-bar .s-link { color: #4caf50; font-size: 11px; text-decoration:none; }
+.las-status-bar .s-link:hover { text-decoration:underline; }
+.las-status-bar .s-divider { color: #33691e; }
+@media(max-width:700px){.las-status-bar .status-inner{flex-direction:column;gap:6px}}
+@media print{.las-status-bar{display:none}}
+</style>
+
+<div class="las-status-bar">
+  <div class="status-inner">
+    <span><span class="s-label">LAS DBK</span><span class="s-none">Ni odprtega razpisa</span></span>
+    <span class="s-upcoming">⏳ Kmalu: 3. javni poziv ESRR — junij 2026</span>
+    <span class="s-divider">|</span>
+    <span class="s-label">Odprti zdaj →</span>
+    
+        <span class="s-call">
+            <a class="s-link" href="https://www.si-hr.eu" target="_blank">Interreg VI-A SI-HR – 4. poziv</a>
+            <span class="s-deadline">rok: 15.6.2026</span>
+            <span class="s-budget">€200k–1.5M</span>
+        </span>
+        <span class="s-call">
+            <a class="s-link" href="https://spirit.si" target="_blank">SPIRIT Slovenia SIDT-2026-RURAL</a>
+            <span class="s-deadline">rok: 15.5.2026</span>
+            <span class="s-budget">€30k–300k</span>
+        </span>
+    <a class="s-link" style="margin-left:auto" href="https://las-dbk.si/javni-pozivi" target="_blank">las-dbk.si →</a>
+  </div>
+</div>
+<!-- /LAS-STATUS-BANNER -->
+
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="hero-badges">
+        <span class="badge badge-program">LEADER/CLLD 2021–2027</span>
+        <span class="badge badge-fund">ESRR</span>
+        <span class="badge badge-region">Bela Krajina · Kolpa</span>
+        <span class="badge badge-region">LAS DBK</span>
+      </div>
+
+      <h1 class="hero-title-sl">Eko-kmetijska pot ob Kolpi<br>s čezmejnimi tržnicami</h1>
+      <p class="hero-title-en">Kolpa Cross-Border Eco-Farm Trail &amp; Pop-Up Markets</p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-value">€120.000</span>
+          <span class="hero-stat-label">Skupni proračun projekta</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">do 80 %</span>
+          <span class="hero-stat-label">Stopnja sofinanciranja EU</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">10</span>
+          <span class="hero-stat-label">Postankov na eko-kmetijah</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">2 državi</span>
+          <span class="hero-stat-label">Slovenija &amp; Hrvaška</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== OVERVIEW ===================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">O projektu</div>
+      <div class="overview-grid">
+        <div class="overview-text">
+          <h2 class="section-title">Kaj predlagamo in zakaj bi delovalo</h2>
+          <p>Kolpa e-BIKE projekt je že postavil odlično infrastrukturo — 25 e-koles, 4 polnilne postaje in označenih 350+ km kolesarskih poti. Zdaj je čas, da jo napolnimo z zgodbo. Ta projekt doda plast, ki e-kolesarjem da razlog za pot: <strong>10 kmetijskih postankov</strong> vzdolž reke Kolpe, kjer lokalni pridelovalci zeliščnih čajev, ovčjega sira, medu in naravnega vina postanejo del kolesarske izkušnje.</p>
+          <p>Ideja je preprosta: <strong>vsak postanak je QR-koda</strong>, ki odpre zgodbo o kmetiji, recepte in možnost naročila. Ob tem pa uvajamo <strong>mobilne sončne tržne stojnice</strong> — skupne čezmejne pop-up tržnice v Vinici in Metliki, kjer se slovensko sreča s hrvaško stran Kolpe. Blagovne znamke za lokalne pridelovalce, pakiranje in skupen gastronomski imidž regije.</p>
+          <p>Projekt se naravno navezuje na Interreg SI-HR projekt <em>Misterion</em> (naravna in kulturna dediščina ob Kolpi) in odpira vrata za skupen nastop z hrvaškimi LAG partneri. Za LAS DBK je to skoraj idealna operacija: gradi na obstoječem, reši realno potrebo in ustvari merljive rezultate v trajnostnem turizmu in lokalni preskrbi.</p>
+        </div>
+
+        <div>
+          <div class="info-card">
+            <div class="info-card-title">Osnovni podatki projekta</div>
+            <div class="info-row">
+              <span class="info-label">Sklad</span>
+              <span class="info-value">ESRR (CLLD)</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">LAS</span>
+              <span class="info-value">LAS Dolenjska in Bela krajina</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Območje</span>
+              <span class="info-value">Črnomelj, Metlika, Semič</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Skupni proračun</span>
+              <span class="info-value">€ 120.000</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Zaprošena sredstva EU</span>
+              <span class="info-value">do € 96.000</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Lastni delež (min.)</span>
+              <span class="info-value">€ 24.000 (20 %)</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Trajanje</span>
+              <span class="info-value">18 mesecev</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Čezmejni element</span>
+              <span class="info-value">Slovenija + Hrvaška</span>
+            </div>
+          </div>
+
+          <div class="note-box">
+            <strong>Navezava na KOLPA E-BIKE</strong>
+            Projekt KOLPA E-BIKE (2018–2019, CLLD) je vzpostavil 4 polnilne postaje, 25 e-koles in GPS-kartiranje 350 km poti z mobilno aplikacijo. Ta projekt je njena vsebinska nadgradnja — doda postanke, vsebino in ekonomski pulz.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHY IT WINS ===================== -->
+  <section class="section wins-bg">
+    <div class="container">
+      <div class="section-label">Prednosti vloge</div>
+      <h2 class="section-title">Zakaj bi ta projekt dobil točke</h2>
+      <div class="wins-grid">
+
+        <div class="win-card">
+          <span class="win-icon">♻️</span>
+          <div class="win-title">Gradi na obstoječi infrastrukturi</div>
+          <p class="win-text">KOLPA E-BIKE je CLLD projekt, ki ga LAS DBK že pozna. Nova operacija ne zahteva gradnje, ampak vsebinsko aktivacijo — to je tipično visoko ocenjeno pri evalvatorjih ("multiplikativni učinek").</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">🌾</span>
+          <div class="win-title">Farm-to-fork = EU prioriteta</div>
+          <p class="win-text">Strategija EU od polja do vilic (Farm to Fork Strategy) je horizontalni cilj kohezijske politike 2021–2027. Projekt, ki neposredno podpira lokalne pridelovalce in kratke verige, se sklada z obema prioritetama hkrati — trajnostnim turizmom in kmetijstvom.</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">🗺️</span>
+          <div class="win-title">Čezmejni element — bonus</div>
+          <p class="win-text">Vključitev hrvaških LAG partnerjev in skupne tržnice v Vinici (ki leži tik ob meji) doda mednarodno dimenzijo. Interreg SI-HR 2021–2027 je aktiven in Kolpa je eksplicitno prioritetno območje programa.</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">📍</span>
+          <div class="win-title">Bela Krajina kot problemsko območje</div>
+          <p class="win-text">LAS DBK ima poseben sklop ukrepov za Belo Krajino kot demografsko ogroženo območje. Projekti, ki tukaj ustvarjajo dohodek za lokalne pridelovalce in preprečujejo depopulacijo, prejmejo dodatne točke pri ocenjevanju.</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">📊</span>
+          <div class="win-title">Merljivi rezultati</div>
+          <p class="win-text">10 vključenih kmetij, 2 tržnici/leto, število obiskovalcev poti, vrednost prodaje lokalnih produktov — kazalniki so konkretni in merljivi, kar evalvatorji zahtevajo za visoko oceno pri sistemu vrednotenja vloge.</p>
+        </div>
+
+        <div class="win-card">
+          <span class="win-icon">☀️</span>
+          <div class="win-title">Zelena tehnologija</div>
+          <p class="win-text">Mobilne sončne tržne stojnice so vidni, fotografični element projekta. Podpirajo zeleno tranzicijo, kar je eno od horizontalnih načel financiranja iz ESRR. Odlična zgodba za medije in poročila.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LAS DBK ALIGNMENT TABLE ===================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Strateška usklajenost</div>
+      <h2 class="section-title">Ujemanje s Strategijo LAS DBK 2021–2027</h2>
+      <p style="margin-bottom:28px; color:var(--ink-mid); font-size:0.95rem;">LAS DBK je za obdobje 2021–2027 prejel €4,073M. ESRR del (€1,817M) pokriva ukrepe lokalne ekonomije, trajnostnega turizma in zelene infrastrukture. Spodaj je usklajenost tega projekta s posameznimi ukrepi SLR.</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Ukrep SLR LAS DBK</th>
+              <th>Opis</th>
+              <th>Sklad</th>
+              <th>Ujemanje projekta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Razvoj lokalnega podjetništva</strong></td>
+              <td>Podpora malim in srednje velikim podjetjem, podjetniškim iniciativam na podeželju</td>
+              <td><span class="tag tag-direct">ESRR</span></td>
+              <td><span class="tag tag-high">Neposredno</span> — podpora blagovnim znamkam in embalaži lokalnih pridelovalcev</td>
+            </tr>
+            <tr>
+              <td><strong>Zeleno gospodarstvo in diverzifikacija kmetij</strong></td>
+              <td>Razvoj dodatnih dejavnosti na kmetijah, trženje lokalnih produktov</td>
+              <td><span class="tag tag-direct">EKSRP</span></td>
+              <td><span class="tag tag-high">Neposredno</span> — 10 kmetij pridobi nov tržni kanal (agroturizem + tržnice)</td>
+            </tr>
+            <tr>
+              <td><strong>Manjše naložbe v infrastrukturo in storitve</strong></td>
+              <td>Investicije v javno infrastrukturo, ki izboljšuje kakovost življenja na podeželju</td>
+              <td><span class="tag tag-direct">ESRR</span></td>
+              <td><span class="tag tag-high">Neposredno</span> — tržne stojnice, označevanje poti, QR postanki</td>
+            </tr>
+            <tr>
+              <td><strong>Ohranjanje kulturne in naravne dediščine</strong></td>
+              <td>Manjše naložbe v dediščino in krajinski potencial</td>
+              <td><span class="tag tag-direct">ESRR</span></td>
+              <td><span class="tag tag-med">Posredno</span> — gastronomska identiteta in krajina Kolpe kot turistična vsebina</td>
+            </tr>
+            <tr>
+              <td><strong>Socialno vključujoča in solidarna skupnost</strong></td>
+              <td>Programi za socialno vključenost in skupnostne aktivnosti</td>
+              <td><span class="tag tag-direct">ESRR</span></td>
+              <td><span class="tag tag-med">Posredno</span> — skupnostne tržnice, aktivacija starejših kmetov</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REQUIREMENTS ===================== -->
+  <section class="section reqs-bg">
+    <div class="container">
+      <div class="section-label">Pogoji prijave</div>
+      <h2 class="section-title">Kdo lahko kandidira in kako</h2>
+      <div class="reqs-grid">
+
+        <div class="req-block">
+          <div class="req-block-title">
+            <div class="icon icon-olive">👤</div>
+            Upravičeni prijavitelji
+          </div>
+          <ul class="checklist">
+            <li><span class="check-mark">✓</span>Občine (Metlika, Črnomelj, Semič)</li>
+            <li><span class="check-mark">✓</span>Društva in nevladne organizacije (npr. turistična društva)</li>
+            <li><span class="check-mark">✓</span>Javni zavodi (Krajinski park Kolpa)</li>
+            <li><span class="check-mark">✓</span>Zadruge in kmetijske organizacije</li>
+            <li><span class="check-mark">✓</span>Mikro in mala podjetja (s.p. ali d.o.o.)</li>
+            <li><span class="check-mark">✓</span>Nosilci kmetijskih gospodarstev (za EKSRP del)</li>
+            <li><span class="check-mark warn">!</span>Sedež ali dejavnost mora biti na območju LAS DBK</li>
+          </ul>
+        </div>
+
+        <div class="req-block">
+          <div class="req-block-title">
+            <div class="icon icon-wheat">💶</div>
+            Finančni pogoji
+          </div>
+          <ul class="checklist">
+            <li><span class="check-mark">✓</span>Sofinanciranje do <strong>80 %</strong> upravičenih stroškov</li>
+            <li><span class="check-mark">✓</span>ESRR: EU prispeva 85 %, država 15 % (od javnega dela)</li>
+            <li><span class="check-mark">✓</span>Minimalni znesek projekta: €5.000</li>
+            <li><span class="check-mark">✓</span>Maksimalni znesek projekta: do €200.000 (odvisno od poziva)</li>
+            <li><span class="check-mark warn">!</span>Lastni delež: min. 20 % (denar ali prostovoljno delo)</li>
+            <li><span class="check-mark warn">!</span>Stroški nastanejo po oddaji vloge (ne pred tem!)</li>
+            <li><span class="check-mark warn">!</span>DDV upravičen samo za tiste brez pravice do odbitka</li>
+          </ul>
+        </div>
+
+        <div class="req-block">
+          <div class="req-block-title">
+            <div class="icon icon-terra">📋</div>
+            Upravičeni stroški
+          </div>
+          <ul class="checklist">
+            <li><span class="check-mark">✓</span>Nakup opreme (stojnice, table, QR nosilci)</li>
+            <li><span class="check-mark">✓</span>Zunanje storitve (oblikovanje, svetovanje, promocija)</li>
+            <li><span class="check-mark">✓</span>Stroški dela pri partnerjih (plače ali pavšal)</li>
+            <li><span class="check-mark">✓</span>Digitalni razvoj (aplikacija, spletna stran, QR sistem)</li>
+            <li><span class="check-mark">✓</span>Delavnice, usposabljanja za pridelovalce</li>
+            <li><span class="check-mark warn">!</span>Za nakupe nad €10.000: potrebne 3 primerljive ponudbe</li>
+            <li><span class="check-mark warn">!</span>Splošni stroški (priprava dokumentacije) do 10 %</li>
+          </ul>
+        </div>
+
+        <div class="req-block">
+          <div class="req-block-title">
+            <div class="icon icon-olive">📁</div>
+            Potrebna dokumentacija
+          </div>
+          <ul class="checklist">
+            <li><span class="check-mark">✓</span>Prijavni obrazec LAS DBK (elektronski)</li>
+            <li><span class="check-mark">✓</span>Podroben finančni načrt po kategorijah</li>
+            <li><span class="check-mark">✓</span>Opis projekta s cilji in kazalniki</li>
+            <li><span class="check-mark">✓</span>Partnerska pogodba (če je partnerstvo)</li>
+            <li><span class="check-mark">✓</span>3 ponudbe za vsak strošek nad €10.000</li>
+            <li><span class="check-mark">✓</span>Izjava o zagotavljanju lastnih sredstev</li>
+            <li><span class="check-mark warn">!</span>Dokazila o registraciji in sedežu v LAS območju</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TIMELINE ===================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Faze in aktivnosti</div>
+      <h2 class="section-title">Projektni načrt (18 mesecev)</h2>
+      <div class="timeline">
+
+        <div class="phase">
+          <div class="phase-dot"><span class="phase-num">1</span></div>
+          <div class="phase-header">
+            <span class="phase-title">Kartiranje in vključevanje kmetij</span>
+            <span class="phase-timespan">Meseci 1–4</span>
+          </div>
+          <p class="phase-desc">Terenska identifikacija 10 primernih kmetij vzdolž Kolpe, pogodbe o sodelovanju, analiza produktov. Skupaj s Krajinskim parkom Kolpa določimo optimalne postanke glede na že obstoječo kolesarsko infrastrukturo. Vzporedno: analiza hrvaških partnerjev (občina Kamanje, LAG Vallis Colapis ali podobni).</p>
+          <div class="phase-items">
+            <span class="phase-item">Terenski obiski</span>
+            <span class="phase-item">Partnerske pogodbe</span>
+            <span class="phase-item">Produktni katalog</span>
+            <span class="phase-item">GIS kartiranje</span>
+            <span class="phase-item">Hrvaški stiki</span>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="phase-dot"><span class="phase-num">2</span></div>
+          <div class="phase-header">
+            <span class="phase-title">Označevanje poti, QR sistem in brandiranje</span>
+            <span class="phase-timespan">Meseci 3–9</span>
+          </div>
+          <p class="phase-desc">Namestitev fizičnih tabelj in QR postankov pri vsakem od 10 kmetijskih postankov. Razvoj skupne vizualne identitete "Okusi Kolpe" — logotip, embalaža, etikete, tržni material. Razvoj spletne strani in QR vsebin (zgodba kmetije, produkti, recept, kontakt). Delavnice za pridelovalce o digitalnem trženju.</p>
+          <div class="phase-items">
+            <span class="phase-item">10 QR postankov</span>
+            <span class="phase-item">Vizualna identiteta</span>
+            <span class="phase-item">Embalaža & etikete</span>
+            <span class="phase-item">Spletna stran</span>
+            <span class="phase-item">Delavnice za kmete</span>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="phase-dot"><span class="phase-num">3</span></div>
+          <div class="phase-header">
+            <span class="phase-title">Mobilne tržnice — lanciranje</span>
+            <span class="phase-timespan">Meseci 8–14</span>
+          </div>
+          <p class="phase-desc">Nabava in namestitev mobilnih sončnih tržnih stojnic. Organizacija prvih pop-up tržnic v Metliki in Vinici (2x letno). Skupna SI-HR tržnica ob Kolpi — simboličen čezmejni dogodek z lokalno hrano, glasbo in agroturistično ponudbo. Medijska in promocijska kampanja za turistično sezono.</p>
+          <div class="phase-items">
+            <span class="phase-item">Mobilne stojnice</span>
+            <span class="phase-item">Pop-up Metlika</span>
+            <span class="phase-item">Pop-up Vinica (SI-HR)</span>
+            <span class="phase-item">Medijska kampanja</span>
+            <span class="phase-item">Foto & video</span>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="phase-dot"><span class="phase-num">4</span></div>
+          <div class="phase-header">
+            <span class="phase-title">Promocija, evalvacija in trajnost</span>
+            <span class="phase-timespan">Meseci 13–18</span>
+          </div>
+          <p class="phase-desc">Integracija poti v turistične pakete (Visit Bela Krajina, Slovenian Tourist Board). Merjenje kazalnikov: obiskovalci postankov, promet kmetij, medijski doseg. Zaključno poročilo za LAS DBK. Načrt za trajnost — model, ki deluje brez EU sredstev (vstopnine, partnerstva, turistična agencija).</p>
+          <div class="phase-items">
+            <span class="phase-item">Turistični paketi</span>
+            <span class="phase-item">Merjenje KPIjev</span>
+            <span class="phase-item">Zaključno poročilo</span>
+            <span class="phase-item">Model trajnosti</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BUDGET ===================== -->
+  <section class="section budget-bg">
+    <div class="container">
+      <div class="section-label">Finančni načrt</div>
+      <h2 class="section-title">Razčlenitev proračuna</h2>
+
+      <div class="budget-total-banner">
+        <div>
+          <div class="budget-total-label">Skupni proračun projekta</div>
+          <div class="budget-total-amount">€ 120.000</div>
+        </div>
+        <div class="budget-split">
+          <strong>do € 96.000</strong> EU sofinanciranje (ESRR, do 80 %)
+          <br>
+          <strong>€ 24.000+</strong> lastni delež prijavitelja / partnerjev
+        </div>
+      </div>
+
+      <div class="budget-bars">
+
+        <div class="budget-line">
+          <div class="budget-cat">
+            Označevanje poti in QR postanki
+            <small>Tabelje, QR nosilci, montaža, GPS kartiranje, spletna vsebina za 10 postankov</small>
+          </div>
+          <div class="budget-bar-wrap">
+            <div class="budget-bar bar-1" style="width:25%"></div>
+          </div>
+          <div class="budget-amount">€ 30.000</div>
+        </div>
+
+        <div class="budget-line">
+          <div class="budget-cat">
+            Mobilne sončne tržne stojnice
+            <small>6 mobilnih stojnic s solarnim napajanjem, prevoz, vzdrževanje</small>
+          </div>
+          <div class="budget-bar-wrap">
+            <div class="budget-bar bar-2" style="width:27%"></div>
+          </div>
+          <div class="budget-amount">€ 32.000</div>
+        </div>
+
+        <div class="budget-line">
+          <div class="budget-cat">
+            Brandiranje in podpora pridelovalcem
+            <small>Vizualna identiteta, embalaža, etikete, spletna stran, delavnice za kmete</small>
+          </div>
+          <div class="budget-bar-wrap">
+            <div class="budget-bar bar-3" style="width:17%"></div>
+          </div>
+          <div class="budget-amount">€ 20.000</div>
+        </div>
+
+        <div class="budget-line">
+          <div class="budget-cat">
+            Promocija in trženje
+            <small>Foto/video produkcija, socialna omrežja, turistični materiali, tiskovina, events</small>
+          </div>
+          <div class="budget-bar-wrap">
+            <div class="budget-bar bar-4" style="width:17%"></div>
+          </div>
+          <div class="budget-amount">€ 20.000</div>
+        </div>
+
+        <div class="budget-line">
+          <div class="budget-cat">
+            Koordinacija in vodenje projekta
+            <small>Projektni vodja, poročanje LAS DBK, finančno upravljanje, evalvacija</small>
+          </div>
+          <div class="budget-bar-wrap">
+            <div class="budget-bar bar-5" style="width:15%"></div>
+          </div>
+          <div class="budget-amount">€ 18.000</div>
+        </div>
+
+      </div>
+
+      <div class="budget-footer">
+        <strong>Opomba:</strong> Stroški so okvirni in indikativni za to fazo brainstorminga. Pred oddajo vloge je treba pridobiti vsaj 3 primerljive ponudbe za vsako kategorijo nad €10.000. Stroški DDV so upravičeni le, če prijavitelj ni zavezanec za DDV. Lastni delež se lahko pokrije delno z vrednotenjem prostovoljnega dela partnerjev (občine, društva).
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PARTNERS ===================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Partnerstvo</div>
+      <h2 class="section-title">Potencialni partnerji in vloge</h2>
+      <div class="partners-grid">
+
+        <div class="partner-card">
+          <div class="partner-name">Turistično društvo Bela Krajina</div>
+          <div class="partner-role">Koordinator turistične vsebine, organizacija tržnic, stik z obiskovalci, promocija poti. Idealen prijavitelj ali vodilni partner.</div>
+          <span class="partner-type type-lead">Vodilni partner / prijavitelj</span>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-name">Občina Metlika</div>
+          <div class="partner-role">Souporaba javnih površin za tržnice, lokalna financijska podpora, politična legitimnost projekta, soglasja za postavitev infrastrukture.</div>
+          <span class="partner-type type-public">Javni partner</span>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-name">Občina Črnomelj</div>
+          <div class="partner-role">Souporaba infrastrukture (Podzemelj, Sinji Vrh), kmetijsko območje ob Kolpi. Logistična podpora, lokalna vez s pridelovalci.</div>
+          <span class="partner-type type-public">Javni partner</span>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-name">Javni zavod Krajinski park Kolpa</div>
+          <div class="partner-role">Upravljavec zavarovanega območja, strokovna podpora pri kartiranju poti, dovoljenjih, naravi-prijaznemu pristopu. Partnerstvo na KOLPA E-BIKE projektu so že imeli.</div>
+          <span class="partner-type type-public">Strokovni partner</span>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-name">Lokalne eko-kmetije (10)</div>
+          <div class="partner-role">Dejanski nosilci projekta: zeliščarji, sirari, čebelarji, vinarji ob Kolpi. Zagotovijo vsebino postankov in produkte za tržnice. Del prostovoljnega dela.</div>
+          <span class="partner-type type-private">Zasebni sektor / kmetije</span>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-name">GTM d.o.o. Metlika (Hotel Bela Krajina)</div>
+          <div class="partner-role">Vodilni partner originalnega KOLPA E-BIKE projekta. Izkušnje z e-kolesarjenjem in turizmom ob Kolpi, obstoječa mreža gostov — naravni zaveznik.</div>
+          <span class="partner-type type-private">Zasebni sektor</span>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-name">Hrvaška stran — LAG Vallis Colapis ali LAG Kupa</div>
+          <div class="partner-role">Hrvaški LAG partner za skupne tržnice v Vinici in čezmejni gastronomski nastop. Odpira pot do Interreg SI-HR komplementarnega financiranja.</div>
+          <span class="partner-type type-hr">Hrvaški partner</span>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-name">Visit Bela Krajina / Zavod za turizem</div>
+          <div class="partner-role">Integracija v obstoječe turistične pakete, promocija na nacionalni ravni (Slovenian Tourist Board), digitalne platforme.</div>
+          <span class="partner-type type-ngo">Turistična organizacija</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CROSS-BORDER ===================== -->
+  <section class="section crossborder-bg">
+    <div class="container">
+      <div class="section-label">Čezmejno sodelovanje</div>
+      <h2 class="section-title">Slovenija × Hrvaška — priložnost ob Kolpi</h2>
+
+      <div class="cb-grid">
+        <div class="cb-block">
+          <div class="cb-block-title">
+            <span class="cb-flag">🇸🇮</span>
+            Interreg VI-A Slovenija–Hrvaška 2021–2027
+          </div>
+          <p>Program Interreg SI-HR za obdobje 2021–2027 je aktiven in Kolpa/Kupa je eksplicitno navedena kot prioritetno čezmejno območje. Program podpira naravno in kulturno dediščino, trajnostni turizem in biotsko raznovrstnost.</p>
+          <ul>
+            <li>Pred. projekt Misterion je že dokazal, da Metlika, Semič in hrvaška stran Kolpe sodelujejo</li>
+            <li>Skupne čezmejne tržnice v Vinici so naravni Interreg element</li>
+            <li>Hrvaška stran (Kamanje, Ozalj) ima razvite LAG strukture</li>
+            <li>Interreg SI-HR razpisi so ločeni od LAS DBK — možno komplementarno financiranje</li>
+          </ul>
+        </div>
+
+        <div class="cb-block">
+          <div class="cb-block-title">
+            <span class="cb-flag">🇭🇷</span>
+            Hrvaška LEADER mreža — isti produkt, drug trg
+          </div>
+          <p>Hrvaška prav tako implementira LEADER/CLLD za obdobje 2021–2027. Hrvaški LAG partnerji vzdolž Kupe (Kupa je hrvaško ime za Kolpo) imajo interes za skupne gastronomske in turistične produkte.</p>
+          <ul>
+            <li>Skupna gastronomska znamka (eko produkti ob Kolpi/Kupa) — nastop na dveh trgih</li>
+            <li>Hrvaški turisti + slovenska stran = nov kanal za lokalne pridelovalce</li>
+            <li>Skupne tržnice ne potrebujejo Interreg — dovolj je partnerska pogodba v vlogi LAS DBK</li>
+            <li>Hrvaška stran prinese lastno financiranje (sofinanciranje EU prek hrvaških LAS)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="interreg-note">
+        <strong>Strateška priporočilo</strong>
+        Projekt prijavi pri LAS DBK kot ESRR operacijo, pri čemer hrvaški partner sodeluje kot pridruženi partner (brez neposrednega financiranja iz slovenskega LAS). Vzporedno preverite, ali hrvaški LAG Vallis Colapis ali LAG Kupa pripravljata Interreg SI-HR vloge — v tem primeru se projekta komplementarno povežeta in skupaj pokrijeta obe strani reke. To je "dvojni udar": en proračun iz LAS DBK, potencialno dodaten iz Interreg SI-HR za infrastrukturo na hrvaški strani.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NEXT STEPS ===================== -->
+  <section class="section steps-bg">
+    <div class="container">
+      <div class="section-label">Praktični naslednji koraki</div>
+      <h2 class="section-title">Kaj storite zdaj, da ste pripravljeni na naslednji razpis</h2>
+      <div class="steps-grid">
+
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-title">Pokličite LAS DBK</div>
+          <p class="step-desc">Obiščite ali pokličite pisarno LAS DBK (las-dbk.si) in vprašajte: "Kdaj bo naslednji javni poziv za ESRR projekte?" in "Ali ima naša ideja osnove za vloge?" Uradniki LAS so zavezani pomagati potencialnim prijaviteljem.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-title">Preberite SLR LAS DBK</div>
+          <p class="step-desc">Strategija lokalnega razvoja (SLR) 2021–2027 je dostopna na las-dbk.si. Preverite specifične cilje, kazalnike in merila ocenjevanja za ESRR sklad — to je "kodni ključ" za pisanje vloge, ki dobi visoke ocene.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-title">Naredite partnerski sestanek</div>
+          <p class="step-desc">Zberite 4–5 ključnih partnerjev (Turistično društvo, vsaj 3 kmetije, 1 občina). Preverite, kdo bo vodilni prijavitelj, kdo bo prispeval lastni delež in kdo bo projektni vodja. Brez tega ni vloge.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-title">Preverite hrvaško stran</div>
+          <p class="step-desc">Poiščite kontakt za LAG Vallis Colapis ali lokalno turistično organizacijo v Kamanju / Ozlju na hrvaški strani Kupe. Preliminarno pismo o nameri (Letter of Intent) za skupne tržnice doda vrednost vlogi.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">5</div>
+          <div class="step-title">Identificirajte 10 kmetij</div>
+          <p class="step-desc">Naredite seznam konkretnih kmetij, ki bi bile pripravljene postati postanki. Zeliščni vrtovi, sirarna, čebelnjak, vinska klet — vsak mora biti na kolesarski razdalji od obstoječih KOLPA E-BIKE poti. Fotografirajte.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">6</div>
+          <div class="step-title">Pripravite finančno konstrukcijo</div>
+          <p class="step-desc">Preverite, koliko lastnih sredstev ima vodilni prijavitelj. Občinska podpora, prostovoljno delo (vrednoti se po urni postavki), članarine društev — vse šteje kot lastni delež. €24.000 lastnega deleža je cilj.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">7</div>
+          <div class="step-title">Poiščite projektnega pisca</div>
+          <p class="step-desc">Za resno vlogo razmislite o najemu svetovalca za EU projekte (cca €2.000–€5.000 za pisanje vloge — to je upravičen strošek projekta!). Dobro napisana vloga pomeni razliko med uspehom in zavrnitvijo.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">8</div>
+          <div class="step-title">Sledite razpisom LAS DBK</div>
+          <p class="step-desc">Naročite se na obvestila na las-dbk.si in preverite skp.si. LAS DBK ima za 2021–2027 predvidenih več razpisnih krogov. Pripravljenost dokumentacije pomeni, da ste takoj ko se razpis odpre — pripravljeni.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">Okusi Kolpe</div>
+      <p class="footer-disclaimer">
+        Ta dokument je bil pripravljen za namene brainstorminga in predinformiranja. Ne predstavlja uradne vloge ali pravnega svetovanja. Vse informacije o pogojih, rokih in zneskih preveri neposredno pri LAS DBK (las-dbk.si) in na skp.si pred oddajo vloge.
+      </p>
+      <div class="footer-meta">Pripravljeno za Bela Krajina · Marec 2026 · LEADER/CLLD 2021–2027</div>
+    </div>
+  </footer>
+
+</body>
+</html>

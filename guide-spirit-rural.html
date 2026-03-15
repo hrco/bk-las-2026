@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPIRIT SIDT-2026-RURAL — Navodila za prijavo | BK LAS 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --surface2: #1c2330; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+    --green: #3fb950; --yellow: #d29922; --orange: #f0883e; --red: #f85149;
+    --purple: #bc8cff; --spirit: #7c3aed; --spirit-light: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+  .header {
+    background: linear-gradient(135deg, #1a0d3a 0%, #2d1a6e 50%, #200d50 100%);
+    border-bottom: 3px solid var(--spirit-light); padding: 40px 20px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.15) 0%, transparent 60%);
+  }
+  .header-badge {
+    display: inline-block; background: rgba(124,58,237,0.3); border: 1px solid var(--spirit-light);
+    color: var(--spirit-light); font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 16px; position: relative;
+  }
+  .header h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(20px, 3.5vw, 38px); font-weight: 700; color: #fff; position: relative; margin-bottom: 8px; }
+  .header .subtitle { font-size: 15px; color: var(--spirit-light); position: relative; margin-bottom: 24px; }
+  .header-meta { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; }
+  .meta-chip { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .meta-chip .label { color: var(--muted); }
+  .meta-chip .value { color: #fff; font-weight: 600; }
+
+  .urgent-banner { background: linear-gradient(90deg, #1a1200, #2d2000); border: 1px solid var(--yellow); border-radius: 10px; padding: 16px 20px; margin: 24px auto; max-width: 900px; display: flex; align-items: center; gap: 16px; }
+  .urgent-text strong { color: var(--yellow); font-size: 15px; }
+  .urgent-text p { color: var(--text); font-size: 13px; margin-top: 4px; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+  .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 13px; border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; margin-bottom: 30px; transition: all 0.2s; }
+  .nav-back:hover { color: var(--text); border-color: var(--accent); }
+
+  .section { margin-bottom: 40px; }
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--spirit-light); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; }
+  .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .kv { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid rgba(48,54,61,0.5); padding-bottom: 8px; }
+  .kv:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .kv .k { color: var(--muted); font-size: 13px; }
+  .kv .v { color: var(--text); font-size: 13px; font-weight: 500; text-align: right; max-width: 60%; }
+
+  .step-list { counter-reset: steps; }
+  .step { counter-increment: steps; display: flex; gap: 16px; margin-bottom: 20px; padding: 16px; background: var(--surface2); border-radius: 10px; border-left: 3px solid var(--spirit-light); }
+  .step-num { width: 32px; height: 32px; min-width: 32px; background: var(--spirit); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: #fff; }
+  .step-num::before { content: counter(steps); }
+  .step-content h4 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .step-content p, .step-content ul { font-size: 13px; color: var(--muted); }
+  .step-content ul { padding-left: 16px; margin-top: 6px; }
+  .step-content li { margin-bottom: 4px; }
+  .step-content a { color: var(--accent); }
+  .step-content strong { color: var(--text); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .tag-purple { background: rgba(167,139,250,0.15); color: var(--spirit-light); border: 1px solid rgba(167,139,250,0.3); }
+  .tag-orange { background: rgba(240,136,62,0.15); color: var(--orange); border: 1px solid rgba(240,136,62,0.3); }
+  .tag-blue { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+
+  .info-box { background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.25); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; }
+  .info-box strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 14px; }
+
+  .purple-box { background: rgba(124,58,237,0.08); border: 1px solid rgba(167,139,250,0.3); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; }
+  .purple-box strong { color: var(--spirit-light); display: block; margin-bottom: 6px; font-size: 14px; }
+
+  .warn-box { background: rgba(210,153,34,0.08); border: 1px solid rgba(210,153,34,0.3); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 13px; color: #deba7a; }
+  .warn-box strong { color: var(--yellow); display: block; margin-bottom: 6px; }
+
+  .contact-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .contact-card p { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .contact-card a { color: var(--accent); }
+
+  .deadline-banner { background: linear-gradient(135deg, #1a0d3a, #2d1a6e); border: 2px solid var(--spirit-light); border-radius: 12px; padding: 20px 24px; text-align: center; margin: 24px 0; }
+  .deadline-banner .deadline-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+  .deadline-banner .deadline-date { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: var(--spirit-light); }
+  .deadline-banner .deadline-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .flat-rate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+  .flat-rate-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .flat-rate-card .amount { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; color: var(--spirit-light); }
+  .flat-rate-card .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .flat-rate-card.highlight { border-color: rgba(167,139,250,0.5); background: rgba(124,58,237,0.08); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(48,54,61,0.5); color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+
+  .footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  @media print { body { background: #fff; color: #000; } .header { background: #3b0d8f; } .nav-back { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">🚀 SPIRIT Slovenija — Podeželski podjetniki</div>
+  <h1>SPIRIT SIDT-2026-RURAL</h1>
+  <p class="subtitle">Spodbude za digitalne inovacije in tehnologijo za podeželska podjetja · 2025–2029</p>
+  <div class="header-meta">
+    <div class="meta-chip"><span class="label">Program</span><span class="value">SPIRIT SIDT 2026</span></div>
+    <div class="meta-chip"><span class="label">Predvideni rok</span><span class="value">15. maj 2026</span></div>
+    <div class="meta-chip"><span class="label">Razpon</span><span class="value">€30k – €300k</span></div>
+    <div class="meta-chip"><span class="label">Sofinanciranje</span><span class="value">do 50%</span></div>
+    <div class="meta-chip"><span class="label">Portal</span><span class="value">spirit.si / eRazpisi</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <a href="index.html" class="nav-back">← Nazaj na pregled</a>
+
+  <div class="urgent-banner">
+    <div style="font-size:28px">🚀</div>
+    <div class="urgent-text">
+      <strong>SPIRIT SIDT-2026-RURAL — Predvideni rok: 15. maj 2026</strong>
+      <p>SPIRIT razpisi za podeželje kombinirajo digitalizacijo in zeleni prehod. Bela krajina ustreza profilu: ruralna lokacija, kmetijsko-turistična podjetja, mladi podjetniki. Preveri <a href="https://www.spirit.si" target="_blank" style="color:var(--accent)">spirit.si</a>.</p>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <h2 class="section-title">📋 Pregled SPIRIT SIDT-RURAL</h2>
+    <div class="card">
+      <div class="kv"><span class="k">Organizacija</span><span class="v">SPIRIT Slovenija (Javna agencija RS za spodbujanje podjetništva)</span></div>
+      <div class="kv"><span class="k">Program</span><span class="v">SPIRIT 2025–2029 (Kohezijska politika EU)</span></div>
+      <div class="kv"><span class="k">Razpis</span><span class="v">SIDT-2026-RURAL (Spodbude za inovacije in digitalne tehnologije — Rural)</span></div>
+      <div class="kv"><span class="k">Prioriteta</span><span class="v">Digitalizacija, zeleni prehod, internacionalizacija podeželskih MSP</span></div>
+      <div class="kv"><span class="k">Min. vrednost projekta</span><span class="v">€30.000</span></div>
+      <div class="kv"><span class="k">Max. vrednost projekta</span><span class="v">€300.000</span></div>
+      <div class="kv"><span class="k">Sofinanciranje</span><span class="v">do 50% upravičenih stroškov</span></div>
+      <div class="kv"><span class="k">Trajanje projekta</span><span class="v">do 24 mesecev</span></div>
+    </div>
+
+    <div class="purple-box">
+      <strong>SPIRIT + Bela krajina = idealna kombinacija</strong>
+      SPIRIT RURAL razpisi prioritizirajo: <em>podeželske MSP</em> (Bela krajina = ruralna regija), <em>digitalizacijo kmetijsko-turističnih podjetij</em> (Farm Trail, wellness, nočno nebo), <em>zeleni prehod</em> (bio-pridelava, reciklaža, ekološki turizem). Mladi podjetniki (&lt;35 let) dobijo prioritetne točke. Bonus za projekte, ki ustvarjajo nova delovna mesta.
+    </div>
+  </div>
+
+  <!-- UPRAVIČENOST -->
+  <div class="section">
+    <h2 class="section-title">✅ Kdo se lahko prijavi?</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>✅ Upravičeni prijavitelji</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>MSP (mikro, mala, srednja podjetja)</li>
+          <li>s.p. (samostojni podjetniki)</li>
+          <li>d.o.o. z manj kot 250 zaposlenimi</li>
+          <li>Prihodki &lt; €50M ali bilanca &lt; €43M</li>
+          <li>Sedež v podeželski regiji (BK ✓)</li>
+          <li>Dejavnost v kmetijstvu, turizmu, predelavi</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>❌ Neupravičeni prijavitelji</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Velika podjetja (&gt;250 zaposlenih)</li>
+          <li>Javne institucije in NVO</li>
+          <li>Podjetja v finančnih težavah</li>
+          <li>Prijavitelji brez registrirane dejavnosti</li>
+          <li>Podjetja z davčnimi dolgovi</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUTH SPECIAL -->
+  <div class="section">
+    <h2 class="section-title">⭐ Posebni program — Youth Start Smart (€9.000 flat-rate)</h2>
+    <div class="flat-rate-grid">
+      <div class="flat-rate-card highlight">
+        <div class="amount">€9.000</div>
+        <div class="label">Flat-rate grant<br>za mlade (&lt;29 let)</div>
+      </div>
+      <div class="flat-rate-card">
+        <div class="amount">€9.45M</div>
+        <div class="label">Skupni proračun<br>programa 2025-2029</div>
+      </div>
+      <div class="flat-rate-card">
+        <div class="amount">0%</div>
+        <div class="label">Birokracije<br>(Flat-rate = ni računovodenja)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Youth Start Smart — Kako deluje?</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Posebni "Start Smart" program znotraj SPIRIT je namenjen izključno mladim podjetnikom (&lt;29 let). Gre za FLAT-RATE subvencijo — ne potrebuješ računovodskih dokazil za vsak euro!</p>
+      <div class="kv"><span class="k">Starostna meja</span><span class="v">Do 29 let (vključno)</span></div>
+      <div class="kv"><span class="k">Znesek</span><span class="v">€9.000 (flat-rate)</span></div>
+      <div class="kv"><span class="k">Predpogoj</span><span class="v">Dokončan "Start Smart" usposabljanje (SPIRIT)</span></div>
+      <div class="kv"><span class="k">Pokriva</span><span class="v">Prvostopenjski poslovni stroški (oprema, trženje, licence)</span></div>
+      <div class="kv"><span class="k">Ne pokriva</span><span class="v">Plače, najem nepremičnin, stalna osnovna sredstva</span></div>
+      <div class="tags">
+        <span class="tag tag-green">Enostavno za pridobiti</span>
+        <span class="tag tag-purple">Mladi BK podjetniki</span>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Stackanje Youth Start Smart + LEADER Youth Venture Lab</strong>
+      Mladi podjetnik (&lt;29 let) iz Bele krajine: LEADER Youth Venture Lab (05) za skupno infrastrukturo + SPIRIT €9k flat-rate za lastni startup = skupaj do €12-15k brez velikega birokracije. Pogoj: različni stroški (ne dvojno financiranje istih).
+    </div>
+  </div>
+
+  <!-- TEMATSKA PODROČJA -->
+  <div class="section">
+    <h2 class="section-title">🎯 Prioritetna področja SIDT-RURAL</h2>
+    <div class="card">
+      <table>
+        <tr><th>Prioriteta</th><th>Opis</th><th>BK relevantnost</th></tr>
+        <tr><td>🌐 Digitalizacija poslovanja</td><td>Uvedba digitalnih orodij, e-commerce, ERP sistemov za podeželska MSP</td><td style="color:var(--green)">Visoka — turizem, prodaja</td></tr>
+        <tr><td>♻️ Zeleni prehod</td><td>Energetska učinkovitost, OVE, zmanjšanje ogljičnega odtisa</td><td style="color:var(--green)">Visoka — kmetije</td></tr>
+        <tr><td>🌍 Internacionalizacija</td><td>Vstop na tuje trge, certificiranje (BIO, TSG), izvoz</td><td style="color:var(--yellow)">Srednja — zelišča, vino</td></tr>
+        <tr><td>🔬 Inovacije v produktih</td><td>Razvoj novih produktov/storitev z dodano vrednostjo</td><td style="color:var(--green)">Visoka — bio-kozmetika, zelišča</td></tr>
+        <tr><td>👥 Socialno podjetništvo</td><td>Podjetja z jasnim socialnim ali okoljskim namenom</td><td style="color:var(--yellow)">Srednja — inkubator</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- KONKRETNE IDEJE -->
+  <div class="section">
+    <h2 class="section-title">💡 Konkretne ideje za BK podjetja</h2>
+
+    <div class="card">
+      <h3>🌿 Ideja 1: "Kolpa Botanicals — Bio-kozmetika iz zelišč Kolpe"</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Mlada podjetnica (&lt;29 let) ustvari D2C (direct-to-consumer) linijo bio-kozmetičnih produktov iz zelišč Kolpe. SPIRIT financira razvoj produktov, trženje, digitalno platformo. SPIRIT Youth €9k za start.</p>
+      <div class="two-col">
+        <div>
+          <div class="kv"><span class="k">Vrednost projekta</span><span class="v">€60.000</span></div>
+          <div class="kv"><span class="k">SPIRIT delež (50%)</span><span class="v">€30.000</span></div>
+          <div class="kv"><span class="k">+ Youth Start Smart</span><span class="v">€9.000 flat-rate</span></div>
+        </div>
+        <div>
+          <div class="kv"><span class="k">Lastna udeležba</span><span class="v">€21.000</span></div>
+          <div class="kv"><span class="k">Partner</span><span class="v">Zeliščna kmetija Hrelenov</span></div>
+          <div class="kv"><span class="k">Trg</span><span class="v">Slovenija, Avstrija, D2C EU</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag tag-green">Idealen profil</span>
+        <span class="tag tag-purple">Mladi + Rural</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📱 Ideja 2: "Kolpa Digital Trail — App za turistični eko-turizem"</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Razvoj digitalne aplikacije za vodenje po Farm Trail poti, Kolpi in nočnem nebu BK. SPIRIT financira IT razvoj (digitalizacija), vsebino, trženje. Kombinacija z Interreg (SI-HR čezmejni turizem).</p>
+      <div class="two-col">
+        <div>
+          <div class="kv"><span class="k">Vrednost projekta</span><span class="v">€80.000</span></div>
+          <div class="kv"><span class="k">SPIRIT delež (50%)</span><span class="v">€40.000</span></div>
+          <div class="kv"><span class="k">Lastna udeležba</span><span class="v">€40.000</span></div>
+        </div>
+        <div>
+          <div class="kv"><span class="k">Tip stroškov</span><span class="v">IT razvoj, UX, vsebina</span></div>
+          <div class="kv"><span class="k">Stackable</span><span class="v">Interreg SI-HR (vsebina)</span></div>
+          <div class="kv"><span class="k">Trg</span><span class="v">SI + HR turizem</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag tag-blue">Digitalizacija</span>
+        <span class="tag tag-purple">Stackable</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>⚡ Ideja 3: "OVE na kmetiji — Sončna energija za ekološke kmetije BK"</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Namestitev sončnih panelov in energetska učinkovitost za 5-10 ekoloških kmetij Bele krajine. Skupni projekt (konzorcij kmetij) — SPIRIT financira zeleni prehod, ARSKTRP 4.1 za kmetijsko infrastrukturo.</p>
+      <div class="two-col">
+        <div>
+          <div class="kv"><span class="k">Vrednost projekta</span><span class="v">€150.000</span></div>
+          <div class="kv"><span class="k">SPIRIT delež (50%)</span><span class="v">€75.000</span></div>
+          <div class="kv"><span class="k">Lastna udeležba</span><span class="v">€75.000</span></div>
+        </div>
+        <div>
+          <div class="kv"><span class="k">Tip stroškov</span><span class="v">OVE oprema, montaža, stroški</span></div>
+          <div class="kv"><span class="k">Stackable</span><span class="v">ARSKTRP 4.1 za kmetijo</span></div>
+          <div class="kv"><span class="k">Cilj</span><span class="v">Ogljična nevtralnost kmetij</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag tag-green">Zeleni prehod</span>
+        <span class="tag tag-orange">Skupni projekt</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KORAKI -->
+  <div class="section">
+    <h2 class="section-title">📝 Koraki za prijavo</h2>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Preveri aktualni razpis na SPIRIT portalu</h4>
+          <p><a href="https://www.spirit.si/razpisi" target="_blank">spirit.si/razpisi</a> — tu so objavljeni vsi razpisi z razpisno dokumentacijo.<br>
+          Za Youth Start Smart: <a href="https://www.spirit.si/mladi" target="_blank">spirit.si/mladi</a></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Preveri, ali si upravičen (screening)</h4>
+          <p>SPIRIT ima orodje za preverjanje upravičenosti:<br>
+          <a href="https://www.spirit.si/podjetja/screen" target="_blank">spirit.si/podjetja/screen</a><br>
+          Preveri: velikost podjetja, sektor, lokacija, starost podjetja.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pripravi poslovni načrt in opis projekta</h4>
+          <p>SPIRIT zahteva:</p>
+          <ul>
+            <li><strong>Opis projekta:</strong> Kaj boš razvil/ustvaril?</li>
+            <li><strong>Digitalni/zeleni element:</strong> Kako projekt prispeva k digitalizaciji ali zelenemu prehodu?</li>
+            <li><strong>Tržni potencial:</strong> Kdo so kupci? Kakšen je trg?</li>
+            <li><strong>Poslovni model:</strong> Kako bo projekt ekonomsko vzdržen po sofinanciranju?</li>
+            <li><strong>WP plan:</strong> Plan delovnih paketov z roki in stroški</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Pripravi finančni načrt (proračun projekta)</h4>
+          <p>Vse postavke morajo biti opravičene z realnimi cenami.<br>
+          Za vsak večji strošek pridobi ponudbo.<br>
+          <strong>Lastna sredstva morajo biti dokumentirana</strong> (bančni izpisek, posojilna pogodba).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Oddaj vlogo prek eRazpisi portala</h4>
+          <p>Portal: <a href="https://erazpisi.spirit.si" target="_blank">erazpisi.spirit.si</a><br>
+          Potrebuješ: kvalificirano digitalno potrdilo (SIGEN-CA) ali SI-PASS.<br>
+          <strong>Rok: 15. maj 2026</strong> (preveri uradni razpis!)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STROŠKI -->
+  <div class="section">
+    <h2 class="section-title">💰 Upravičeni stroški SPIRIT SIDT</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>✅ Upravičeni stroški</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>Stroški osebja (zaposleni na projektu)</li>
+          <li>IT oprema in programska oprema</li>
+          <li>Razvoj digitalne platforme / aplikacije</li>
+          <li>Zunanji strokovnjaki (svetovalci, oblikovalci)</li>
+          <li>Trženje in promocija (do 15%)</li>
+          <li>Izobraževanje (vezano na projekt)</li>
+          <li>Potni stroški</li>
+          <li>Nakup licenc in certifikatov</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>❌ Neupravičeni stroški</h3>
+        <ul style="font-size:13px; color:var(--muted); padding-left:16px;">
+          <li>DDV (razen nevračljiv)</li>
+          <li>Obresti in stroški financiranja</li>
+          <li>Najem pisarn in poslovnih prostorov</li>
+          <li>Stroški pred oddajo vloge</li>
+          <li>Redno vzdrževanje obstoječe opreme</li>
+          <li>Stroški, ki niso vezani na projekt</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONTAKTI -->
+  <div class="section">
+    <h2 class="section-title">📞 Ključni kontakti</h2>
+    <div class="contact-card">
+      <h4>SPIRIT Slovenija — Javna agencija</h4>
+      <p>📞 01 5898 550</p>
+      <p>📧 <a href="mailto:spirit@spirit.si">spirit@spirit.si</a></p>
+      <p>🌐 <a href="https://www.spirit.si" target="_blank">spirit.si</a></p>
+      <p>Brezplačne posvetovalnice za potencialne prijavitelje — priporoča se!</p>
+    </div>
+    <div class="contact-card">
+      <h4>Podjetniški center Bela krajina (PCBK)</h4>
+      <p>Lokalni partner za podporo pri SPIRIT prijavah</p>
+      <p>📍 Metlika — Bela krajina</p>
+      <p>Kontaktiraj LAS DBK za napotitev na lokalne svetovalce</p>
+    </div>
+    <div class="contact-card">
+      <h4>Enterprise Europe Network (EEN) — Slovenija</h4>
+      <p>Brezplačna podpora pri EU prijavah za MSP</p>
+      <p>🌐 <a href="https://een.ec.europa.eu/about/branches/een-slovenia" target="_blank">een.ec.europa.eu/slovenia</a></p>
+    </div>
+  </div>
+
+  <!-- POVEZAVE -->
+  <div class="section">
+    <h2 class="section-title">🔗 Relevantni BK LAS projekti</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3><a href="05-kolpa-youth-venture-lab.html" style="color:var(--accent); text-decoration:none;">05 — Youth Green Venture Lab</a></h3>
+        <p style="font-size:13px; color:var(--muted);">SPIRIT Youth Start Smart (€9k flat) + LEADER Youth Venture Lab (€40k) = idealna kombinacija za mlade podjetnike BK. Stack je dovoljen za različne stroške.</p>
+        <div class="tags"><span class="tag tag-purple">Idealen stack</span></div>
+      </div>
+      <div class="card">
+        <h3><a href="07-kolpa-night-sky-gastro.html" style="color:var(--accent); text-decoration:none;">07 — Nočno nebo &amp; Gastro</a></h3>
+        <p style="font-size:13px; color:var(--muted);">Digitalizacija gastro in turističnih storitev (rezervacijski sistem, festival app, sledljivost pridelkov) je idealna SPIRIT SIDT aktivnost.</p>
+        <div class="tags"><span class="tag tag-blue">Digitalizacija turizma</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deadline-banner">
+    <div class="deadline-label">Predvideni rok za oddajo vloge</div>
+    <div class="deadline-date">15. maj 2026</div>
+    <div class="deadline-note">Youth Start Smart €9k: prijaviti se pred izčrpanjem sredstev · spirit.si/mladi</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>BK LAS 2026 Research Hub · <a href="index.html">← Nazaj na pregled</a></p>
+  <p style="margin-top:6px;">Informacije na podlagi javnih podatkov SPIRIT Slovenija · Vedno preveri uradne razpisne pogoje</p>
+</div>
+
+</body>
+</html>

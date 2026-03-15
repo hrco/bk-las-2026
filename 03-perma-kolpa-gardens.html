@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mreža permakultivnih vrtov ob Kolpi — LAS DBK 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       TOKENS
+    ============================================================ */
+    :root {
+      --forest:    #1e3a2f;
+      --forest-mid:#2d5a42;
+      --moss:      #4a7c59;
+      --moss-light:#6ba07a;
+      --earth:     #7c5c3a;
+      --earth-light:#a67c52;
+      --bark:      #3d2b1f;
+      --cream:     #f5f0e8;
+      --cream-dark:#ece5d4;
+      --parchment: #faf7f0;
+      --yellow:    #d4a843;
+      --yellow-pale:#f0d98a;
+      --sage:      #c8d9c0;
+      --sage-dark: #a3bda0;
+      --red-berry: #8b2e2e;
+      --text-dark: #1a1a1a;
+      --text-mid:  #3a3a3a;
+      --text-light:#6b6b6b;
+      --border:    #d4c9b0;
+
+      --radius-sm: 6px;
+      --radius:    12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 8px rgba(30,58,47,.10);
+      --shadow:    0 6px 24px rgba(30,58,47,.14);
+      --shadow-lg: 0 12px 48px rgba(30,58,47,.18);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--parchment);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.25;
+    }
+
+    a { color: var(--moss); text-decoration: underline; }
+    p { margin-bottom: .85em; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ============================================================
+       LAYOUT WRAPPER
+    ============================================================ */
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      background: linear-gradient(160deg, var(--forest) 0%, var(--forest-mid) 55%, var(--moss) 100%);
+      color: var(--cream);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* botanical SVG background pattern */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 80% 20%, rgba(212,168,67,.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 80%, rgba(107,160,122,.20) 0%, transparent 45%);
+      pointer-events: none;
+    }
+
+    /* leaf/botanical SVG layer */
+    .hero-botanical {
+      position: absolute;
+      right: -30px;
+      top: -20px;
+      opacity: .08;
+      width: 420px;
+      height: 420px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 3.5rem 2.5rem 3rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .32rem .85rem;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .badge-eu {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.30);
+      color: var(--cream);
+    }
+
+    .badge-leader {
+      background: var(--yellow);
+      color: var(--bark);
+    }
+
+    .badge-builds {
+      background: rgba(200,217,192,.20);
+      border: 1px solid var(--sage-dark);
+      color: var(--sage);
+    }
+
+    .hero-flag {
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--sage);
+      letter-spacing: .04em;
+      margin-bottom: .6rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: .4rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+
+    .hero h1 em {
+      color: var(--yellow-pale);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--sage);
+      margin-bottom: 2.2rem;
+      font-weight: 300;
+      letter-spacing: .01em;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .meta-card {
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius);
+      padding: .9rem 1.1rem;
+    }
+
+    .meta-card .label {
+      font-size: .68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--sage-dark);
+      margin-bottom: .2rem;
+    }
+
+    .meta-card .value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    /* ============================================================
+       SECTION WRAPPER
+    ============================================================ */
+    .section {
+      margin: 3rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--forest);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.55rem;
+      color: var(--forest);
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       CARDS
+    ============================================================ */
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-forest {
+      background: var(--forest);
+      color: var(--cream);
+      border-color: var(--forest-mid);
+    }
+
+    .card-cream {
+      background: var(--cream);
+      border-color: var(--border);
+    }
+
+    .card-moss {
+      background: linear-gradient(135deg, var(--forest-mid), var(--moss));
+      color: var(--cream);
+      border: none;
+    }
+
+    /* ============================================================
+       OVERVIEW
+    ============================================================ */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+    }
+
+    .overview-text {
+      grid-column: 1 / -1;
+    }
+
+    .overview-text p {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    .overview-text p strong {
+      color: var(--forest);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       WIN LIST
+    ============================================================ */
+    .win-list {
+      list-style: none;
+      display: grid;
+      gap: .9rem;
+    }
+
+    .win-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--moss);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .win-list li .win-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+
+    .win-list li .win-text strong {
+      display: block;
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: .2rem;
+    }
+
+    .win-list li .win-text span {
+      font-size: .88rem;
+      color: var(--text-light);
+    }
+
+    /* ============================================================
+       ALIGNMENT TABLE
+    ============================================================ */
+    .align-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .align-table thead tr {
+      background: var(--forest);
+      color: var(--cream);
+    }
+
+    .align-table thead th {
+      padding: .85rem 1rem;
+      text-align: left;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: .92rem;
+      letter-spacing: .02em;
+    }
+
+    .align-table tbody tr {
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .align-table tbody tr:last-child { border-bottom: none; }
+
+    .align-table tbody tr:nth-child(even) {
+      background: var(--parchment);
+    }
+
+    .align-table td {
+      padding: .85rem 1rem;
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .align-table td:first-child {
+      font-weight: 600;
+      color: var(--forest);
+      width: 32%;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: .18rem .6rem;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .pill-green  { background: #d4edda; color: #1a5c2d; }
+    .pill-yellow { background: #fff3cd; color: #7a5800; }
+    .pill-blue   { background: #d1ecf1; color: #0c4a60; }
+    .pill-earth  { background: #f5e6d3; color: #6b3a1a; }
+
+    .fit-stars {
+      color: var(--yellow);
+      font-size: 1rem;
+      letter-spacing: .05em;
+    }
+
+    /* ============================================================
+       VERIGA SECTION (connection box)
+    ============================================================ */
+    .veriga-box {
+      background: linear-gradient(135deg, var(--cream) 0%, #e8f0e5 100%);
+      border: 2px solid var(--moss-light);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .veriga-box::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      right: 30px;
+      font-family: 'Playfair Display', serif;
+      font-size: 12rem;
+      color: var(--sage);
+      opacity: .25;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .veriga-box h3 {
+      font-size: 1.3rem;
+      color: var(--forest);
+      margin-bottom: 1rem;
+    }
+
+    .veriga-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .veriga-col {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.1rem 1.2rem;
+      border: 1px solid var(--border);
+    }
+
+    .veriga-col h4 {
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--earth);
+      margin-bottom: .6rem;
+    }
+
+    .veriga-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .veriga-col ul li {
+      padding: .3rem 0;
+      font-size: .9rem;
+      color: var(--text-mid);
+      border-bottom: 1px solid var(--cream-dark);
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+    }
+
+    .veriga-col ul li:last-child { border-bottom: none; }
+
+    .veriga-col ul li::before {
+      content: '→';
+      color: var(--moss);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       REQUIREMENTS CHECKLIST
+    ============================================================ */
+    .req-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .req-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.3rem 1.4rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .req-box h3 {
+      font-size: 1.05rem;
+      color: var(--forest);
+      margin-bottom: .9rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--sage);
+    }
+
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: .7rem;
+      padding: .4rem 0;
+      font-size: .9rem;
+      color: var(--text-mid);
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--moss);
+      color: white;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      font-weight: 700;
+      margin-top: .12rem;
+    }
+
+    .check-icon.warn {
+      background: var(--yellow);
+      color: var(--bark);
+    }
+
+    .check-icon.info {
+      background: var(--earth-light);
+      color: white;
+    }
+
+    /* ============================================================
+       TIMELINE / PHASES
+    ============================================================ */
+    .phases {
+      position: relative;
+      padding-left: 2.8rem;
+    }
+
+    .phases::before {
+      content: '';
+      position: absolute;
+      left: 1rem;
+      top: 1.4rem;
+      bottom: 1.4rem;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--moss), var(--yellow), var(--earth));
+      border-radius: 2px;
+    }
+
+    .phase {
+      position: relative;
+      margin-bottom: 1.6rem;
+    }
+
+    .phase:last-child { margin-bottom: 0; }
+
+    .phase-dot {
+      position: absolute;
+      left: -2.1rem;
+      top: .7rem;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px var(--moss);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      font-weight: 700;
+      color: white;
+      z-index: 1;
+    }
+
+    .phase-dot.p1 { background: var(--moss);   box-shadow: 0 0 0 3px var(--moss); }
+    .phase-dot.p2 { background: var(--forest); box-shadow: 0 0 0 3px var(--forest); }
+    .phase-dot.p3 { background: var(--earth);  box-shadow: 0 0 0 3px var(--earth); }
+    .phase-dot.p4 { background: var(--yellow); box-shadow: 0 0 0 3px var(--yellow); color: var(--bark); }
+
+    .phase-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      margin-bottom: .7rem;
+    }
+
+    .phase-tag {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-light);
+      flex-shrink: 0;
+    }
+
+    .phase-card h3 {
+      font-size: 1.1rem;
+      color: var(--forest);
+    }
+
+    .phase-activities {
+      list-style: none;
+      display: grid;
+      gap: .35rem;
+    }
+
+    .phase-activities li {
+      font-size: .88rem;
+      color: var(--text-mid);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .phase-activities li::before {
+      content: '·';
+      position: absolute;
+      left: .3rem;
+      color: var(--moss-light);
+      font-size: 1.2rem;
+      line-height: .9;
+    }
+
+    /* ============================================================
+       BUDGET
+    ============================================================ */
+    .budget-total-bar {
+      background: var(--forest);
+      color: var(--cream);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+
+    .budget-total-bar .label {
+      font-size: .85rem;
+      color: var(--sage);
+      margin-bottom: .15rem;
+    }
+
+    .budget-total-bar .amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--yellow-pale);
+    }
+
+    .budget-total-bar .co-finance {
+      text-align: right;
+    }
+
+    .budget-total-bar .co-finance .label { text-align: right; }
+
+    .budget-items {
+      display: grid;
+      gap: .7rem;
+    }
+
+    .budget-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: .9rem 1.1rem;
+    }
+
+    .budget-item .name {
+      font-weight: 500;
+      color: var(--text-dark);
+      font-size: .95rem;
+    }
+
+    .budget-item .name small {
+      display: block;
+      font-size: .78rem;
+      color: var(--text-light);
+      font-weight: 400;
+      margin-top: .1rem;
+    }
+
+    .budget-item .pct {
+      font-size: .85rem;
+      color: var(--text-light);
+      font-weight: 500;
+      min-width: 40px;
+      text-align: right;
+    }
+
+    .budget-item .eur {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--forest);
+      font-size: 1.05rem;
+      min-width: 90px;
+      text-align: right;
+    }
+
+    .budget-bar-wrap {
+      grid-column: 1 / -1;
+      height: 6px;
+      background: var(--cream-dark);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .budget-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--moss), var(--moss-light));
+      transition: width .4s;
+    }
+
+    /* ============================================================
+       PARTNERS
+    ============================================================ */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .partner-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+    }
+
+    .partner-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .partner-card .partner-name {
+      font-weight: 600;
+      color: var(--forest);
+      font-size: .95rem;
+      margin-bottom: .2rem;
+    }
+
+    .partner-card .partner-role {
+      font-size: .82rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       CROSS-BORDER
+    ============================================================ */
+    .crossborder-box {
+      background: linear-gradient(135deg, #1e3a2f 0%, #2d5a42 50%, #7c5c3a 100%);
+      color: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .crossborder-box::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(212,168,67,.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .crossborder-box h3 {
+      font-size: 1.3rem;
+      color: var(--yellow-pale);
+      margin-bottom: .6rem;
+    }
+
+    .crossborder-box p {
+      color: var(--sage);
+      font-size: .95rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .crossborder-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+    }
+
+    .crossborder-item {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-sm);
+      padding: .9rem 1rem;
+      font-size: .88rem;
+      color: var(--cream);
+    }
+
+    .crossborder-item strong {
+      display: block;
+      color: var(--yellow-pale);
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: .25rem;
+    }
+
+    /* ============================================================
+       NEXT STEPS
+    ============================================================ */
+    .steps-list {
+      list-style: none;
+      counter-reset: steps;
+      display: grid;
+      gap: .85rem;
+    }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .steps-list li::before {
+      content: counter(steps);
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--earth);
+      color: white;
+      font-weight: 700;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: .05rem;
+    }
+
+    .steps-list li .step-body strong {
+      display: block;
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: .2rem;
+    }
+
+    .steps-list li .step-body span {
+      font-size: .87rem;
+      color: var(--text-light);
+    }
+
+    /* ============================================================
+       DIVIDER
+    ============================================================ */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    .divider-leaf {
+      text-align: center;
+      position: relative;
+      margin: 2.5rem 0;
+    }
+
+    .divider-leaf::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider-leaf span {
+      position: relative;
+      background: var(--parchment);
+      padding: 0 1rem;
+      color: var(--moss);
+      font-size: 1.3rem;
+    }
+
+    /* ============================================================
+       HIGHLIGHT CALLOUT
+    ============================================================ */
+    .callout {
+      background: var(--cream);
+      border-left: 4px solid var(--yellow);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 1rem 1.3rem;
+      margin: 1.2rem 0;
+      font-size: .93rem;
+      color: var(--text-mid);
+    }
+
+    .callout strong { color: var(--bark); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--bark);
+      color: rgba(245,240,232,.65);
+      text-align: center;
+      padding: 2rem;
+      font-size: .82rem;
+      letter-spacing: .03em;
+      line-height: 1.8;
+    }
+
+    .footer strong {
+      color: var(--cream);
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: .4rem;
+    }
+
+    .footer .disclaimer {
+      margin-top: .8rem;
+      font-size: .75rem;
+      color: rgba(245,240,232,.4);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 680px) {
+      .hero-inner          { padding: 2.2rem 1.4rem 2rem; }
+      .overview-grid       { grid-template-columns: 1fr; }
+      .veriga-grid         { grid-template-columns: 1fr; }
+      .req-grid            { grid-template-columns: 1fr; }
+      .crossborder-items   { grid-template-columns: 1fr; }
+      .budget-item         { grid-template-columns: 1fr auto; }
+      .budget-item .pct    { display: none; }
+      .budget-bar-wrap     { grid-column: 1 / -1; }
+      .hero h1             { font-size: 1.8rem; }
+      .hero-meta-grid      { grid-template-columns: 1fr 1fr; }
+      .hero-botanical      { display: none; }
+      .section-header h2   { font-size: 1.3rem; }
+      .budget-total-bar    { flex-direction: column; gap: .8rem; text-align: left; }
+      .budget-total-bar .co-finance { text-align: left; }
+    }
+
+    /* ============================================================
+       PRINT
+    ============================================================ */
+    @media print {
+      body      { background: white; font-size: 11pt; }
+      .hero     { background: var(--forest) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .hero-botanical { display: none; }
+      .page     { max-width: 100%; padding: 0; }
+      .section  { margin: 1.5rem 0; }
+      .card, .phase-card, .win-list li, .budget-item { box-shadow: none; border: 1px solid #ccc; }
+      a         { text-decoration: none; color: inherit; }
+    }
+  </style>
+</head>
+<body>
+<!-- LAS-STATUS-BANNER -->
+
+<style id="las-status-css">
+.las-status-bar {
+    background: #0f1f0f;
+    color: #e8f5e8;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 13px;
+    border-bottom: 3px solid #4caf50;
+}
+.las-status-bar .status-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+}
+.las-status-bar .s-label {
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #81c784;
+    font-weight: 700;
+    margin-right: 2px;
+}
+.las-status-bar .s-none {
+    background: #c62828;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+.las-status-bar .s-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1b3a1b;
+    border: 1px solid #4caf50;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+.las-status-bar .s-call.hot {
+    border-color: #ff9800;
+    background: #2a1f00;
+    animation: pulse-hot 1.4s ease-in-out infinite;
+}
+@keyframes pulse-hot {
+    0%,100%{box-shadow:0 0 0 0 rgba(255,152,0,.4)}
+    50%{box-shadow:0 0 0 4px rgba(255,152,0,0)}
+}
+.las-status-bar .s-deadline { color: #a5d6a7; font-size: 11px; }
+.las-status-bar .s-deadline.hot-d { color: #ffb74d; font-weight:700; }
+.las-status-bar .s-budget { color: #81c784; font-size: 11px; }
+.las-status-bar .s-upcoming {
+    background: #1a2940;
+    border: 1px solid #4a90a4;
+    color: #90caf9;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+.las-status-bar .s-link { color: #4caf50; font-size: 11px; text-decoration:none; }
+.las-status-bar .s-link:hover { text-decoration:underline; }
+.las-status-bar .s-divider { color: #33691e; }
+@media(max-width:700px){.las-status-bar .status-inner{flex-direction:column;gap:6px}}
+@media print{.las-status-bar{display:none}}
+</style>
+
+<div class="las-status-bar">
+  <div class="status-inner">
+    <span><span class="s-label">LAS DBK</span><span class="s-none">Ni odprtega razpisa</span></span>
+    <span class="s-upcoming">⏳ Kmalu: 3. javni poziv EKSRP — april 2026</span>
+    <span class="s-divider">|</span>
+    <span class="s-label">Odprti zdaj →</span>
+    
+        <span class="s-call">
+            <a class="s-link" href="https://www.arsktrp.gov.si" target="_blank">ARSKTRP Podukrep 4.1 – Kmetijske investicije</a>
+            <span class="s-deadline">rok: 30.4.2026</span>
+            <span class="s-budget">€20k–150k</span>
+        </span>
+    <a class="s-link" style="margin-left:auto" href="https://las-dbk.si/javni-pozivi" target="_blank">las-dbk.si →</a>
+  </div>
+</div>
+<!-- /LAS-STATUS-BANNER -->
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<header class="hero">
+  <!-- botanical illustration (pure CSS/SVG) -->
+  <svg class="hero-botanical" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="white" stroke-width="1.5">
+      <!-- stem -->
+      <path d="M200 380 Q200 300 180 220 Q160 140 120 80"/>
+      <path d="M200 380 Q200 300 220 220 Q240 140 270 60"/>
+      <!-- leaves left -->
+      <path d="M175 230 Q130 200 100 180 Q135 185 165 220"/>
+      <path d="M170 265 Q110 255 80 240 Q120 240 165 260"/>
+      <path d="M178 195 Q145 155 140 120 Q160 155 180 190"/>
+      <!-- leaves right -->
+      <path d="M225 215 Q275 185 300 165 Q270 175 230 210"/>
+      <path d="M222 255 Q280 245 310 230 Q275 232 225 250"/>
+      <path d="M215 180 Q255 140 260 110 Q245 140 218 178"/>
+      <!-- flowers top left -->
+      <circle cx="115" cy="75" r="12"/>
+      <path d="M115 63 Q108 50 102 45 M115 63 Q122 50 128 45 M127 72 Q140 68 145 62 M103 72 Q90 68 85 62"/>
+      <!-- flowers top right -->
+      <circle cx="272" cy="55" r="10"/>
+      <path d="M272 45 Q265 33 260 28 M272 45 Q279 33 284 28 M282 62 Q295 58 299 52 M262 62 Q249 58 245 52"/>
+      <!-- small berries -->
+      <circle cx="145" cy="118" r="5"/>
+      <circle cx="135" cy="108" r="4"/>
+      <circle cx="155" cy="110" r="4"/>
+      <!-- roots hint -->
+      <path d="M195 382 Q185 395 170 400"/>
+      <path d="M205 382 Q215 395 230 400"/>
+    </g>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="hero-badges">
+      <span class="badge badge-eu">&#127466;&#127482; EU / EKSRP</span>
+      <span class="badge badge-leader">LEADER / CLLD 2021–2027</span>
+      <span class="badge badge-eu">LAS DBK</span>
+      <span class="badge badge-builds">Gradi na: Veriga EKO semen</span>
+    </div>
+
+    <div class="hero-flag">Bela Krajina — Kolpa — Slovenija</div>
+
+    <h1>Mreža permakultivnih<br><em>vrtov ob Kolpi</em></h1>
+    <p class="hero-sub">Riverbank Perma-Kolpa Gardens Network</p>
+
+    <div class="hero-meta-grid">
+      <div class="meta-card">
+        <div class="label">Predvideni proračun</div>
+        <div class="value">200.000 €</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Financiranje EKSRP (do 80%)</div>
+        <div class="value">do 160.000 €</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Površina ob Kolpi</div>
+        <div class="value">5 ha</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Kmetij — koristniki</div>
+        <div class="value">50 +</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Trajanje projekta</div>
+        <div class="value">24 mesecev</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Občine</div>
+        <div class="value">Črnomelj · Metlika · Semič</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     MAIN CONTENT
+============================================================ -->
+<main class="page">
+
+  <!-- OVERVIEW -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#127807;</div>
+      <h2>O projektu</h2>
+    </div>
+
+    <div class="card card-cream">
+      <p>
+        <strong>Mreža permakultivnih vrtov ob Kolpi</strong> je operacija, ki gradi neposredno na dosežkih uspešno zaključenega projekta <em>Veriga EKO semen</em> — in jih premešča od shranjevanja semen k živemu, produktivnemu ekosistemu. Na petih hektarih obkolpskih bregov bomo skupaj z lokalnimi kmeti, šolami in eko-zadrugami zasadili podnebno odporne pasove avtohtone sadje, zelišč in divjih rastlin po principih permakulture.
+      </p>
+      <p>
+        Bela Krajina ima izjemno botanično raznovrstnost — več kot <strong>1.150 vrst praprot in semenk</strong>, od ilirskih in sub-mediteranskih do alpskih in mokrišnih rastlin. Reka Kolpa je med najtoplejšimi in najčistejšimi rekami v Sloveniji ter naravna meja z Hrvaško — idealna os za <strong>čezmejno izmenjavo semen in znanja</strong> z hrvaškimi partnerji iz Like in Karlovca. Tradicionalni belokranjski pridelki — ajda, fižol, grah, bučno olje, zelišča (meta, ognjič, rman, bezeg, šentjanžev-
+
+vka), sad (jablane, hruške, slive) — bodo hrbtenica pridelovalnega programa.
+      </p>
+      <p>
+        Krožni sistem projekta povzema logiko narave same: <strong>kuhinjski odpadki → kompost → vrtni pasovi → pridelki → lokalni izdelki (marmelade, tinkture, zeliščni čaji, namazi)</strong>. Skupnostne delavnice in šolski programi bodo zagotovili prenos znanja na naslednjo generacijo, medtem ko bo eko-zadruga vzpostavila skupen tržni kanal za 50+ kmetij. Projekt neposredno odgovarja na klicatj Strategije LAS DBK po <em>trajnostni samooskrbi</em> in <em>zelenem prestrukturiranju podeželja</em>.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- WHY THIS WINS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#11088;</div>
+      <h2>Zakaj ta projekt zmaga</h2>
+    </div>
+
+    <ul class="win-list">
+      <li>
+        <span class="win-icon">&#127807;</span>
+        <div class="win-text">
+          <strong>Direktna kontinuiteta — bonus pri ocenjevanju</strong>
+          <span>Projekt je naravno nadaljevanje Veriga EKO semen (ista LAS, isti partnerji, isti ekosistem). Razpisni kriteriji LAS DBK nagrajujejo projektno kontinuiteto in izkoriščanje obstoječe infrastrukture.</span>
+        </div>
+      </li>
+      <li>
+        <span class="win-icon">&#127758;</span>
+        <div class="win-text">
+          <strong>Natura 2000 + riparijska zelena infrastruktura</strong>
+          <span>45% Kolpskega krajinskega parka je v Natura 2000. Riparianski puferni pasovi so eksplicitna zahteva nove SKP (CAP 2023-2027) — projekt je v 100% sinhroniji z evropsko politiko varstva voda in biodiverzitete.</span>
+        </div>
+      </li>
+      <li>
+        <span class="win-icon">&#9855;</span>
+        <div class="win-text">
+          <strong>Čezmejno sodelovanje s Hrvaško</strong>
+          <span>Izmenjava semen in znanja z Liko / Karlovaško zvišuje točke pri ocenjevanju (čezmejni projekti imajo prednostno obravnavo pri EKSRP) in odpira pot do Interreg SI-HR sredstev v drugi fazi.</span>
+        </div>
+      </li>
+      <li>
+        <span class="win-icon">&#9851;</span>
+        <div class="win-text">
+          <strong>Krožno gospodarstvo in nič odpadkov</strong>
+          <span>Kompostni sistem in lokalna predelava (marmelade, tinkture, čaji) ustvarjata zaprto zanko. Skladno s prednostnim področjem Zeleno prestrukturiranje in krožno kmetijstvo LAS DBK SLR.</span>
+        </div>
+      </li>
+      <li>
+        <span class="win-icon">&#128106;</span>
+        <div class="win-text">
+          <strong>Socialna kohezija + prehranska varnost</strong>
+          <span>50+ kmetij, šolski programi, skupnostne delavnice — projekt neposredno naslavlja demografske izzive Bele Krajine (staranje, odseljevanje) in krepi lokalno identiteto ter belokranjske pridelke kot blagovno znamko.</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- LAS DBK ALIGNMENT TABLE -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#128203;</div>
+      <h2>Skladnost z LAS DBK SLR 2021–2027</h2>
+    </div>
+
+    <table class="align-table">
+      <thead>
+        <tr>
+          <th>Prioritetna os / Ukrep SLR</th>
+          <th>Kako projekt naslavlja</th>
+          <th>Skladnost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Trajnostna samooskrba in lokalna pridelava</td>
+          <td>50+ kmetij, zadruga, avtohtone sorte, 5 ha pridelovalnih pasov vzdolž Kolpe</td>
+          <td><span class="fit-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br><span class="pill pill-green">Neposredno</span></td>
+        </tr>
+        <tr>
+          <td>Zelena infrastruktura in biotska raznovrstnost</td>
+          <td>Riparianski puferni pasovi, Natura 2000 pas, avtohtone rastline, kompost</td>
+          <td><span class="fit-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br><span class="pill pill-green">Neposredno</span></td>
+        </tr>
+        <tr>
+          <td>Krožno gospodarstvo in zmanjšanje odpadkov</td>
+          <td>Kuhinjski odpadki → kompost → vrt → izdelki; zaprta zanka, nič odpadkov</td>
+          <td><span class="fit-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><br><span class="pill pill-green">Neposredno</span></td>
+        </tr>
+        <tr>
+          <td>Ozaveščanje in izobraževanje skupnosti</td>
+          <td>Šolski programi žetve, skupnostne delavnice permakulture, demonstracijske kmetije</td>
+          <td><span class="fit-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><br><span class="pill pill-blue">Posredno</span></td>
+        </tr>
+        <tr>
+          <td>Spodbujanje lokalnih vrednostnih verig</td>
+          <td>Skupen tržni kanal zadružnikov — marmelade, zeliščni čaji, tinkture, namazi</td>
+          <td><span class="fit-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><br><span class="pill pill-green">Neposredno</span></td>
+        </tr>
+        <tr>
+          <td>Čezmejno in medsektorsko sodelovanje</td>
+          <td>Izmenjava semen / znanja s hrvaškimi partnerji (Lika, Karlovac)</td>
+          <td><span class="fit-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br><span class="pill pill-yellow">Sodelovanje</span></td>
+        </tr>
+        <tr>
+          <td>Podnebna odpornost in adaptacija kmetijstva</td>
+          <td>Podnebno odporne avtohtone sorte, talni pokrov, zadrževanje vode v riparijanskem pasu</td>
+          <td><span class="fit-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br><span class="pill pill-earth">Podnebje</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- VERIGA EKOSEMEN CONNECTION -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#128279;</div>
+      <h2>Navezava na Verigo EKO semen</h2>
+    </div>
+
+    <div class="veriga-box">
+      <h3>Od semenske banke do živega vrtnega ekosistema</h3>
+      <p style="color: var(--text-mid); font-size: .95rem; margin-bottom: .5rem;">
+        <strong>Veriga EKO semen</strong> (skupaj LAS DBK + LAS Gorenjska košarica, vrednost 241.167 €, sofinanciranje 186.966 €) je v programskem obdobju 2014-2020 postavila temelje: semensko banko z avtohtonimi sortami fižola, graha in zelenjave, mobile rastlinjake, sistem zadruge eko-pridelovalcev in kulinarične delavnice. Projekt je uspešno zaključen in vzpostavil mrežo 10+ kmetij ter ekosemenski zavod.
+      </p>
+      <p style="color: var(--text-mid); font-size: .95rem;">
+        Nova operacija je logični <strong>korak naprej</strong>: semena, ki so bila shranjena in pridelana v Verigi EKO semen, zdaj zasadimo v žive, produktivne riparijske pasove ob Kolpi — in iz semen naredimo pridelke, iz pridelkov pa lokalne izdelke z dodano vrednostjo.
+      </p>
+
+      <div class="veriga-grid">
+        <div class="veriga-col">
+          <h4>Veriga EKO semen je naredila</h4>
+          <ul>
+            <li>Semensko banko avtohtonih sort (fižol, grah, zelenjava)</li>
+            <li>Zadruga 10+ eko-kmetij na območju DBK</li>
+            <li>Mobile rastlinjake, namakanje, protitočne mreže</li>
+            <li>Kulinarične delavnice (namazi iz semen)</li>
+            <li>Prenos znanja Gorenjska → Dolenjska / Bela krajina</li>
+            <li>Pilotna zasaditev + demonstracijske kmetije</li>
+          </ul>
+        </div>
+        <div class="veriga-col">
+          <h4>Perma-Kolpa gradi naprej z</h4>
+          <ul>
+            <li>5 ha riparianskih sadnih / zeliščnih pasov vzdolž Kolpe</li>
+            <li>Razširjeno mrežo 50+ kmetij — koristnikov</li>
+            <li>Kompostnim sistemom in krožnim kmetijstvom</li>
+            <li>Šolskimi programi žetve in skupnostnimi delavnicami</li>
+            <li>Čezmejno izmenjavo semen z Hrvaško</li>
+            <li>Skupnim tržnim kanalom (marmelade, zeliščni čaji, tinkture)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:1.2rem;">
+      <strong>Ocenjevalni nasvet:</strong> Razpisna merila LAS DBK eksplicitno nagrajujejo operacije, ki izkoriščajo dosežke preteklih projektov. Sklicevanje na Verigo EKO semen z natančnimi kazalniki dosežkov je ena najmočnejših točk te vloge.
+    </div>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- REQUIREMENTS TO APPLY -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#9989;</div>
+      <h2>Pogoji za prijavo</h2>
+    </div>
+
+    <div class="req-grid">
+      <div class="req-box">
+        <h3>Kdo lahko kandidira</h3>
+        <ul class="checklist">
+          <li><span class="check-icon">&#10003;</span>Kmetijska zadruga ali kmetijska zadruga s p.o.</li>
+          <li><span class="check-icon">&#10003;</span>Kmetijsko-gozdarska organizacija (nevladna)</li>
+          <li><span class="check-icon">&#10003;</span>Občine (Črnomelj, Metlika, Semič) kot partnerice</li>
+          <li><span class="check-icon">&#10003;</span>Osnovna / srednja šola — kot partnerica</li>
+          <li><span class="check-icon warn">!</span>Fizična kmetija brez organizacijske forme NE more biti vodilni partner</li>
+          <li><span class="check-icon info">i</span>Priporočeni vodilni prijavitelj: kmetijska zadruga ali eko-NGO z izkušnjami</li>
+        </ul>
+      </div>
+
+      <div class="req-box">
+        <h3>Sofinanciranje in zneski</h3>
+        <ul class="checklist">
+          <li><span class="check-icon">&#10003;</span>Stopnja EKSRP sofinanciranja: do <strong>80%</strong> upravičenih stroškov</li>
+          <li><span class="check-icon">&#10003;</span>Za naložbene ukrepe (oprema, ureditev): do <strong>65%</strong></li>
+          <li><span class="check-icon">&#10003;</span>Lastni delež prijavitelja: min. 20% (idealno z bančno garancijo ali lastnimi sredstvi)</li>
+          <li><span class="check-icon">&#10003;</span>Maks. znesek operacije EKSRP: <strong>200.000 €</strong></li>
+          <li><span class="check-icon">&#10003;</span>Min. znesek operacije EKSRP: 5.000 €</li>
+          <li><span class="check-icon info">i</span>DDV NI upravičen strošek za zavezance za DDV</li>
+        </ul>
+      </div>
+
+      <div class="req-box">
+        <h3>Upravičeni stroški</h3>
+        <ul class="checklist">
+          <li><span class="check-icon">&#10003;</span>Nakup in zasaditev rastlinskega materiala (sadike, semena)</li>
+          <li><span class="check-icon">&#10003;</span>Priprava tal, osuševanje, melioracije ob vodotoku</li>
+          <li><span class="check-icon">&#10003;</span>Oprema za predelavo (kozarčki, kuhalniki, destilatorji)</li>
+          <li><span class="check-icon">&#10003;</span>Izobraževanja, delavnice, strokovne ekskurzije</li>
+          <li><span class="check-icon">&#10003;</span>Stroški animacije in komunikacije (do 20%)</li>
+          <li><span class="check-icon">&#10003;</span>Splošni stroški projekta (vodenje, poročanje) — do 15%</li>
+          <li><span class="check-icon warn">!</span>Nakup nepremičnin in zemljišč — NIzaupajte brez svetovalca</li>
+        </ul>
+      </div>
+
+      <div class="req-box">
+        <h3>Potrebna dokumentacija</h3>
+        <ul class="checklist">
+          <li><span class="check-icon">&#10003;</span>Projektna vloga po obrazcu LAS DBK</li>
+          <li><span class="check-icon">&#10003;</span>Partnerska pogodba (za vse partnerje)</li>
+          <li><span class="check-icon">&#10003;</span>Dokazilo o registraciji / pravni status prijavitelja</li>
+          <li><span class="check-icon">&#10003;</span>Izjava o sofinanciranju (lastni delež)</li>
+          <li><span class="check-icon">&#10003;</span>Skice / situacijski načrt lokacije ob Kolpi</li>
+          <li><span class="check-icon">&#10003;</span>Potrdilo o lastništvu ali najemu zemljišč</li>
+          <li><span class="check-icon warn">!</span>Soglasje upravljavca vodotokov (DRSV — Direkcija RS za vode)</li>
+          <li><span class="check-icon info">i</span>Morebitna presoja vplivov na okolje (Natura 2000 ocena)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- PHASES / TIMELINE -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#128197;</div>
+      <h2>Aktivnosti in faze projekta</h2>
+    </div>
+
+    <div class="phases">
+
+      <div class="phase">
+        <div class="phase-dot p1">1</div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <span class="phase-tag">Meseci 1–5</span>
+            <h3>Priprava terena in skupnost</h3>
+          </div>
+          <ul class="phase-activities">
+            <li>Kartiranje in izbor 5 ha ob Kolpi — koordinacija z DRSV in Natura 2000</li>
+            <li>Vzpostavitev upravljavske strukture (zadruga, vodilni partner)</li>
+            <li>Agrogozdniška analiza tal in hidrologije vzdolž bregov</li>
+            <li>Uvodne skupnostne delavnice v vseh treh občinah (Črnomelj, Metlika, Semič)</li>
+            <li>Podpis partnerskih pogodb s hrvaškimi partnerji (mejna izmenjava)</li>
+            <li>Nabava in preskus kompostnih sistemov na pilotnih kmetijah</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-dot p2">2</div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <span class="phase-tag">Meseci 6–12</span>
+            <h3>Zasaditev in usposabljanje</h3>
+          </div>
+          <ul class="phase-activities">
+            <li>Zasaditev riparianskih sadnih pasov: divja jablana, hruška, sliva, bezeg, glog</li>
+            <li>Zasaditev zeliščnih pasov: meta, ognjič, rman, šentjanževka, melisa, materina dušica</li>
+            <li>Inštalacija protierozijskega mulčiranja in talnega pokrova (bele detelje, žitarice)</li>
+            <li>Usposabljanje 50+ kmetov — osnove permakulture in riparijanskega kmetijstva</li>
+            <li>Šolski program: 3 delavnice za OŠ Črnomelj, OŠ Metlika, OŠ Semič</li>
+            <li>Čezmejni semenski tabor ob Kolpi (Slovenija + Hrvaška)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-dot p3">3</div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <span class="phase-tag">Meseci 13–20</span>
+            <h3>Žetev, predelava in trg</h3>
+          </div>
+          <ul class="phase-activities">
+            <li>Prva žetev zeliščnih in sadnih pridelkov iz riparianskih pasov</li>
+            <li>Pilotna predelava: zeliščni čaji, marmelade iz samoniklih sadežev, zeliščne tinkture, namazi</li>
+            <li>Vzpostavitev skupne blagovne znamke in embalažne grafike (belokranjski dizajn)</li>
+            <li>Prodajni kanali: kmečke tržnice (Črnomelj, Metlika), ekološke trgovine, turizem</li>
+            <li>Šolski program žetve — otroci pomagajo pri predelavi, prejmejo produkte</li>
+            <li>Medijska predstavitev projekta in rezultatov (lokalni mediji, LAS DBK kanal)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-dot p4">4</div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <span class="phase-tag">Meseci 21–24</span>
+            <h3>Vrednotenje in trajnostnost</h3>
+          </div>
+          <ul class="phase-activities">
+            <li>Meritve biodiverzitete in kakovosti vode vzdolž riparianskih pasov (DRSV)</li>
+            <li>Ekonomska evalvacija — prihodki zadružnikov, stroški, ROI</li>
+            <li>Poročilo o vplivu na podnebno odpornost kmetij</li>
+            <li>Priprava trajnostnega načrta upravljanja za naslednjih 5 let</li>
+            <li>Zaključna konferenca in predaja rezultatov LAS DBK</li>
+            <li>Oddaja prijave za Interreg SI-HR 2027 (nadaljevanje čezmejnega projekta)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- BUDGET -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#128200;</div>
+      <h2>Okvirni proračun projekta</h2>
+    </div>
+
+    <div class="budget-total-bar">
+      <div>
+        <div class="label">Skupna vrednost operacije</div>
+        <div class="amount">200.000 €</div>
+      </div>
+      <div class="co-finance">
+        <div class="label">EKSRP sofinanciranje (80%)</div>
+        <div class="amount" style="font-size:1.5rem;">160.000 €</div>
+      </div>
+      <div class="co-finance">
+        <div class="label">Lastni delež (20%)</div>
+        <div class="amount" style="font-size:1.5rem;">40.000 €</div>
+      </div>
+    </div>
+
+    <div class="budget-items">
+
+      <div class="budget-item">
+        <div class="name">
+          Priprava terena in ripariansko urejanje
+          <small>Melioracija, mulčiranje, protierozija, talni pokrov, sistema vodotokov</small>
+        </div>
+        <div class="pct">18%</div>
+        <div class="eur">36.000 €</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar-fill" style="width:18%;"></div>
+        </div>
+      </div>
+
+      <div class="budget-item">
+        <div class="name">
+          Rastlinski material in zasaditev
+          <small>Sadike, semena, sadna drevesa (divja jablana, sliva, bezeg, glog), zelišča</small>
+        </div>
+        <div class="pct">20%</div>
+        <div class="eur">40.000 €</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar-fill" style="width:20%;"></div>
+        </div>
+      </div>
+
+      <div class="budget-item">
+        <div class="name">
+          Oprema za predelavo in kompostni sistemi
+          <small>Kuhalniki za marmelade, destilatorji zelišč, kompostišča, lope, namakalni sistem</small>
+        </div>
+        <div class="pct">18%</div>
+        <div class="eur">36.000 €</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar-fill" style="width:18%;"></div>
+        </div>
+      </div>
+
+      <div class="budget-item">
+        <div class="name">
+          Izobraževanja, delavnice in šolski programi
+          <small>20+ delavnic permakulture, 3 šolski programi, strokovni obiski, 1 čezmejni tabor</small>
+        </div>
+        <div class="pct">16%</div>
+        <div class="eur">32.000 €</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar-fill" style="width:16%;"></div>
+        </div>
+      </div>
+
+      <div class="budget-item">
+        <div class="name">
+          Razvoj blagovne znamke in trženje
+          <small>Embalaža, grafika, spletna stran, kmečke tržnice, promocijska gradiva</small>
+        </div>
+        <div class="pct">10%</div>
+        <div class="eur">20.000 €</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar-fill" style="width:10%;"></div>
+        </div>
+      </div>
+
+      <div class="budget-item">
+        <div class="name">
+          Evalvacija, meritve biodiverzitete in poročanje
+          <small>Hidrološka analiza, biodiverzitetne meritve (DRSV), zaključno poročilo, konferenca</small>
+        </div>
+        <div class="pct">8%</div>
+        <div class="eur">16.000 €</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar-fill" style="width:8%;"></div>
+        </div>
+      </div>
+
+      <div class="budget-item">
+        <div class="name">
+          Vodenje projekta in splošni stroški
+          <small>Koordinacija, računovodstvo, pravne storitve, pisarniški stroški (maks. 15%)</small>
+        </div>
+        <div class="pct">10%</div>
+        <div class="eur">20.000 €</div>
+        <div class="budget-bar-wrap">
+          <div class="budget-bar-fill" style="width:10%;"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout" style="margin-top:1rem;">
+      <strong>Opomba:</strong> Proračun je okvirni in bo prilagojen aktualnemu razpisu LAS DBK. Predvideni zneski za naložbe (oprema, ureditev terena) bodo sofinancirani po 65% stopnji; ostale aktivnosti po 80%.
+    </div>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- PARTNERS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#129309;</div>
+      <h2>Potencialni partnerji</h2>
+    </div>
+
+    <div class="partners-grid">
+
+      <div class="partner-card">
+        <div class="partner-icon">&#127812;</div>
+        <div>
+          <div class="partner-name">Kmetijska zadruga Bele Krajine</div>
+          <div class="partner-role">Vodilni prijavitelj — koordinacija, nakup, vodenje zadruge pridelovalcev</div>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-icon">&#127981;</div>
+        <div>
+          <div class="partner-name">Občina Semič</div>
+          <div class="partner-role">Sofinancirant, dostop do občinskih zemljišč ob Kolpi, administrativna podpora</div>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-icon">&#127981;</div>
+        <div>
+          <div class="partner-name">Občina Črnomelj / Metlika</div>
+          <div class="partner-role">Partnerska občina — šolski programi, promocija, lokalni prostori za delavnice</div>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-icon">&#128218;</div>
+        <div>
+          <div class="partner-name">OŠ Črnomelj / OŠ Metlika / OŠ Semič</div>
+          <div class="partner-role">Šolski žetveni programi, izobraževanje otrok, naravoslovne ure na terenu</div>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-icon">&#127807;</div>
+        <div>
+          <div class="partner-name">Eko-NGO (npr. Ekoci ali lokalni eko-zavod)</div>
+          <div class="partner-role">Strokovno svetovanje za permakulturno načrtovanje, delavnice, komuniciranje</div>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-icon">&#128140;</div>
+        <div>
+          <div class="partner-name">Ekosemena / zavod iz Veriga EKO semen</div>
+          <div class="partner-role">Zagotavljanje avtohtonih semen in sort, prenos znanja semenarne, kontinuiteta</div>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-icon">&#127470;&#127479;</div>
+        <div>
+          <div class="partner-name">Hrvaški partner (Ličko-Senjska / Karlovačka)</div>
+          <div class="partner-role">Čezmejna izmenjava semen, skupni tabori, potencialni Interreg SI-HR partner</div>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="partner-icon">&#128167;</div>
+        <div>
+          <div class="partner-name">Direkcija RS za vode (DRSV)</div>
+          <div class="partner-role">Soglasje za dela ob vodotoku, monitoring kakovosti Kolpe, hidrološka analiza</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- CROSS-BORDER -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#127759;</div>
+      <h2>Čezmejna priložnost</h2>
+    </div>
+
+    <div class="crossborder-box">
+      <h3>Semenski most čez Kolpo</h3>
+      <p>
+        Reka Kolpa je naravna meja med Slovenijo in Hrvaško — in priložnost za živo semensko koridorsko zvezo med belokranjskim in liškim kmetijstvom. Projekt predvideva vsaj eno čezmejno semensko izmenjavo na leto (tabor ob reki) in vzajemni prenos starih sort, ki so se ohranile na obeh straneh. To odpira neposredno pot do Interreg VI-A SI-HR programa za naslednjo fazo.
+      </p>
+
+      <div class="crossborder-items">
+        <div class="crossborder-item">
+          <strong>Izmenjava semen</strong>
+          Avtohtone sorte fižola, čebule, bučk, koruze iz Like in Bele Krajine — skupna semenarna brez meja.
+        </div>
+        <div class="crossborder-item">
+          <strong>Skupni tabori</strong>
+          Letni semenski tabor ob Kolpi — kmeti, mladina in šole iz obeh držav. Skupna kultura pridelave.
+        </div>
+        <div class="crossborder-item">
+          <strong>Interreg SI-HR</strong>
+          Projekt je zasnovan kot predhodnica prijave Interreg SI-HR 2027+ s hrvaškimi LAG partnerji — čezmejni projekti zmagajo z jasnim doseženim predprojektom.
+        </div>
+        <div class="crossborder-item">
+          <strong>Skupne recepture</strong>
+          Obojestransko zbiranje kulinaričnih receptov s semenskimi rastlinami — knjižica / spletna baza kot skupni produkt.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-leaf"><span>&#127807;</span></div>
+
+  <!-- NEXT STEPS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#128640;</div>
+      <h2>Naslednji koraki — kako začeti</h2>
+    </div>
+
+    <ol class="steps-list">
+      <li>
+        <div class="step-body">
+          <strong>Preveriti aktualni javni poziv LAS DBK</strong>
+          <span>Obiskati las-dbk.si/javni-pozivi in preveriti, ali je odprt razpis za EKSRP operacije. Roki so pogosto aprilen in jesenski.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Kontaktirati LAS DBK animatorja</strong>
+          <span>Razvojna agencija, ki vodi LAS DBK, ima brezplačne animacijske svetovalne ure za prijavitelje. To je obvezni korak pred prijavo.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Vzpostaviti stik z Ekosemena / Zavod iz Veriga EKO semen</strong>
+          <span>Potrditi partnerstvo in pridobiti pisno podporo — "naravno nadaljevanje" je argument samo, če ga potrdijo izvorni partnerji.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Kartiranje potencialnih lokacij ob Kolpi</strong>
+          <span>Z geodetskim načrtom prepoznati parcele, ki so primerne za riparianski sadni pas (Natura 2000 pas, lastništvo, dostopnost). Potrebno soglasje DRSV.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Registracija ali okrepitev pravne forme prijavitelja</strong>
+          <span>Zagotoviti, da ima vodilni prijavitelj ustrezno pravno obliko (zadruga, zavod, s.p. z več kmetijami). Brez tega ni vloge.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Pridobiti pisno podporo občin</strong>
+          <span>Pismo podpore (NE sofinanciranje, le izjava podpre) Semič, Črnomelj ali Metlika znatno poveča točkovanje vloge.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Vzpostaviti hrvaški partnerski stik</strong>
+          <span>Poiskati LAG / LAS skupino na hrvaški strani Kolpe (Karlovačka, Ličko-Senjska župnija) in pridobiti izjavo o nameri sodelovanja.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <strong>Pripraviti projektno vlogo in proračun</strong>
+          <span>Po pridobitvi vseh predhodnih korakov in obrazcev LAS DBK pripraviti celotno dokumentacijo. Priporočamo angažiranje izkušenega pisca EU vlog.</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- PLANTS REFERENCE BOX -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#127807;</div>
+      <h2>Referenčne rastline za riparianske pasove</h2>
+    </div>
+
+    <div class="card card-cream">
+      <p style="font-size:.9rem; color:var(--text-mid); margin-bottom:1rem;">Avtohtone in naturalizirane vrste, primerne za setev in zasaditev ob Kolpi (Bela Krajina klima — sub-mediteransko-celinska):</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap:.6rem;">
+
+        <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-sm); padding:.7rem 1rem;">
+          <div style="font-weight:700; color:var(--forest); font-size:.88rem; margin-bottom:.3rem;">Sadna drevesa</div>
+          <div style="font-size:.82rem; color:var(--text-mid); line-height:1.7;">Divja jablana (Malus sylvestris)<br>Divja hruška (Pyrus pyraster)<br>Češnja ptica (Prunus avium)<br>Trnulja (Prunus spinosa)<br>Bezeg (Sambucus nigra)<br>Glog (Crataegus monogyna)</div>
+        </div>
+
+        <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-sm); padding:.7rem 1rem;">
+          <div style="font-weight:700; color:var(--forest); font-size:.88rem; margin-bottom:.3rem;">Zelišča ob vodi</div>
+          <div style="font-size:.82rem; color:var(--text-mid); line-height:1.7;">Meta (Mentha aquatica)<br>Šentjanževka (Hypericum perforatum)<br>Melisa (Melissa officinalis)<br>Ognjič (Calendula officinalis)<br>Rman (Achillea millefolium)<br>Materina dušica (Thymus serpyllum)</div>
+        </div>
+
+        <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-sm); padding:.7rem 1rem;">
+          <div style="font-weight:700; color:var(--forest); font-size:.88rem; margin-bottom:.3rem;">Talni pokrov</div>
+          <div style="font-size:.82rem; color:var(--text-mid); line-height:1.7;">Bela detelja (Trifolium repens)<br>Lucerna (Medicago sativa)<br>Facelija (Phacelia tanacetifolia)<br>Ajda (Fagopyrum esculentum)<br>Gorčica (Sinapis alba)<br>Navadna nokota (Lotus corniculatus)</div>
+        </div>
+
+        <div style="background:white; border:1px solid var(--border); border-radius:var(--radius-sm); padding:.7rem 1rem;">
+          <div style="font-weight:700; color:var(--forest); font-size:.88rem; margin-bottom:.3rem;">Belokranjske sorte</div>
+          <div style="font-size:.82rem; color:var(--text-mid); line-height:1.7;">Fižol (lokalne sorte — vir: EKO semen)<br>Grah (lokalne sorte)<br>Bučke / buče<br>Ajda belokranjska<br>Koruza (avtohtona)<br>Paprika / kumarice (tradicionalno)</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <strong>Mreža permakultivnih vrtov ob Kolpi — Riverbank Perma-Kolpa Gardens Network</strong>
+  Pripravljeno za namene brainstorminga in preliminarne analize — Bela Krajina, Slovenija<br>
+  Program LEADER/CLLD 2021-2027 &middot; LAS Dolenjska in Bela Krajina (LAS DBK) &middot; Sklad EKSRP
+  <div class="disclaimer">
+    Dokument je informativne narave in ne predstavlja uradne projektne vloge. Podatki o proračunu, stopnjah sofinanciranja in pogojih so okvirni ter podvrženi aktualnemu razpisu LAS DBK. Pred prijavo obvezno preveriti veljavni javni poziv na las-dbk.si.
+    <br>Pripravljeno: Bela Krajina, Slovenija — Marec 2026
+  </div>
+</footer>
+
+</body>
+</html>
